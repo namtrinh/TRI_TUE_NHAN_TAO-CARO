@@ -122,22 +122,23 @@ public class JFrameMain {
         });
     }
 
-    public void CreateAndShow(){
+    public void CreateAndShow() {
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(10, //initial value
-                       3,15,1);//step
+                        3, 15, 1);//step
 
         spinnerRow.setModel(spinnerModel);
-        jFrame =new JFrame("Caro");
+        jFrame = new JFrame("Caro");
+
         jFrame.setContentPane(new JFrameMain().JPanelMain);
 
-        jFrame.setSize(350,300);
+        jFrame.setSize(350, 300);
+
         jFrame.setUndecorated(true);
-        Shape shape = new RoundRectangle2D.Double(0,0,350,300,20,20);
+        Shape shape = new RoundRectangle2D.Double(0, 0, 350, 300, 20, 20);
         jFrame.setShape(shape);
         jFrame.setVisible(true);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setLocationRelativeTo(null);
 
+        jFrame.setLocationRelativeTo(null);
     }
 }
