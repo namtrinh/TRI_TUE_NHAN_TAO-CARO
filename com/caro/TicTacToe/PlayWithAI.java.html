@@ -1,0 +1,646 @@
+<html>
+<head>
+<title>PlayWithAI.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PlayWithAI.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">caro</span><span class="s2">.</span><span class="s1">TicTacToe</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">caro</span><span class="s2">.</span><span class="s1">EasyBot</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+
+<span class="s0">import static </span><span class="s1">com</span><span class="s2">.</span><span class="s1">caro</span><span class="s2">.</span><span class="s1">JFrameMain</span><span class="s2">.</span><span class="s1">jFrame</span><span class="s2">;</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* Tic-Tac-Toe: Two-player Graphics version with Simple-OO</span>
+ <span class="s3">*/</span>
+<span class="s1">@SuppressWarnings</span><span class="s2">(</span><span class="s4">&quot;serial&quot;</span><span class="s2">)</span>
+<span class="s0">public class </span><span class="s1">PlayWithAI </span><span class="s0">extends </span><span class="s1">Play2Players</span><span class="s2">{</span>
+   <span class="s0">public enum </span><span class="s1">Bot</span><span class="s2">{</span>
+      <span class="s1">EASY_BOT</span><span class="s2">, </span><span class="s1">HEURISTIC_BOT</span>
+   <span class="s2">}</span>
+   <span class="s0">public static int </span><span class="s1">rowBotPreSelected </span><span class="s2">= -</span><span class="s5">1</span><span class="s2">;</span>
+   <span class="s0">public static int </span><span class="s1">colBotPreSelected </span><span class="s2">= -</span><span class="s5">1</span><span class="s2">;</span>
+   <span class="s0">public static int </span><span class="s1">rowBotPreDiLai</span><span class="s2">;</span>
+   <span class="s0">public static int </span><span class="s1">colBotPreDiLai</span><span class="s2">;</span>
+
+   <span class="s0">public static </span><span class="s1">Bot GameBot</span><span class="s2">;</span>
+
+   <span class="s0">public static </span><span class="s1">String PlayerName</span><span class="s2">;</span>
+
+   <span class="s6">// Named-constants of the various dimensions used for graphics drawing</span>
+
+   <span class="s3">/** Constructor to setup the game and the GUI components */</span>
+   <span class="s0">public </span><span class="s1">PlayWithAI</span><span class="s2">(</span><span class="s1">String name</span><span class="s2">){</span>
+      <span class="s0">super</span><span class="s2">(</span><span class="s1">name</span><span class="s2">,</span><span class="s4">&quot;&quot;</span><span class="s2">);</span>
+   <span class="s2">}</span>
+   <span class="s6">/*private static PlayWithAI instance; 
+   public static PlayWithAI getInstance(String name) { 
+      if(instance == null) { 
+         instance = new PlayWithAI(name); 
+      } 
+      return instance; 
+   }*/</span>
+
+
+   <span class="s1">@Override</span>
+   <span class="s0">protected void </span><span class="s1">PlayGame</span><span class="s2">(</span><span class="s1">String name1</span><span class="s2">, </span><span class="s1">String name2</span><span class="s2">) {</span>
+      <span class="s1">Player1Name </span><span class="s2">= </span><span class="s1">name1</span><span class="s2">;</span>
+      <span class="s1">Player2Name </span><span class="s2">=</span><span class="s4">&quot;Máy&quot;</span><span class="s2">;</span>
+      <span class="s1">canvas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DrawCanvas</span><span class="s2">();  </span><span class="s6">// Construct a drawing canvas (a JPanel)</span>
+      <span class="s1">canvas</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s1">CANVAS_WIDTH</span><span class="s2">, </span><span class="s1">CANVAS_HEIGHT</span><span class="s2">));</span>
+
+      <span class="s6">// The canvas (JPanel) fires a MouseEvent upon mouse-click</span>
+      <span class="s1">canvas</span><span class="s2">.</span><span class="s1">addMouseListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MouseAdapter</span><span class="s2">() {</span>
+         <span class="s1">@Override</span>
+         <span class="s0">public void </span><span class="s1">mouseClicked</span><span class="s2">(</span><span class="s1">MouseEvent e</span><span class="s2">) {  </span><span class="s6">// mouse-clicked handler</span>
+            <span class="s0">int </span><span class="s1">mouseX </span><span class="s2">= </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getX</span><span class="s2">();</span>
+            <span class="s0">int </span><span class="s1">mouseY </span><span class="s2">= </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getY</span><span class="s2">();</span>
+            <span class="s6">// Get the row and column clicked</span>
+            <span class="s0">int </span><span class="s1">rowSelected </span><span class="s2">= </span><span class="s1">mouseY </span><span class="s2">/ </span><span class="s1">CELL_SIZE</span><span class="s2">;</span>
+            <span class="s0">int </span><span class="s1">colSelected </span><span class="s2">= </span><span class="s1">mouseX </span><span class="s2">/ </span><span class="s1">CELL_SIZE</span><span class="s2">;</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">currentState </span><span class="s2">== </span><span class="s1">GameState</span><span class="s2">.</span><span class="s1">PLAYING</span><span class="s2">) {</span>
+               <span class="s0">if </span><span class="s2">(</span><span class="s1">rowSelected </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">rowSelected </span><span class="s2">&lt; </span><span class="s1">ROWS </span><span class="s2">&amp;&amp; </span><span class="s1">colSelected </span><span class="s2">&gt;= </span><span class="s5">0</span>
+                       <span class="s2">&amp;&amp; </span><span class="s1">colSelected </span><span class="s2">&lt; </span><span class="s1">COLS </span><span class="s2">&amp;&amp; </span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) {</span>
+                  <span class="s6">//Lưu dòng cột đã chọn của người chơi</span>
+                  <span class="s1">rowPreSelected </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">;</span>
+                  <span class="s1">colPreSelected </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">;</span>
+
+                  <span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] = </span><span class="s1">currentPlayer</span><span class="s2">; </span><span class="s6">// Make a move</span>
+
+                  <span class="s6">// Switch player</span>
+                  <span class="s1">currentPlayer </span><span class="s2">= (</span><span class="s1">currentPlayer </span><span class="s2">== </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">CROSS</span><span class="s2">) ? </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">NOUGHT </span><span class="s2">: </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">CROSS</span><span class="s2">;</span>
+                  <span class="s1">STEPS</span><span class="s2">++;</span>
+                  <span class="s0">if </span><span class="s2">(</span><span class="s1">currentPlayer </span><span class="s2">== </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">NOUGHT </span><span class="s2">&amp;&amp; </span><span class="s1">currentState </span><span class="s2">== </span><span class="s1">GameState</span><span class="s2">.</span><span class="s1">PLAYING</span><span class="s2">) {</span>
+                     <span class="s0">if</span><span class="s2">(</span><span class="s1">GameBot </span><span class="s2">== </span><span class="s1">Bot</span><span class="s2">.</span><span class="s1">EASY_BOT</span><span class="s2">) {</span>
+                        <span class="s1">EasyBot botRun </span><span class="s2">= </span><span class="s0">new </span><span class="s1">EasyBot</span><span class="s2">();</span>
+                        <span class="s1">String run </span><span class="s2">= </span><span class="s1">botRun</span><span class="s2">.</span><span class="s1">getPosFrBrd</span><span class="s2">(</span><span class="s1">board</span><span class="s2">);</span>
+                        <span class="s1">String</span><span class="s2">[] </span><span class="s1">splStr </span><span class="s2">= </span><span class="s1">run</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">);</span>
+                        <span class="s1">rowSelected </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">0</span><span class="s2">]);</span>
+                        <span class="s1">colSelected </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">1</span><span class="s2">]);</span>
+                     <span class="s2">}</span>
+                     <span class="s0">else if</span><span class="s2">(</span><span class="s1">GameBot </span><span class="s2">== </span><span class="s1">Bot</span><span class="s2">.</span><span class="s1">HEURISTIC_BOT</span><span class="s2">){</span>
+                        <span class="s1">HeuristicBot botRun </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HeuristicBot</span><span class="s2">(</span><span class="s1">ROWS</span><span class="s2">,</span><span class="s1">COLS</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">NOUGHT</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">CROSS</span><span class="s2">);</span>
+                        <span class="s1">String run </span><span class="s2">= </span><span class="s1">botRun</span><span class="s2">.</span><span class="s1">getPoint</span><span class="s2">(</span><span class="s1">board</span><span class="s2">);</span>
+                        <span class="s1">String</span><span class="s2">[] </span><span class="s1">splStr </span><span class="s2">= </span><span class="s1">run</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">);</span>
+                        <span class="s0">if </span><span class="s2">(!</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">0</span><span class="s2">].</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                           <span class="s1">rowSelected </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">0</span><span class="s2">]);</span>
+                        <span class="s2">}</span>
+
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s5">1</span><span class="s2">) {</span>
+                           <span class="s1">colSelected </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">1</span><span class="s2">]);</span>
+                        <span class="s2">}</span>
+
+                     <span class="s2">}</span>
+
+                     <span class="s0">if </span><span class="s2">(</span><span class="s1">rowSelected </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">rowSelected </span><span class="s2">&lt; </span><span class="s1">ROWS </span><span class="s2">&amp;&amp; </span><span class="s1">colSelected </span><span class="s2">&gt;= </span><span class="s5">0</span>
+                             <span class="s2">&amp;&amp; </span><span class="s1">colSelected </span><span class="s2">&lt; </span><span class="s1">COLS </span><span class="s2">&amp;&amp; </span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) {</span>
+                        <span class="s6">//Lưu dòng cột đã chọn của máy</span>
+                        <span class="s1">rowBotPreSelected </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">;</span>
+                        <span class="s1">colBotPreSelected </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">;</span>
+
+                        <span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] = </span><span class="s1">currentPlayer</span><span class="s2">; </span><span class="s6">// Make a move</span>
+
+                        <span class="s6">// Switch player</span>
+                        <span class="s1">currentPlayer </span><span class="s2">= (</span><span class="s1">currentPlayer </span><span class="s2">== </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">CROSS</span><span class="s2">) ? </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">NOUGHT </span><span class="s2">: </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">CROSS</span><span class="s2">;</span>
+                     <span class="s2">}</span>
+                  <span class="s2">}</span>
+               <span class="s2">}</span>
+               <span class="s1">btnDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+               <span class="s1">btnBoDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{       </span><span class="s6">// game over</span>
+               <span class="s1">initGame</span><span class="s2">(); </span><span class="s6">// restart the game</span>
+            <span class="s2">}</span>
+            <span class="s6">// Refresh the drawing canvas</span>
+
+            <span class="s1">repaint</span><span class="s2">();  </span><span class="s6">// Call-back paintComponent().</span>
+         <span class="s2">}</span>
+      <span class="s2">});</span>
+
+      <span class="s1">addWindowListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">WindowAdapter</span><span class="s2">() {</span>
+         <span class="s1">@Override</span>
+         <span class="s0">public void </span><span class="s1">windowClosing</span><span class="s2">(</span><span class="s1">WindowEvent e</span><span class="s2">) {</span>
+            <span class="s1">jFrame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+         <span class="s2">}</span>
+      <span class="s2">});</span>
+
+      <span class="s6">// Setup the status bar (JLabel) to display status message</span>
+      <span class="s1">statusBar </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s4">&quot;  &quot;</span><span class="s2">);</span>
+      <span class="s1">statusBar</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s1">Font</span><span class="s2">.</span><span class="s1">DIALOG_INPUT</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s5">15</span><span class="s2">));</span>
+      <span class="s1">statusBar</span><span class="s2">.</span><span class="s1">setBorder</span><span class="s2">(</span><span class="s1">BorderFactory</span><span class="s2">.</span><span class="s1">createEmptyBorder</span><span class="s2">(</span><span class="s5">2</span><span class="s2">, </span><span class="s5">5</span><span class="s2">, </span><span class="s5">4</span><span class="s2">, </span><span class="s5">5</span><span class="s2">));</span>
+
+      <span class="s6">//Thêm Button</span>
+      <span class="s1">btnDiLai </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s4">&quot;Đi lại&quot;</span><span class="s2">);</span>
+      <span class="s1">btnDiLai</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s1">Font</span><span class="s2">.</span><span class="s1">DIALOG_INPUT</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s5">15</span><span class="s2">));</span>
+      <span class="s1">btnDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+      <span class="s6">//btnDiLai.setSize(10,10);</span>
+
+      <span class="s1">btnDiLai</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+         <span class="s1">@Override</span>
+         <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">currentState </span><span class="s2">!= </span><span class="s1">GameState</span><span class="s2">.</span><span class="s1">PLAYING</span><span class="s2">) </span><span class="s0">return</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">CheckEmptyBoard</span><span class="s2">()) </span><span class="s0">return</span><span class="s2">;</span>
+            <span class="s1">rowPreDiLai </span><span class="s2">=</span><span class="s1">rowPreSelected</span><span class="s2">;</span>
+            <span class="s1">colPreDiLai </span><span class="s2">=</span><span class="s1">colPreSelected</span><span class="s2">;</span>
+            <span class="s1">colBotPreDiLai </span><span class="s2">=</span><span class="s1">colBotPreSelected</span><span class="s2">;</span>
+            <span class="s1">rowBotPreDiLai </span><span class="s2">= </span><span class="s1">rowBotPreSelected</span><span class="s2">;</span>
+            <span class="s1">PlayerReRun </span><span class="s2">= </span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowPreSelected</span><span class="s2">][</span><span class="s1">colPreSelected</span><span class="s2">];</span>
+            <span class="s1">currentPlayer </span><span class="s2">= </span><span class="s1">PlayerReRun</span><span class="s2">;</span>
+            <span class="s1">board</span><span class="s2">[</span><span class="s1">rowPreSelected</span><span class="s2">][</span><span class="s1">colPreSelected</span><span class="s2">] = </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">;</span>
+            <span class="s1">board</span><span class="s2">[</span><span class="s1">rowBotPreSelected</span><span class="s2">][</span><span class="s1">colBotPreSelected</span><span class="s2">] = </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">;</span>
+            <span class="s1">btnBoDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s1">btnDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+            <span class="s1">repaint</span><span class="s2">();</span>
+         <span class="s2">}</span>
+      <span class="s2">});</span>
+
+      <span class="s1">btnBoDiLai </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s4">&quot;Bỏ đi lại&quot;</span><span class="s2">);</span>
+      <span class="s1">btnBoDiLai</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s1">Font</span><span class="s2">.</span><span class="s1">DIALOG_INPUT</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s5">15</span><span class="s2">));</span>
+      <span class="s1">btnBoDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+      <span class="s6">//btnDiLai.setSize(10,10);</span>
+
+      <span class="s1">btnBoDiLai</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+         <span class="s1">@Override</span>
+         <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">currentState </span><span class="s2">!= </span><span class="s1">GameState</span><span class="s2">.</span><span class="s1">PLAYING</span><span class="s2">) </span><span class="s0">return</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">STEPS </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">PlayerReRun </span><span class="s2">== </span><span class="s0">null </span><span class="s2">) </span><span class="s0">return</span><span class="s2">;</span>
+            <span class="s1">board</span><span class="s2">[</span><span class="s1">rowPreDiLai</span><span class="s2">][</span><span class="s1">colPreDiLai</span><span class="s2">] = </span><span class="s1">PlayerReRun</span><span class="s2">;</span>
+            <span class="s1">board</span><span class="s2">[</span><span class="s1">rowBotPreDiLai</span><span class="s2">][</span><span class="s1">colBotPreDiLai</span><span class="s2">] = </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">NOUGHT</span><span class="s2">;</span>
+            <span class="s6">//currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;</span>
+            <span class="s1">btnBoDiLai</span><span class="s2">.</span><span class="s1">setEnabled</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+            <span class="s1">repaint</span><span class="s2">();</span>
+         <span class="s2">}</span>
+      <span class="s2">});</span>
+
+      <span class="s1">pnButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+      <span class="s1">pnButton</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">FlowLayout</span><span class="s2">(</span><span class="s1">FlowLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">));</span>
+      <span class="s1">pnButton</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnDiLai</span><span class="s2">);</span>
+      <span class="s1">pnButton</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnBoDiLai</span><span class="s2">);</span>
+
+
+      <span class="s1">Container cp </span><span class="s2">= </span><span class="s1">getContentPane</span><span class="s2">();</span>
+      <span class="s1">cp</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+      <span class="s1">cp</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">canvas</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+      <span class="s1">cp</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">statusBar</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">PAGE_END</span><span class="s2">); </span><span class="s6">// same as SOUTH</span>
+      <span class="s1">cp</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">pnButton</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">PAGE_START</span><span class="s2">);</span>
+
+      <span class="s1">pack</span><span class="s2">();  </span><span class="s6">// pack all the components in this JFrame</span>
+      <span class="s1">setTitle</span><span class="s2">(</span><span class="s4">&quot;Tic Tac Toe với Máy&quot;</span><span class="s2">);</span>
+      <span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+      <span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);  </span><span class="s6">// show this JFrame</span>
+
+      <span class="s1">board </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Seed</span><span class="s2">[</span><span class="s1">ROWS</span><span class="s2">][</span><span class="s1">COLS</span><span class="s2">]; </span><span class="s6">// allocate array</span>
+      <span class="s1">initGame</span><span class="s2">(); </span><span class="s6">// initialize the game board contents and game variables</span>
+   <span class="s2">}</span>
+
+   <span class="s6">// Bot theo thuật toán Heuristic</span>
+
+   <span class="s0">public static class </span><span class="s1">HeuristicBot </span><span class="s2">{</span>
+      <span class="s0">static int </span><span class="s1">dong</span><span class="s2">, </span><span class="s1">cot</span><span class="s2">;</span>
+      <span class="s0">static </span><span class="s1">Seed bot</span><span class="s2">;</span>
+      <span class="s0">static </span><span class="s1">Seed player</span><span class="s2">;</span>
+      <span class="s0">static int</span><span class="s2">[] </span><span class="s1">mangTC </span><span class="s2">= </span><span class="s0">new int</span><span class="s2">[]{</span><span class="s5">0</span><span class="s2">, </span><span class="s5">10</span><span class="s2">, </span><span class="s5">600</span><span class="s2">, </span><span class="s5">3500</span><span class="s2">, </span><span class="s5">40000000</span><span class="s2">, </span><span class="s5">70000</span><span class="s2">, </span><span class="s5">1000000</span><span class="s2">};</span>
+      <span class="s0">static int</span><span class="s2">[] </span><span class="s1">mangPN </span><span class="s2">= </span><span class="s0">new int</span><span class="s2">[]{</span><span class="s5">0</span><span class="s2">, </span><span class="s5">7</span><span class="s2">, </span><span class="s5">700</span><span class="s2">, </span><span class="s5">4000</span><span class="s2">, </span><span class="s5">10000</span><span class="s2">, </span><span class="s5">67000</span><span class="s2">, </span><span class="s5">500000</span><span class="s2">};</span>
+      <span class="s0">static long </span><span class="s1">MAX_INT </span><span class="s2">= </span><span class="s5">100000000</span><span class="s2">;</span>
+      <span class="s0">static int </span><span class="s1">MAX_DEPTH </span><span class="s2">= </span><span class="s5">3</span><span class="s2">;</span>
+      <span class="s0">private static long </span><span class="s1">checkTC</span><span class="s2">;</span>
+      <span class="s0">private static long </span><span class="s1">checkPT</span><span class="s2">;</span>
+
+      <span class="s0">public </span><span class="s1">HeuristicBot</span><span class="s2">(</span><span class="s0">int </span><span class="s1">dongg</span><span class="s2">, </span><span class="s0">int </span><span class="s1">cott</span><span class="s2">, </span><span class="s1">Seed Bott</span><span class="s2">, </span><span class="s1">Seed Playerr</span><span class="s2">) {</span>
+         <span class="s1">dong </span><span class="s2">= </span><span class="s1">dongg</span><span class="s2">;</span>
+         <span class="s1">cot </span><span class="s2">= </span><span class="s1">cott</span><span class="s2">;</span>
+         <span class="s1">bot </span><span class="s2">= </span><span class="s1">Bott</span><span class="s2">;</span>
+         <span class="s1">player </span><span class="s2">= </span><span class="s1">Playerr</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static </span><span class="s1">String getPoint</span><span class="s2">(</span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">) {</span>
+         <span class="s0">long </span><span class="s1">bestScore </span><span class="s2">= -</span><span class="s1">MAX_INT</span><span class="s2">;</span>
+         <span class="s1">String bestMove </span><span class="s2">= </span><span class="s4">&quot;&quot;</span><span class="s2">;</span>
+         <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">moves </span><span class="s2">= </span><span class="s1">getPossibleMoves</span><span class="s2">(</span><span class="s1">board</span><span class="s2">);</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s1">String move </span><span class="s2">: </span><span class="s1">moves</span><span class="s2">) {</span>
+            <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">move</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">)[</span><span class="s5">0</span><span class="s2">]);</span>
+            <span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">move</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">)[</span><span class="s5">1</span><span class="s2">]);</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">isValidMove</span><span class="s2">(</span><span class="s1">board</span><span class="s2">, </span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">)) {</span>
+               <span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">bot</span><span class="s2">;</span>
+               <span class="s0">long </span><span class="s1">score </span><span class="s2">= </span><span class="s1">minimax</span><span class="s2">(</span><span class="s1">board</span><span class="s2">, </span><span class="s5">0</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, -</span><span class="s1">MAX_INT</span><span class="s2">, </span><span class="s1">MAX_INT</span><span class="s2">);</span>
+               <span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">;</span>
+               <span class="s0">if </span><span class="s2">(</span><span class="s1">score </span><span class="s2">&gt; </span><span class="s1">bestScore</span><span class="s2">) {</span>
+                  <span class="s1">bestScore </span><span class="s2">= </span><span class="s1">score</span><span class="s2">;</span>
+                  <span class="s1">bestMove </span><span class="s2">= </span><span class="s1">move</span><span class="s2">;</span>
+               <span class="s2">}</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s0">return </span><span class="s1">bestMove</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">getPossibleMoves</span><span class="s2">(</span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">) {</span>
+         <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">moves </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">cot</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+               <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) {</span>
+                  <span class="s1">moves</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">&quot; &quot; </span><span class="s2">+ </span><span class="s1">j</span><span class="s2">);</span>
+               <span class="s2">}</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s0">return </span><span class="s1">moves</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static boolean </span><span class="s1">isValidMove</span><span class="s2">(</span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s0">int </span><span class="s1">row</span><span class="s2">, </span><span class="s0">int </span><span class="s1">col</span><span class="s2">) {</span>
+         <span class="s0">return </span><span class="s1">row </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">row </span><span class="s2">&lt; </span><span class="s1">dong </span><span class="s2">&amp;&amp; </span><span class="s1">col </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">col </span><span class="s2">&lt; </span><span class="s1">cot </span><span class="s2">&amp;&amp; </span><span class="s1">board</span><span class="s2">[</span><span class="s1">row</span><span class="s2">][</span><span class="s1">col</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static long </span><span class="s1">minimax</span><span class="s2">(</span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s0">int </span><span class="s1">depth</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">isMaximizing</span><span class="s2">, </span><span class="s0">long </span><span class="s1">alpha</span><span class="s2">, </span><span class="s0">long </span><span class="s1">beta</span><span class="s2">) {</span>
+         <span class="s0">long </span><span class="s1">boardVal </span><span class="s2">= </span><span class="s1">evaluateBoard</span><span class="s2">(</span><span class="s1">board</span><span class="s2">);</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">abs</span><span class="s2">(</span><span class="s1">boardVal</span><span class="s2">) &gt;= </span><span class="s1">MAX_INT </span><span class="s2">|| </span><span class="s1">depth </span><span class="s2">== </span><span class="s1">MAX_DEPTH</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s1">boardVal</span><span class="s2">;</span>
+         <span class="s2">}</span>
+
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">isMaximizing</span><span class="s2">) {</span>
+            <span class="s0">long </span><span class="s1">maxEval </span><span class="s2">= -</span><span class="s1">MAX_INT</span><span class="s2">;</span>
+            <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">moves </span><span class="s2">= </span><span class="s1">getPossibleMoves</span><span class="s2">(</span><span class="s1">board</span><span class="s2">);</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">String move </span><span class="s2">: </span><span class="s1">moves</span><span class="s2">) {</span>
+               <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">move</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">)[</span><span class="s5">0</span><span class="s2">]);</span>
+               <span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">move</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">)[</span><span class="s5">1</span><span class="s2">]);</span>
+               <span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">bot</span><span class="s2">;</span>
+               <span class="s0">long </span><span class="s1">eval </span><span class="s2">= </span><span class="s1">minimax</span><span class="s2">(</span><span class="s1">board</span><span class="s2">, </span><span class="s1">depth </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">, </span><span class="s0">false</span><span class="s2">, </span><span class="s1">alpha</span><span class="s2">, </span><span class="s1">beta</span><span class="s2">);</span>
+               <span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">;</span>
+               <span class="s1">maxEval </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s1">maxEval</span><span class="s2">, </span><span class="s1">eval</span><span class="s2">);</span>
+               <span class="s1">alpha </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s1">alpha</span><span class="s2">, </span><span class="s1">eval</span><span class="s2">);</span>
+               <span class="s0">if </span><span class="s2">(</span><span class="s1">beta </span><span class="s2">&lt;= </span><span class="s1">alpha</span><span class="s2">) {</span>
+                  <span class="s0">break</span><span class="s2">;</span>
+               <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s0">return </span><span class="s1">maxEval</span><span class="s2">;</span>
+         <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">long </span><span class="s1">minEval </span><span class="s2">= </span><span class="s1">MAX_INT</span><span class="s2">;</span>
+            <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">moves </span><span class="s2">= </span><span class="s1">getPossibleMoves</span><span class="s2">(</span><span class="s1">board</span><span class="s2">);</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">String move </span><span class="s2">: </span><span class="s1">moves</span><span class="s2">) {</span>
+               <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">move</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">)[</span><span class="s5">0</span><span class="s2">]);</span>
+               <span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">move</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">)[</span><span class="s5">1</span><span class="s2">]);</span>
+               <span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">player</span><span class="s2">;</span>
+               <span class="s0">long </span><span class="s1">eval </span><span class="s2">= </span><span class="s1">minimax</span><span class="s2">(</span><span class="s1">board</span><span class="s2">, </span><span class="s1">depth </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">, </span><span class="s0">true</span><span class="s2">, </span><span class="s1">alpha</span><span class="s2">, </span><span class="s1">beta</span><span class="s2">);</span>
+               <span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">;</span>
+               <span class="s1">minEval </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">min</span><span class="s2">(</span><span class="s1">minEval</span><span class="s2">, </span><span class="s1">eval</span><span class="s2">);</span>
+               <span class="s1">beta </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">min</span><span class="s2">(</span><span class="s1">beta</span><span class="s2">, </span><span class="s1">eval</span><span class="s2">);</span>
+               <span class="s0">if </span><span class="s2">(</span><span class="s1">beta </span><span class="s2">&lt;= </span><span class="s1">alpha</span><span class="s2">) {</span>
+                  <span class="s0">break</span><span class="s2">;</span>
+               <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s0">return </span><span class="s1">minEval</span><span class="s2">;</span>
+         <span class="s2">}</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static long </span><span class="s1">evaluateBoard</span><span class="s2">(</span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">) {</span>
+         <span class="s0">long </span><span class="s1">score </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">cot</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+               <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">bot</span><span class="s2">) {</span>
+                  <span class="s1">score </span><span class="s2">+= </span><span class="s1">evaluatePosition</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">bot</span><span class="s2">);</span>
+               <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+                  <span class="s1">score </span><span class="s2">-= </span><span class="s1">evaluatePosition</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">player</span><span class="s2">);</span>
+               <span class="s2">}</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s0">return </span><span class="s1">score</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static long </span><span class="s1">evaluatePosition</span><span class="s2">(</span><span class="s0">int </span><span class="s1">i</span><span class="s2">, </span><span class="s0">int </span><span class="s1">j</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">) {</span>
+        <span class="s1">checkTC </span><span class="s2">= </span><span class="s1">CheckDoc</span><span class="s2">(</span><span class="s1">j</span><span class="s2">, </span><span class="s1">i</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">bot</span><span class="s2">) + </span><span class="s1">CheckNgang</span><span class="s2">(</span><span class="s1">j</span><span class="s2">, </span><span class="s1">i</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">bot</span><span class="s2">) + </span><span class="s1">CheckCheoPhai</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">bot</span><span class="s2">) + </span><span class="s1">CheckCheoTrai</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">bot</span><span class="s2">);</span>
+         <span class="s1">checkPT </span><span class="s2">= </span><span class="s1">PTDoc</span><span class="s2">(</span><span class="s1">j</span><span class="s2">, </span><span class="s1">i</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">player</span><span class="s2">) + </span><span class="s1">PTNgang</span><span class="s2">(</span><span class="s1">j</span><span class="s2">, </span><span class="s1">i</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">player</span><span class="s2">) + </span><span class="s1">PTPhai</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">player</span><span class="s2">) + </span><span class="s1">PTTrai</span><span class="s2">(</span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">board</span><span class="s2">, </span><span class="s1">player</span><span class="s2">);</span>
+       <span class="s0">long  </span><span class="s1">result </span><span class="s2">= </span><span class="s1">checkTC </span><span class="s2">+ </span><span class="s1">checkPT</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s1">result</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s0">public static long </span><span class="s1">CheckNgang</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s0">int </span><span class="s1">rowNow</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">) {</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">boolean </span><span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos </span><span class="s2">- </span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">2</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&lt;= </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">&amp;&amp; </span><span class="s1">count </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT </span><span class="s2">/ </span><span class="s5">250</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangTC</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">] * </span><span class="s5">3</span><span class="s2">) / </span><span class="s5">2 </span><span class="s2">- </span><span class="s1">count </span><span class="s2">* </span><span class="s5">100</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s6">//^ ^ ^ ^ or | | | | [n++][i]</span>
+      <span class="s6">// colNow =&gt; cột hiện tại, pos =&gt; vị trí dòng hiện tại</span>
+      <span class="s6">// int type =&gt; enum type</span>
+      <span class="s0">public static long </span><span class="s1">CheckDoc</span><span class="s2">(</span><span class="s0">int </span><span class="s1">colNow</span><span class="s2">, </span><span class="s0">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">) {</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">boolean </span><span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos </span><span class="s2">- </span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">2</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&lt;= </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">&amp;&amp; </span><span class="s1">count </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT </span><span class="s2">/ </span><span class="s5">250</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangTC</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">] * </span><span class="s5">3</span><span class="s2">) / </span><span class="s5">2 </span><span class="s2">- </span><span class="s1">count </span><span class="s2">* </span><span class="s5">100</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s6">// \ \ \ \ \ \ [n++][n++]</span>
+      <span class="s6">//pos_col =&gt; dòng hiện tại, pos_row =&gt; cột hiện tại</span>
+      <span class="s0">public static long </span><span class="s1">CheckCheoPhai</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pos_col</span><span class="s2">, </span><span class="s0">int </span><span class="s1">pos_row</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">) {</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">boolean </span><span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check xuống</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1 </span><span class="s2">&lt; </span><span class="s1">dong </span><span class="s2">&amp;&amp; </span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1 </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">;</span>
+         <span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s6">//check lên</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">2</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&lt;= </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">&amp;&amp; </span><span class="s1">count </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT </span><span class="s2">/ </span><span class="s5">250</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangTC</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">] * </span><span class="s5">3</span><span class="s2">) - </span><span class="s1">count </span><span class="s2">* </span><span class="s5">100</span><span class="s2">;</span>
+      <span class="s2">}</span>
+
+      <span class="s6">// pos_col =&gt; dòng hiện tại, pos_row =&gt; cột hiện tại</span>
+      <span class="s0">public static long </span><span class="s1">CheckCheoTrai</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pos_col</span><span class="s2">, </span><span class="s0">int </span><span class="s1">pos_row</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">) {</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">boolean </span><span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check xuống</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1 </span><span class="s2">&lt; </span><span class="s1">dong </span><span class="s2">&amp;&amp; </span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s1">flag </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+         <span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">;</span>
+         <span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check lên</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1 </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY </span><span class="s2">&amp;&amp; </span><span class="s1">flag </span><span class="s2">== </span><span class="s0">false</span><span class="s2">) {</span>
+               <span class="s1">count</span><span class="s2">++;</span>
+               <span class="s1">flag </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">] == </span><span class="s1">player</span><span class="s2">) {</span>
+               <span class="s1">dich</span><span class="s2">++;</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+               <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">2 </span><span class="s2">&amp;&amp; (</span><span class="s1">count </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">count </span><span class="s2">== </span><span class="s5">2</span><span class="s2">)) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&lt;= </span><span class="s5">3 </span><span class="s2">&amp;&amp; </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">&amp;&amp; </span><span class="s1">count </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT </span><span class="s2">/ </span><span class="s5">250</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangTC</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">] * </span><span class="s5">3</span><span class="s2">) - </span><span class="s1">count </span><span class="s2">* </span><span class="s5">100</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">public static long </span><span class="s1">PTNgang</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s0">int </span><span class="s1">rowNow</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">){</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">1</span><span class="s2">; </span><span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos</span><span class="s2">+</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">bot</span><span class="s2">) {</span><span class="s1">dich </span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s0">break</span><span class="s2">;}</span>
+         <span class="s2">}</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowNow</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">bot</span><span class="s2">) {</span><span class="s1">dich </span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s0">break</span><span class="s2">;}</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">2</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">1000</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangPN</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">+</span><span class="s5">1</span><span class="s2">]*</span><span class="s5">6</span><span class="s2">)/</span><span class="s5">4 </span><span class="s2">- </span><span class="s1">count</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s6">//^ ^ ^ ^ or | | | | [n++][i]</span>
+      <span class="s0">public static long </span><span class="s1">PTDoc</span><span class="s2">(</span><span class="s0">int </span><span class="s1">colNow</span><span class="s2">, </span><span class="s0">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">){</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">1</span><span class="s2">; </span><span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos</span><span class="s2">+</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">bot</span><span class="s2">) {</span><span class="s1">dich </span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s0">break</span><span class="s2">;}</span>
+         <span class="s2">}</span>
+         <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colNow</span><span class="s2">] == </span><span class="s1">bot</span><span class="s2">) {</span><span class="s1">dich </span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s0">break</span><span class="s2">;}</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">0</span><span class="s2">) </span><span class="s0">return </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">2</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">1000</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangPN</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">+</span><span class="s5">1</span><span class="s2">]*</span><span class="s5">6</span><span class="s2">)/</span><span class="s5">4 </span><span class="s2">- </span><span class="s1">count</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s6">// \ \ \ \ \ \ [n++][n++]</span>
+      <span class="s0">public static long </span><span class="s1">PTPhai</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pos_col</span><span class="s2">, </span><span class="s0">int </span><span class="s1">pos_row</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">){</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">1</span><span class="s2">; </span><span class="s0">int </span><span class="s1">dich </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">; </span><span class="s0">int </span><span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check xuống</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i</span><span class="s2">+</span><span class="s5">1</span><span class="s2">&lt; </span><span class="s1">dong </span><span class="s2">&amp;&amp; </span><span class="s1">ii</span><span class="s2">+</span><span class="s5">1 </span><span class="s2">&lt;</span><span class="s1">dong</span><span class="s2">){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">+</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">+</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">+</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">+</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">)</span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s1">dich</span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">; </span><span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check lên</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i</span><span class="s2">-</span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">ii</span><span class="s2">-</span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">-</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">-</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">-</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">-</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s1">dich</span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">-</span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">2</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">1000</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangPN</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">+</span><span class="s5">1</span><span class="s2">]*</span><span class="s5">6</span><span class="s2">)/</span><span class="s5">4 </span><span class="s2">- </span><span class="s1">count</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">public static long </span><span class="s1">PTTrai</span><span class="s2">(</span><span class="s0">int </span><span class="s1">pos_col</span><span class="s2">, </span><span class="s0">int </span><span class="s1">pos_row</span><span class="s2">, </span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s1">Seed type</span><span class="s2">){</span>
+         <span class="s0">int </span><span class="s1">ta </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">1</span><span class="s2">;</span><span class="s0">int </span><span class="s1">dich</span><span class="s2">=</span><span class="s5">0</span><span class="s2">;</span>
+         <span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">; </span><span class="s0">int </span><span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check xuống</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i</span><span class="s2">+</span><span class="s5">1</span><span class="s2">&lt; </span><span class="s1">dong </span><span class="s2">&amp;&amp; </span><span class="s1">ii</span><span class="s2">-</span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0</span><span class="s2">){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">+</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">-</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">+</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">-</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s1">dich</span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s1">i </span><span class="s2">= </span><span class="s1">pos_col</span><span class="s2">; </span><span class="s1">ii </span><span class="s2">= </span><span class="s1">pos_row</span><span class="s2">;</span>
+         <span class="s6">//check lên</span>
+         <span class="s0">while </span><span class="s2">(</span><span class="s1">i</span><span class="s2">-</span><span class="s5">1 </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">ii</span><span class="s2">+</span><span class="s5">1 </span><span class="s2">&lt; </span><span class="s1">dong</span><span class="s2">){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">-</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">+</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">type</span><span class="s2">) </span><span class="s1">ta</span><span class="s2">++;</span>
+            <span class="s0">else if </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">-</span><span class="s5">1</span><span class="s2">][</span><span class="s1">ii</span><span class="s2">+</span><span class="s5">1</span><span class="s2">] == </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else </span><span class="s2">{</span><span class="s1">dich</span><span class="s2">++;</span><span class="s0">break</span><span class="s2">;}</span>
+            <span class="s1">i </span><span class="s2">= </span><span class="s1">i </span><span class="s2">- </span><span class="s5">1</span><span class="s2">;</span>
+            <span class="s1">ii </span><span class="s2">= </span><span class="s1">ii </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s2">}</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">2</span><span class="s2">;</span>
+         <span class="s0">if </span><span class="s2">(</span><span class="s1">ta </span><span class="s2">== </span><span class="s5">3 </span><span class="s2">&amp;&amp; (</span><span class="s1">dich </span><span class="s2">== </span><span class="s5">1 </span><span class="s2">|| </span><span class="s1">dich </span><span class="s2">== </span><span class="s5">0</span><span class="s2">)) </span><span class="s0">return </span><span class="s1">MAX_INT</span><span class="s2">/</span><span class="s5">1000</span><span class="s2">;</span>
+         <span class="s0">return </span><span class="s2">(</span><span class="s1">mangPN</span><span class="s2">[</span><span class="s1">ta</span><span class="s2">+</span><span class="s5">1</span><span class="s2">]*</span><span class="s5">6</span><span class="s2">)/</span><span class="s5">4 </span><span class="s2">- </span><span class="s1">count</span><span class="s2">;</span>
+      <span class="s2">}</span>
+   <span class="s2">}</span>
+
+   <span class="s6">// timeRun = số lần xuất hiện</span>
+   <span class="s0">public static void </span><span class="s1">runFirst</span><span class="s2">(</span><span class="s1">Seed</span><span class="s2">[][] </span><span class="s1">board</span><span class="s2">, </span><span class="s0">int </span><span class="s1">timeRun</span><span class="s2">, </span><span class="s1">Seed bot</span><span class="s2">){</span>
+      <span class="s1">String vTri </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">();</span>
+      <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">list </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+      <span class="s1">Random rand </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Random</span><span class="s2">();</span>
+      <span class="s0">int </span><span class="s1">pos1</span><span class="s2">, </span><span class="s1">pos2</span><span class="s2">;</span>
+      <span class="s0">do </span><span class="s2">{</span>
+         <span class="s1">pos1 </span><span class="s2">= </span><span class="s1">rand</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">COLS </span><span class="s2">- </span><span class="s5">2</span><span class="s2">) + </span><span class="s5">1</span><span class="s2">;</span>
+         <span class="s1">pos2 </span><span class="s2">= </span><span class="s1">rand</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">COLS </span><span class="s2">- </span><span class="s5">2</span><span class="s2">) + </span><span class="s5">1</span><span class="s2">;</span>
+      <span class="s2">}</span>
+      <span class="s0">while </span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">pos1</span><span class="s2">][</span><span class="s1">pos2</span><span class="s2">] != </span><span class="s1">Seed</span><span class="s2">.</span><span class="s1">EMPTY</span><span class="s2">);</span>
+      <span class="s1">board</span><span class="s2">[</span><span class="s1">pos1</span><span class="s2">][</span><span class="s1">pos2</span><span class="s2">] = </span><span class="s1">bot</span><span class="s2">;</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">-</span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">- </span><span class="s5">0</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">-</span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">- </span><span class="s5">1</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">-</span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">- </span><span class="s5">1</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">+</span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">- </span><span class="s5">1</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">+</span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2</span><span class="s2">));</span>
+      <span class="s1">list</span><span class="s2">.</span><span class="s1">add</span><span class="s2">((</span><span class="s1">pos1</span><span class="s2">+</span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot; &quot; </span><span class="s2">+ (</span><span class="s1">pos2 </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">));</span>
+      <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">timeRun</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&gt; </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+         <span class="s1">vTri </span><span class="s2">= </span><span class="s1">list</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rand</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">list</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()));</span>
+         <span class="s1">String</span><span class="s2">[] </span><span class="s1">splStr </span><span class="s2">= </span><span class="s1">vTri</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s4">&quot; &quot;</span><span class="s2">);</span>
+         <span class="s0">int </span><span class="s1">rowSelected </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">0</span><span class="s2">]);</span>
+         <span class="s0">int </span><span class="s1">colSelected </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">splStr</span><span class="s2">[</span><span class="s5">1</span><span class="s2">]);</span>
+         <span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] = </span><span class="s1">bot</span><span class="s2">;</span>
+         <span class="s1">list</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">vTri</span><span class="s2">);</span>
+      <span class="s2">}</span>
+
+   <span class="s2">}</span>
+
+<span class="s2">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Play2PlayersCaro.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #67a37c; font-style: italic;}
+.s5 { color: #2aacb8;}
+.s6 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Play2PlayersCaro.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">caro</span><span class="s2">.</span><span class="s1">Caro</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">caro</span><span class="s2">.</span><span class="s1">TicTacToe</span><span class="s2">.</span><span class="s1">Play2Players</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Play2PlayersCaro </span><span class="s0">extends </span><span class="s1">Play2Players </span><span class="s2">{</span>
+
+    <span class="s3">/**</span>
+     <span class="s3">* Constructor to setup the game and the GUI components</span>
+     <span class="s3">*</span>
+     <span class="s3">* </span><span class="s4">@param </span><span class="s3">name1</span>
+     <span class="s3">* </span><span class="s4">@param </span><span class="s3">name2</span>
+     <span class="s3">*/</span>
+    <span class="s0">public </span><span class="s1">Play2PlayersCaro</span><span class="s2">(</span><span class="s1">String name1</span><span class="s2">, </span><span class="s1">String name2</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">(</span><span class="s1">name1</span><span class="s2">, </span><span class="s1">name2</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public boolean </span><span class="s1">hasWon</span><span class="s2">(</span><span class="s1">Seed theSeed</span><span class="s2">, </span><span class="s0">int </span><span class="s1">rowSelected</span><span class="s2">, </span><span class="s0">int </span><span class="s1">colSelected</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">countRowWin </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">countColWin </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">countDiaWin </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">countOpDiaWin </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s6">// Kiểm tra hàng ngang</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">+</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&lt;</span><span class="s1">COLS</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">)  </span><span class="s1">countRowWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&gt;=</span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else  if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">rowSelected</span><span class="s2">][</span><span class="s1">i</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countRowWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">countRowWin </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return true</span><span class="s2">;</span>
+        <span class="s6">// Kiểm tra hàng dọc</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">+</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&lt;</span><span class="s1">ROWS</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else  if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countColWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&gt;=</span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else  if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">colSelected</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countColWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">countColWin </span><span class="s2">&gt;= </span><span class="s5">4</span><span class="s2">) </span><span class="s0">return true</span><span class="s2">;</span>
+        <span class="s6">// Kiểm tra hàng chéo</span>
+        <span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">+</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&lt;</span><span class="s1">ROWS</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s1">j</span><span class="s2">++;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">j</span><span class="s2">&gt;=</span><span class="s1">COLS</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else  if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countDiaWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s1">j </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&gt;=</span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+            <span class="s1">j</span><span class="s2">--;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">j</span><span class="s2">&lt;</span><span class="s5">0</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countDiaWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">countDiaWin</span><span class="s2">&gt;=</span><span class="s5">4</span><span class="s2">) </span><span class="s0">return true</span><span class="s2">;</span>
+        <span class="s6">// Kiểm tra hàng chéo đối</span>
+        <span class="s1">j </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">+</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&lt;</span><span class="s1">ROWS</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s1">j</span><span class="s2">--;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">j</span><span class="s2">&lt;</span><span class="s5">0</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countOpDiaWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s1">j </span><span class="s2">= </span><span class="s1">colSelected</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s1">rowSelected</span><span class="s2">-</span><span class="s5">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">&gt;=</span><span class="s5">0</span><span class="s2">; </span><span class="s1">i</span><span class="s2">--){</span>
+            <span class="s1">j</span><span class="s2">++;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">j</span><span class="s2">&gt;=</span><span class="s1">COLS</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] != </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">else if</span><span class="s2">(</span><span class="s1">board</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] == </span><span class="s1">theSeed</span><span class="s2">) </span><span class="s1">countOpDiaWin</span><span class="s2">++;</span>
+        <span class="s2">}</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">countOpDiaWin</span><span class="s2">&gt;=</span><span class="s5">4</span><span class="s2">) </span><span class="s0">return true</span><span class="s2">;</span>
+        <span class="s0">return false</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
