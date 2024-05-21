@@ -7,8 +7,10 @@ import com.caro.TicTacToe.Play2Players;
 import com.caro.TicTacToe.PlayWithAI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 
 public class JFrameMain {
     public static JFrame jFrame;
@@ -128,9 +130,13 @@ public class JFrameMain {
         spinnerRow.setModel(spinnerModel);
         jFrame =new JFrame("Caro");
         jFrame.setContentPane(new JFrameMain().JPanelMain);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         jFrame.setSize(350,300);
+        jFrame.setUndecorated(true);
+        Shape shape = new RoundRectangle2D.Double(0,0,350,300,20,20);
+        jFrame.setShape(shape);
         jFrame.setVisible(true);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
 
     }
