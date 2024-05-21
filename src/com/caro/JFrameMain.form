@@ -16,67 +16,52 @@
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <grid id="27dc6" binding="JPanelMain" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="27dc6" binding="JPanelMain" layout-manager="GridLayoutManager" row-count="6" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="true"/>
         </constraints>
         <properties>
-          <background color="-2752810"/>
+          <background color="-720907"/>
           <enabled value="true"/>
-          <foreground color="-8726273"/>
+          <foreground color="-3409921"/>
         </properties>
         <border type="none">
           <title-color color="-4473925"/>
         </border>
         <children>
-          <component id="4efac" class="javax.swing.JLabel">
+          <component id="9c86d" class="javax.swing.JTextField" binding="txtPlayer2Name">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Nhập số dòng = cột&#10;(Từ 3 đến 20)"/>
-            </properties>
-          </component>
-          <component id="8b67f" class="javax.swing.JSpinner" binding="spinnerRow">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="2" use-parent-layout="false">
-                <preferred-size width="35" height="-1"/>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="200" height="28"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="4f40a" class="javax.swing.JTextField" binding="txtPlayer1Name">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="200" height="28"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="16"/>
+              <text value=""/>
+            </properties>
           </component>
           <component id="21657" class="javax.swing.JButton" binding="btnExit">
             <constraints>
-              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Thoát"/>
             </properties>
           </component>
-          <component id="9c86d" class="javax.swing.JTextField" binding="txtPlayer2Name">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="dc0c7" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="129" height="16"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font name="Berlin Sans FB Demi" size="22" style="0"/>
-              <foreground color="-14921404"/>
-              <text value="Player's Name 2"/>
-            </properties>
-          </component>
           <component id="498b4" class="javax.swing.JButton" binding="btnPlayVSAI">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+              <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="103" height="24"/>
               </grid>
             </constraints>
@@ -84,34 +69,55 @@
               <text value="Chơi với máy"/>
             </properties>
           </component>
-          <component id="4f40a" class="javax.swing.JTextField" binding="txtPlayer1Name">
+          <component id="9cfa8" class="javax.swing.JButton" binding="btnPlay2Players">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
+              <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font size="16"/>
+              <text value="Chơi 2 người"/>
             </properties>
           </component>
-          <component id="c03e2" class="javax.swing.JLabel" binding="tênNgườiChơi1Label">
+          <component id="8b67f" class="javax.swing.JSpinner" binding="spinnerRow">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="2" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="2" use-parent-layout="false">
+                <preferred-size width="40" height="30"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="4efac" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="14"/>
+              <foreground color="-9999260"/>
+              <text value="Chọn kích thước :"/>
+            </properties>
+          </component>
+          <component id="dc0c7" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="129" height="16"/>
               </grid>
             </constraints>
             <properties>
-              <font name="Berlin Sans FB Demi" size="22" style="0"/>
-              <text value="Player's Name 1"/>
-              <verticalAlignment value="0"/>
+              <font name="Berlin Sans FB Demi" size="16" style="0"/>
+              <foreground color="-14921404"/>
+              <text value="Player's Name 2"/>
             </properties>
           </component>
-          <component id="9cfa8" class="javax.swing.JButton" binding="btnPlay2Players">
+          <component id="c03e2" class="javax.swing.JLabel" binding="tênNgườiChơi1Label">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="129" height="16"/>
+              </grid>
             </constraints>
             <properties>
-              <text value="Chơi 2 người"/>
+              <font name="Berlin Sans FB Demi" size="16" style="0"/>
+              <foreground color="-13946856"/>
+              <text value="Player's Name 1"/>
+              <verticalAlignment value="0"/>
             </properties>
           </component>
         </children>

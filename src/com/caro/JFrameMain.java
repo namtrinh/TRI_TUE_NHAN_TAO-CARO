@@ -28,7 +28,7 @@ public class JFrameMain {
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(10, //initial value
                         3, //min
-                        20, //max
+                        15, //max
                         1);//step
         spinnerRow.setModel(spinnerModel);
 
@@ -47,7 +47,7 @@ public class JFrameMain {
                     return;
                 }
                 int row = (int)spinnerRow.getValue();
-                if( row<3 || row >20){
+                if( row<3 || row >15){
                     JOptionPane.showMessageDialog(null,"Bạn phải nhập số dòng, cột nằm trong khoảng" +
                             " giá trị từ 3 đến 20!!!");
                     return;
@@ -129,7 +129,7 @@ public class JFrameMain {
         jFrame =new JFrame("Caro");
         jFrame.setContentPane(new JFrameMain().JPanelMain);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setSize(400,400);
+        jFrame.setSize(350,300);
         jFrame.setVisible(true);
         jFrame.setLocationRelativeTo(null);
 
