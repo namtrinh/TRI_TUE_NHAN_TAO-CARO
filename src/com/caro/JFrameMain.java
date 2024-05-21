@@ -132,11 +132,10 @@ public class JFrameMain {
 
         jFrame.setContentPane(new JFrameMain().JPanelMain);
 
-        jFrame.setSize(350, 300);
+        jFrame.setSize(400, 350);
 
-        jFrame.setUndecorated(true);
-        Shape shape = new RoundRectangle2D.Double(0, 0, 350, 300, 20, 20);
-        jFrame.setShape(shape);
+
+
         jFrame.setVisible(true);
 
         jFrame.setLocationRelativeTo(null);
