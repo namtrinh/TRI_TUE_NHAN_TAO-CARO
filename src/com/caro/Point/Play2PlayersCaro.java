@@ -1,18 +1,17 @@
-package com.caro.Caro;
+package com.caro.Point;
 
-import com.caro.TicTacToe.PlayWithAI;
+import com.caro.TicTacToe.Play2Players;
 
-public class PlayWithAiCaro extends PlayWithAI {
-
+public class Play2PlayersCaro extends Play2Players {
 
     /**
      * Constructor to setup the game and the GUI components
      *
-     * @param name
+     * @param name1
+     * @param name2
      */
-
-    public PlayWithAiCaro(String name) {
-        super(name);
+    public Play2PlayersCaro(String name1, String name2) {
+        super(name1, name2);
     }
 
     @Override
@@ -30,7 +29,7 @@ public class PlayWithAiCaro extends PlayWithAI {
             if(board[rowSelected][i] != theSeed) break;
             else  if(board[rowSelected][i] == theSeed) countRowWin++;
         }
-        if(countRowWin == 4) return true;
+        if(countRowWin >= 4) return true;
         // Kiểm tra hàng dọc
         for (int i = rowSelected+1; i<ROWS; i++){
             if(board[i][colSelected] != theSeed) break;
@@ -40,7 +39,7 @@ public class PlayWithAiCaro extends PlayWithAI {
             if(board[i][colSelected] != theSeed) break;
             else  if(board[i][colSelected] == theSeed) countColWin++;
         }
-        if(countColWin == 4) return true;
+        if(countColWin >= 4) return true;
         // Kiểm tra hàng chéo
         int j = colSelected;
         for (int i = rowSelected+1; i<ROWS; i++){
@@ -56,7 +55,7 @@ public class PlayWithAiCaro extends PlayWithAI {
             if(board[i][j] != theSeed) break;
             else if(board[i][j] == theSeed) countDiaWin++;
         }
-        if(countDiaWin==4) return true;
+        if(countDiaWin>=4) return true;
         // Kiểm tra hàng chéo đối
         j = colSelected;
         for (int i = rowSelected+1; i<ROWS; i++){
@@ -72,11 +71,7 @@ public class PlayWithAiCaro extends PlayWithAI {
             if(board[i][j] != theSeed) break;
             else if(board[i][j] == theSeed) countOpDiaWin++;
         }
-        if(countOpDiaWin==4) return true;
+        if(countOpDiaWin>=4) return true;
         return false;
     }
-
-
-
-
 }

@@ -1,16 +1,14 @@
 package com.caro;
 
 
-import com.caro.Caro.Play2PlayersCaro;
-import com.caro.Caro.PlayWithAiCaro;
+import com.caro.Point.Play2PlayersCaro;
+import com.caro.Point.PlayWithAiCaro;
 import com.caro.TicTacToe.Play2Players;
 import com.caro.TicTacToe.PlayWithAI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.RoundRectangle2D;
 
 public class JFrameMain {
     public static JFrame jFrame;
@@ -25,15 +23,12 @@ public class JFrameMain {
     private JPanel caroPanel;
     private JPanel menuPanel;
 
+
     public JFrameMain() {
         // Cài đặt model cho spinner nhập dòng, cột.
         SpinnerModel spinnerModel =
-                new SpinnerNumberModel(10, //initial value
-                        3, //min
-                        15, //max
-                        1);//step
+                new SpinnerNumberModel(10, 3,15,1);
         spinnerRow.setModel(spinnerModel);
-
         btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +51,7 @@ public class JFrameMain {
                 }
                 // Chọn độ khó máy
                 Object[] options1 = {"Dễ",
-                        "Bình thường"};
+                        "Khó"};
                 int resultLevel = JOptionPane.showOptionDialog(null,"Chọn độ khó","Chọn độ khó" +
                         "",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options1,options1[1]);
 
@@ -116,7 +111,6 @@ public class JFrameMain {
                     new Play2Players(Player1Name,Player2Name);
                 }
 
-
                 jFrame.setVisible(false);
             }
         });
@@ -124,20 +118,13 @@ public class JFrameMain {
 
     public void CreateAndShow() {
         SpinnerModel spinnerModel =
-                new SpinnerNumberModel(10, //initial value
-                        3, 15, 1);//step
+                new SpinnerNumberModel(10, 3, 15, 1);//step
 
         spinnerRow.setModel(spinnerModel);
         jFrame = new JFrame("Caro");
-
         jFrame.setContentPane(new JFrameMain().JPanelMain);
-
-        jFrame.setSize(400, 350);
-
-
-
+        jFrame.setSize(450, 450);
         jFrame.setVisible(true);
-
         jFrame.setLocationRelativeTo(null);
     }
 }

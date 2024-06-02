@@ -1,12 +1,15 @@
 package com.caro.TicTacToe;
 
 import com.caro.EasyBot;
+import com.caro.JFrameMain;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.border.Border;
 
 import static com.caro.JFrameMain.jFrame;
 
@@ -14,198 +17,264 @@ import static com.caro.JFrameMain.jFrame;
  * Tic-Tac-Toe: Two-player Graphics version with Simple-OO
  */
 @SuppressWarnings("serial")
-public class PlayWithAI extends Play2Players{
-   public enum Bot{
+public class PlayWithAI extends Play2Players {
+   public enum Bot {
       EASY_BOT, HEURISTIC_BOT
    }
+
    public static int rowBotPreSelected = -1;
    public static int colBotPreSelected = -1;
    public static int rowBotPreDiLai;
    public static int colBotPreDiLai;
-
+protected JButton btnExit;
    public static Bot GameBot;
 
    public static String PlayerName;
+   protected JButton btnNewgame;
+   private JLabel lblPlayer1, lblPlayer2; // Labels for player names
 
-   // Named-constants of the various dimensions used for graphics drawing
+   private Timer timer;
+   private int timeLeft; // Remaining time in seconds
+   private JLabel lblTimer;
 
    /** Constructor to setup the game and the GUI components */
-   public PlayWithAI(String name){
-      super(name,"");
+   public PlayWithAI(String name) {
+      super(name, "");
+      initTimer(); // Initialize the countdown timer
    }
-   /*private static PlayWithAI instance;
-   public static PlayWithAI getInstance(String name) {
-      if(instance == null) {
-         instance = new PlayWithAI(name);
-      }
-      return instance;
-   }*/
 
-
-   @Override
    protected void PlayGame(String name1, String name2) {
       SetUpBoard(newRow);
       Player1Name = name1;
-      Player2Name ="Máy";
-      canvas = new DrawCanvas();  // Construct a drawing canvas (a JPanel)
+      Player2Name = "Máy";
+      canvas = new DrawCanvas();
       canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
-      // The canvas (JPanel) fires a MouseEvent upon mouse-click
+      // Mouse event listener for canvas
       canvas.addMouseListener(new MouseAdapter() {
          @Override
-         public void mouseClicked(MouseEvent e) {  // mouse-clicked handler
+         public void mouseClicked(MouseEvent e) {
             int mouseX = e.getX();
             int mouseY = e.getY();
-            // Get the row and column clicked
             int rowSelected = mouseY / CELL_SIZE;
             int colSelected = mouseX / CELL_SIZE;
 
             if (currentState == GameState.PLAYING) {
-               if (rowSelected >= 0 && rowSelected < ROWS && colSelected >= 0
-                       && colSelected < COLS && board[rowSelected][colSelected] == Seed.EMPTY) {
-                  //Lưu dòng cột đã chọn của người chơi
-                  rowPreSelected = rowSelected;
-                  colPreSelected = colSelected;
-
-                  board[rowSelected][colSelected] = currentPlayer; // Make a move
-                  updateGame(currentPlayer, rowSelected, colSelected); // update state
-                  // Switch player
-                  currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
-                  STEPS++;
-                  if (currentPlayer == Seed.NOUGHT && currentState == GameState.PLAYING) {
-                     if(GameBot == Bot.EASY_BOT) {
-                        EasyBot botRun = new EasyBot();
-                        String run = botRun.getPosFrBrd(board);
-                        String[] splStr = run.split(" ");
-                        rowSelected = Integer.parseInt(splStr[0]);
-                        colSelected = Integer.parseInt(splStr[1]);
-                     }
-                     else if(GameBot == Bot.HEURISTIC_BOT){
-                        HeuristicBot botRun = new HeuristicBot(ROWS,COLS, Seed.NOUGHT, Seed.CROSS);
-                        String run = botRun.getPoint(board);
-                        String[] splStr = run.split(" ");
-                        if (!splStr[0].isEmpty()) {
-                           rowSelected = Integer.parseInt(splStr[0]);
-                        }
-
-                        if (splStr.length > 1) {
-                           colSelected = Integer.parseInt(splStr[1]);
-                        }
-
-                     }
-
-                     if (rowSelected >= 0 && rowSelected < ROWS && colSelected >= 0
-                             && colSelected < COLS && board[rowSelected][colSelected] == Seed.EMPTY) {
-                        //Lưu dòng cột đã chọn của máy
-                        rowBotPreSelected = rowSelected;
-                        colBotPreSelected = colSelected;
-
-                        board[rowSelected][colSelected] = currentPlayer; // Make a move
-                        updateGame(currentPlayer, rowSelected, colSelected); // update state
-                        // Switch player
-                        currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
-                     }
-                  }
+               if (isMoveValid(rowSelected, colSelected)) {
+                  processPlayerMove(rowSelected, colSelected);
+                  processAIMove();
                }
-               btnDiLai.setEnabled(true);
-               btnBoDiLai.setEnabled(false);
-            } else {       // game over
+            } else {
                initGame(); // restart the game
             }
-            // Refresh the drawing canvas
-
-            repaint();  // Call-back paintComponent().
+            repaint();
          }
       });
 
+      setupWindowListener();
+      setupStatusBar();
+      setupButtons();
+
+      Container cp = getContentPane();
+      cp.setLayout(new BorderLayout());
+
+      // Create panels for player names
+      JPanel leftPanel = new JPanel(new BorderLayout());
+      JPanel rightPanel = new JPanel(new BorderLayout());
+
+      lblPlayer1 = new JLabel(Player1Name, SwingConstants.CENTER);
+      lblPlayer2 = new JLabel(Player2Name, SwingConstants.CENTER);
+
+      lblPlayer1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+      lblPlayer2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+
+      leftPanel.add(lblPlayer1, BorderLayout.CENTER);
+      rightPanel.add(lblPlayer2, BorderLayout.CENTER);
+
+      // Set preferred size for panels
+      leftPanel.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+      rightPanel.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+
+      cp.add(leftPanel, BorderLayout.WEST);
+      cp.add(canvas, BorderLayout.CENTER);
+      cp.add(rightPanel, BorderLayout.EAST);
+      cp.add(statusBar, BorderLayout.PAGE_END);
+      cp.add(pnButton, BorderLayout.PAGE_START);
+
+      pack();
+      setTitle("Chơi với Máy");
+      setLocationRelativeTo(null);
+      setVisible(true);
+
+      board = new Seed[ROWS][COLS];
+      initGame();
+   }
+
+   private boolean isMoveValid(int row, int col) {
+      return row >= 0 && row < ROWS && col >= 0 && col < COLS && board[row][col] == Seed.EMPTY;
+   }
+
+   private void processPlayerMove(int row, int col) {
+      rowPreSelected = row;
+      colPreSelected = col;
+      board[row][col] = currentPlayer;
+      updateGame(currentPlayer, row, col);
+      currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
+      STEPS++;
+      resetTimer();
+      resetAndStartTimer();
+      if (currentState != GameState.PLAYING) {
+         stopTimer(); // Stop the timer if the game is over
+      } else {
+         resetTimer();
+         startTimer(); // Start the timer for the next player's turn
+         processAIMove(); // Process AI move after resetting the timer
+      }
+   }
+
+   private void processAIMove() {
+      if (currentPlayer == Seed.NOUGHT && currentState == GameState.PLAYING) {
+         int rowSelected = -1;
+         int colSelected = -1;
+         if (GameBot == Bot.EASY_BOT) {
+            EasyBot botRun = new EasyBot();
+            String[] move = botRun.getPosFrBrd(board).split(" ");
+            rowSelected = Integer.parseInt(move[0]);
+            colSelected = Integer.parseInt(move[1]);
+         } else if (GameBot == Bot.HEURISTIC_BOT) {
+            HeuristicBot botRun = new HeuristicBot(ROWS, COLS, Seed.NOUGHT, Seed.CROSS);
+            String[] move = botRun.getPoint(board).split(" ");
+            if (!move[0].isEmpty()) {
+               rowSelected = Integer.parseInt(move[0]);
+            }
+            if (move.length > 1) {
+               colSelected = Integer.parseInt(move[1]);
+            }
+         }
+
+         if (isMoveValid(rowSelected, colSelected)) {
+            rowBotPreSelected = rowSelected;
+            colBotPreSelected = colSelected;
+            board[rowSelected][colSelected] = currentPlayer;
+            updateGame(currentPlayer, rowSelected, colSelected);
+            currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
+            if (currentState != GameState.PLAYING) {
+               stopTimer(); // Stop the timer if the game is over
+            } else {
+               resetAndStartTimer(); // Reset and start the timer for the next player's turn
+            }
+         }
+      }
+   }
+
+   private void setupWindowListener() {
       addWindowListener(new WindowAdapter() {
          @Override
          public void windowClosing(WindowEvent e) {
             jFrame.setVisible(true);
          }
       });
+   }
 
-      // Setup the status bar (JLabel) to display status message
+   private void setupStatusBar() {
       statusBar = new JLabel("  ");
       statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
       statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
+   }
 
-      //Thêm Button
-      btnDiLai = new Button("Đi lại");
-      btnDiLai.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
-      btnDiLai.setEnabled(false);
-      //btnDiLai.setSize(10,10);
+   private void setupButtons() {
+      btnNewgame = new JButton("NewGame");
+      btnNewgame.setForeground(Color.WHITE);
+      btnNewgame.setBackground(new Color(59, 89, 182));
 
-      btnDiLai.addActionListener(new ActionListener() {
-         @Override
+      btnNewgame.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            if(currentState != GameState.PLAYING) return;
-            if(CheckEmptyBoard()) return;
-            rowPreDiLai =rowPreSelected;
-            colPreDiLai =colPreSelected;
-            colBotPreDiLai =colBotPreSelected;
-            rowBotPreDiLai = rowBotPreSelected;
-            PlayerReRun = board[rowPreSelected][colPreSelected];
-            currentPlayer = PlayerReRun;
-            board[rowPreSelected][colPreSelected] = Seed.EMPTY;
-            board[rowBotPreSelected][colBotPreSelected] = Seed.EMPTY;
-            btnBoDiLai.setEnabled(true);
-            btnDiLai.setEnabled(false);
-            repaint();
+            int result = JOptionPane.showOptionDialog(null, "Bạn có muốn bắt đầu trò chơi mới không?", "New Game", JOptionPane.YES_NO_OPTION
+                    , JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (result == JOptionPane.YES_OPTION) {
+               if (timer != null && timer.isRunning()) {
+                  timer.stop();
+               }
+               initGame();
+               repaint();
+
+            }
          }
       });
 
-      btnBoDiLai = new Button("Bỏ đi lại");
-      btnBoDiLai.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
-      btnBoDiLai.setEnabled(false);
-      //btnDiLai.setSize(10,10);
+      // Timer label
+      lblTimer = new JLabel("Time left: " + timeLeft + " seconds", SwingConstants.CENTER);
+      lblTimer.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+      lblTimer.setForeground(Color.RED);
 
-      btnBoDiLai.addActionListener(new ActionListener() {
+      btnExit = new JButton("Exit Game");
+      btnExit.setForeground(Color.WHITE);
+      btnExit.setBackground(new Color(59, 89, 182));
+      btnExit.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            if(currentState != GameState.PLAYING) return;
-            if(STEPS == 0 || PlayerReRun == null ) return;
-            board[rowPreDiLai][colPreDiLai] = PlayerReRun;
-            board[rowBotPreDiLai][colBotPreDiLai] = Seed.NOUGHT;
-            //currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
-            btnBoDiLai.setEnabled(false);
-            repaint();
+            if (timer != null && timer.isRunning()) {
+               timer.stop();
+            }
+            JFrameMain.jFrame.setVisible(true);
+            dispose();
          }
       });
 
       pnButton = new JPanel();
-      pnButton.setLayout(new FlowLayout(FlowLayout.CENTER));
-      pnButton.add(btnDiLai);
-      pnButton.add(btnBoDiLai);
-
-
-      Container cp = getContentPane();
-      cp.setLayout(new BorderLayout());
-      cp.add(canvas, BorderLayout.CENTER);
-      cp.add(statusBar, BorderLayout.PAGE_END); // same as SOUTH
-      cp.add(pnButton, BorderLayout.PAGE_START);
-
-      pack();  // pack all the components in this JFrame
-      setTitle("Tic Tac Toe với Máy");
-      setLocationRelativeTo(null);
-      setVisible(true);  // show this JFrame
-
-      board = new Seed[ROWS][COLS]; // allocate array
-      initGame(); // initialize the game board contents and game variables
+      pnButton.setLayout(new GridLayout(1, 2));
+      pnButton.add(btnNewgame);
+      pnButton.add(lblTimer);
+      pnButton.add(btnExit);
    }
 
-   // Bot theo thuật toán Heuristic
+   private void initTimer() {
+      timeLeft = 30; // Initial time left is 10 seconds
+      timer = new Timer(1000, new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if (timeLeft > 0) {
+               timeLeft--;
+               lblTimer.setText("Time left: " + timeLeft + " seconds");
+            } else {
+
+               stopTimer(); // Stop the timer when time runs out
+               processAIMove(); // Proceed with AI move when time runs out
+               resetTimer();
+            }
+         }
+      });
+   }
+
+   private void startTimer() {
+      if (timer != null && !timer.isRunning()) {
+         timer.start();
+      }
+   }
+
+   private void stopTimer() {
+      if (timer != null && timer.isRunning()) {
+         timer.stop();
+      }
+   }
+   private void resetAndStartTimer() {
+      stopTimer(); // Stop the timer if it's running
+      timeLeft = 30; // Reset time to the initial value
+      lblTimer.setText("Time left: " + timeLeft + " seconds"); // Update the timer label
+      startTimer(); // Start the timer
+   }
+
+   // Bot đi theo thuật toán Heuristic
 
    public static class HeuristicBot {
       static int dong, cot;
-      static Seed bot;
-      static Seed player;
+      static Seed bot; //giá trị quân cờ của boss
+      static Seed player; // giá trị quân cờ cuar người chơi
       static int[] mangTC = new int[]{0, 10, 600, 3500, 40000000, 70000, 1000000};
       static int[] mangPN = new int[]{0, 7, 700, 4000, 10000, 67000, 500000};
-      static long MAX_INT = 100000000;
-      static int MAX_DEPTH = 0;
-      private static long checkTC;
-      private static long checkPT;
+      //2 mảng tc pt lưu giá trị tương ứng với những trường hợp trong trò chơi
+      static long MAX_INT = 1000000000;
+      static int MAX_DEPTH = 0; // độ sâu tối đa mà thuật toán minimax phải duyệt
 
       public HeuristicBot(int dongg, int cott, Seed Bott, Seed Playerr) {
          dong = dongg;
@@ -213,7 +282,7 @@ public class PlayWithAI extends Play2Players{
          bot = Bott;
          player = Playerr;
       }
-
+      //  nhận vào một bảng trạng thái của trò chơi và trả về tọa độ của nước đi tốt nhất dựa trên thuật toán minimax và hàm đánh giá.
       public static String getPoint(Seed[][] board) {
          long bestScore = -MAX_INT;
          String bestMove = "";
@@ -233,7 +302,7 @@ public class PlayWithAI extends Play2Players{
          }
          return bestMove;
       }
-
+      //Trả về một danh sách các nước đi có thể thực hiện trên bảng trạng thái hiện tại.
       public static List<String> getPossibleMoves(Seed[][] board) {
          List<String> moves = new ArrayList<>();
          for (int i = 0; i < dong; i++) {
@@ -245,7 +314,7 @@ public class PlayWithAI extends Play2Players{
          }
          return moves;
       }
-
+      //Kiểm tra xem một nước đi có hợp lệ không.
       public static boolean isValidMove(Seed[][] board, int row, int col) {
          return row >= 0 && row < dong && col >= 0 && col < cot && board[row][col] == Seed.EMPTY;
       }
@@ -255,20 +324,19 @@ public class PlayWithAI extends Play2Players{
          if (Math.abs(boardVal) >= MAX_INT || depth == MAX_DEPTH) {
             return boardVal;
          }
-
          if (isMaximizing) {
             long maxEval = -MAX_INT;
             List<String> moves = getPossibleMoves(board);
             for (String move : moves) {
                int i = Integer.parseInt(move.split(" ")[0]);
                int j = Integer.parseInt(move.split(" ")[1]);
-               board[i][j] = bot;
-               long eval = minimax(board, depth + 1, false, alpha, beta);
-               board[i][j] = Seed.EMPTY;
-               maxEval = Math.max(maxEval, eval);
-               alpha = Math.max(alpha, eval);
-               if (beta <= alpha) {
-                  break;
+               if (isValidMove(board, i, j)) {
+                  board[i][j] = bot;
+                  long eval = minimax(board, depth + 1, false, alpha, beta);
+                  board[i][j] = Seed.EMPTY;
+                  maxEval = Math.max(maxEval, eval);
+                  alpha = Math.max(alpha, eval);
+                  if (beta <= alpha) break;
                }
             }
             return maxEval;
@@ -278,19 +346,20 @@ public class PlayWithAI extends Play2Players{
             for (String move : moves) {
                int i = Integer.parseInt(move.split(" ")[0]);
                int j = Integer.parseInt(move.split(" ")[1]);
-               board[i][j] = player;
-               long eval = minimax(board, depth + 1, true, alpha, beta);
-               board[i][j] = Seed.EMPTY;
-               minEval = Math.min(minEval, eval);
-               beta = Math.min(beta, eval);
-               if (beta <= alpha) {
-                  break;
+               if (isValidMove(board, i, j)) {
+                  board[i][j] = player;
+                  long eval = minimax(board, depth + 1, true, alpha, beta);
+                  board[i][j] = Seed.EMPTY;
+                  minEval = Math.min(minEval, eval);
+                  beta = Math.min(beta, eval);
+                  if (beta <= alpha) break;
                }
             }
             return minEval;
          }
-      }
 
+      }
+      // Hàm đánh giá giá trị của bảng trạng thái.dựa trên các quân cờ hiện có trên bàn cờ
       public static long evaluateBoard(Seed[][] board) {
          long score = 0;
          for (int i = 0; i < dong; i++) {
@@ -304,12 +373,11 @@ public class PlayWithAI extends Play2Players{
          }
          return score;
       }
-
+      //Đánh giá giá trị của một vị trí trên bảng dựa trên loại quân cờ và vị trí đó.
       public static long evaluatePosition(int i, int j, Seed[][] board, Seed type) {
-         checkTC = CheckDoc(j, i, board, bot) + CheckNgang(j, i, board, bot) + CheckCheoPhai(i, j, board, bot) + CheckCheoTrai(i, j, board, bot);
-         checkPT = PTDoc(j, i, board, player) + PTNgang(j, i, board, player) + PTPhai(i, j, board, player) + PTTrai(i, j, board, player);
-         long result = checkTC + checkPT;
-         return result;
+         long checkTC = CheckDoc(j, i, board, bot) + CheckNgang(j, i, board, bot) + CheckCheoPhai(i, j, board, bot) + CheckCheoTrai(i, j, board, bot);
+         long checkPT = PTDoc(j, i, board, player) + PTNgang(j, i, board, player) + PTPhai(i, j, board, player) + PTTrai(i, j, board, player);
+         return checkTC + checkPT;
       }
 
       public static long CheckNgang(int pos, int rowNow, Seed[][] board, Seed type) {
@@ -633,38 +701,6 @@ public class PlayWithAI extends Play2Players{
          if (ta == 3 && (dich == 1 || dich == 0)) return MAX_INT / 1000;
          return (mangPN[ta + 1] * 6) / 4 - count;
       }
-   }
-
-
-   // timeRun = số lần xuất hiện
-   public static void runFirst(Seed[][] board, int timeRun, Seed bot){
-      String vTri = new String();
-      List<String> list = new ArrayList<>();
-      Random rand = new Random();
-      int pos1, pos2;
-      do {
-         pos1 = rand.nextInt(COLS - 2) + 1;
-         pos2 = rand.nextInt(COLS - 2) + 1;
-      }
-      while (board[pos1][pos2] != Seed.EMPTY);
-      board[pos1][pos2] = bot;
-      list.add((pos1-1) + " " + (pos2 - 0));
-      list.add((pos1-1) + " " + (pos2 - 1));
-      list.add((pos1-1) + " " + (pos2 + 1));
-      list.add((pos1) + " " + (pos2 - 1));
-      list.add((pos1) + " " + (pos2 + 1));
-      list.add((pos1+1) + " " + (pos2 - 1));
-      list.add((pos1+1) + " " + (pos2));
-      list.add((pos1+1) + " " + (pos2 + 1));
-      for (int i = timeRun-1; i > 0; i--){
-         vTri = list.get(rand.nextInt(list.size()));
-         String[] splStr = vTri.split(" ");
-         int rowSelected = Integer.parseInt(splStr[0]);
-         int colSelected = Integer.parseInt(splStr[1]);
-         board[rowSelected][colSelected] = bot;
-         list.remove(vTri);
-      }
-
    }
 
 }

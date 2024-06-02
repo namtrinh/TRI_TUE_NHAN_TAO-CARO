@@ -1,81 +1,78 @@
 package com.caro.TicTacToe;
 
+import com.caro.JFrameMain;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
-import static com.caro.JFrameMain.jFrame;
-
-/**
- * Tic-Tac-Toe: Two-player Graphics version with Simple-OO
- */
-@SuppressWarnings("serial")
 public class Play2Players extends JFrame {
-    public static int newRow =3;
+    private Timer timer;
+    private int timeLeft;
+
+    public static int newRow = 3;
     protected Seed PlayerReRun;
     public static int rowPreSelected = -1;
     public static int colPreSelected = -1;
-    public static int rowPreDiLai;
-    public static int colPreDiLai;
-    // Named-constants for the game board
-    public static  int ROWS = 3;  // ROWS by COLS cells
-    public static  int COLS = 3;
+    public static int ROWS = 3;
+    public static int COLS = 3;
     public static String Player1Name;
     public static String Player2Name;
     public static boolean Player1TwoMove;
-    public static int STEPS=0;
+    public static int STEPS = 0;
+    public static int CELL_SIZE = 100;
+    public static int CANVAS_WIDTH = CELL_SIZE * COLS;
+    public static int CANVAS_HEIGHT = CELL_SIZE * ROWS;
+    public static int GRID_WIDTH = 2;
+    public static int GRID_WIDHT_HALF = GRID_WIDTH / 2;
+    public static int CELL_PADDING = CELL_SIZE / 6;
+    public static int SYMBOL_SIZE = CELL_SIZE - CELL_PADDING * 2;
+    public static int SYMBOL_STROKE_WIDTH = 8;
 
-    // Named-constants of the various dimensions used for graphics drawing
-    public static  int CELL_SIZE = 100; // cell width and height (square)
-    public static  int CANVAS_WIDTH = CELL_SIZE * COLS;  // the drawing canvas
-    public static  int CANVAS_HEIGHT = CELL_SIZE * ROWS;
-    public static  int GRID_WIDTH = 2;                   // Grid-line's width
-    public static  int GRID_WIDHT_HALF = GRID_WIDTH / 2; // Grid-line's half-width
-    // Symbols (cross/nought) are displayed inside a cell, with padding from border
-    public static  int CELL_PADDING = CELL_SIZE / 6;
-    public static  int SYMBOL_SIZE = CELL_SIZE - CELL_PADDING * 2; // width/height
-    public static  int SYMBOL_STROKE_WIDTH = 8; // pen's stroke width
     private JPanel jhjh;
     private JList list1;
     private JEditorPane ụuuEditorPane;
-
-    // Use an enumeration (inner class) to represent the various states of the game
     public enum GameState {
         PLAYING, DRAW, CROSS_WON, NOUGHT_WON
     }
-    protected GameState currentState;  // the current game state
+    protected GameState currentState;
 
-    // Use an enumeration (inner class) to represent the seeds and cell contents
     public enum Seed {
         EMPTY, CROSS, NOUGHT
     }
-    protected Seed currentPlayer;  // the current player
-
-    public Seed[][] board   ; // Game board of ROWS-by-COLS cells
-    protected DrawCanvas canvas; // Drawing canvas (JPanel) for the game board
-    protected JLabel statusBar;  // Status Bar
+    protected Seed currentPlayer;
+    public Seed[][] board;
+    protected DrawCanvas canvas;
+    protected JLabel statusBar;
     protected JPanel pnButton;
-    protected Button btnDiLai;
-    protected Button btnBoDiLai;
-
-
-    /** Constructor to setup the game and the GUI components */
+    protected JButton btnDiLai;
+    protected JButton btnBoDiLai;
+    protected JButton btnNewgame;
+    protected JLabel player1Label;
+    protected JLabel player2Label;
+    protected JLabel player1TimeLabel;
+    protected JLabel player2TimeLabel;
+    protected JButton btnExit;
     public Play2Players(String name1, String name2) {
-        STEPS=0;
-        PlayGame(name1,name2);
+        STEPS = 0;
+        Player1Name = name1;
+        Player2Name = name2;
+        // Initialize the labels
+        player1TimeLabel = new JLabel("", SwingConstants.CENTER);
+        player2TimeLabel = new JLabel("", SwingConstants.CENTER);
+        PlayGame(name1, name2);
     }
 
-    // Set up lại kích cỡ bàn cờ.
-    public void SetUpBoard(int row){
+    public void SetUpBoard(int row) {
         ROWS = row;
         COLS = row;
-        if ( row <= 10 ) {
+        if (row <= 10) {
             CELL_SIZE = (20 / row) * 25;
             CANVAS_WIDTH = CELL_SIZE * COLS;
             CANVAS_HEIGHT = CELL_SIZE * ROWS;
             CELL_PADDING = CELL_SIZE / 6;
             SYMBOL_SIZE = CELL_SIZE - CELL_PADDING * 2;
-        }else {
+        } else {
             CELL_SIZE = (20 / row) * 45;
             CANVAS_WIDTH = CELL_SIZE * COLS;
             CANVAS_HEIGHT = CELL_SIZE * ROWS;
@@ -84,27 +81,78 @@ public class Play2Players extends JFrame {
         }
     }
 
-    protected void PlayGame(String name1, String name2){
+    public void resetTimer() {
+        if (timer != null) {
+            timer.stop();
+        }
+        timeLeft = 30; // hoặc giá trị mặc định bạn muốn
+        updatePlayerTimeLabels(); // Cập nhật label ngay từ đầu
+        timer = new Timer(1000, new ActionListener() {
+            boolean firstTick = true; // Biến để kiểm tra tick đầu tiên
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    timeLeft--;
+                if (timeLeft < 0) {
+                    handleTimeout();
+                } else {
+                    updateStatusBar();
+                    updatePlayerTimeLabels();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    protected void PlayGame(String name1, String name2) {
         SetUpBoard(newRow);
         Player1Name = name1;
         Player2Name = name2;
-        canvas = new DrawCanvas();  // Construct a drawing canvas (a JPanel)
+        canvas = new DrawCanvas();
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-        JMenuBar menuBar = new JMenuBar();
-        JMenu gameMenu = new JMenu("Game");
-        JMenuItem newGameMenuItem = new JMenuItem("Chơi ván mới");
-        JMenuItem exitMenuItem = new JMenuItem("Thoát");
-        Font menuFont = new Font("Arial", Font.PLAIN, 16); // Thiết lập kiểu chữ và kích thước mong muốn
-        gameMenu.setFont(menuFont); // Thiết lập kiểu chữ và kích thước cho menu "Game"
-        newGameMenuItem.setFont(menuFont); // Thiết lập kiểu chữ và kích thước cho mục "Chơi ván mới"
-        exitMenuItem.setFont(menuFont); // Thiết lập kiểu chữ và kích thước cho mục "Thoát"
+
+        btnNewgame = new JButton("NewGame");
+        btnNewgame.setForeground(Color.WHITE);
+        btnNewgame.setBackground(new Color(59, 89, 182));
+
+        btnNewgame.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int result = JOptionPane.showOptionDialog(null, "Bạn có muốn bắt đầu trò chơi mới không?", "New Game", JOptionPane.YES_NO_OPTION
+                        , JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if (result == JOptionPane.YES_OPTION) {
+                    if (timer != null && timer.isRunning()) {
+                        timer.stop();
+                    }
+                    initGame();
+                    repaint();
+                }
+            }
+        });
+
+        btnExit = new JButton("Exit Game");
+        btnExit.setForeground(Color.WHITE);
+        btnExit.setBackground(new Color(59, 89, 182));
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to exit the game?", "Exit Game",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    if (timer != null && timer.isRunning()) {
+                        timer.stop();
+                    }
+                    JFrameMain.jFrame.setVisible(true);
+                    dispose();
+                }
+            }
+        });
 
         canvas.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {  // mouse-clicked handler
+            public void mouseClicked(MouseEvent e) {
                 int mouseX = e.getX();
                 int mouseY = e.getY();
-                // Get the row and column clicked
                 int rowSelected = mouseY / CELL_SIZE;
                 int colSelected = mouseX / CELL_SIZE;
 
@@ -113,246 +161,218 @@ public class Play2Players extends JFrame {
                             && colSelected < COLS && board[rowSelected][colSelected] == Seed.EMPTY) {
                         rowPreSelected = rowSelected;
                         colPreSelected = colSelected;
-                        board[rowSelected][colSelected] = currentPlayer; // Make a move
-                        updateGame(currentPlayer, rowSelected, colSelected); // update state
-                        // Switch player
+                        board[rowSelected][colSelected] = currentPlayer;
+                        updateGame(currentPlayer, rowSelected, colSelected);
                         currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
                         STEPS++;
+                        // Gọi resetTimer() khi chuyển lượt chơi
+                        resetTimer();
+                        // Cập nhật statusBar sau khi chuyển lượt chơi
+                        updateStatusBar();
                     }
-                    btnDiLai.setEnabled(true);
-                    btnBoDiLai.setEnabled(false);
-                } else {       // game over
-                    initGame(); // restart the game
+                } else {
+                    initGame();
                 }
-                // Refresh the drawing canvas
-                repaint();  // Call-back paintComponent().
+                repaint();
             }
         });
 
-        // Setup the status bar (JLabel) to display status message
         statusBar = new JLabel("  ");
         statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
         statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
 
-        //Thêm Button
-        btnDiLai = new Button("Đi lại");
-        btnDiLai.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
-        btnDiLai.setEnabled(false);
-        //btnDiLai.setSize(10,10);
-
-        btnDiLai.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(currentState != GameState.PLAYING) return;
-                if(STEPS==0) return;
-                rowPreDiLai =rowPreSelected;
-                colPreDiLai =colPreSelected;
-                PlayerReRun = board[rowPreSelected][colPreSelected];
-                currentPlayer = PlayerReRun;
-                board[rowPreSelected][colPreSelected] = Seed.EMPTY;
-                btnBoDiLai.setEnabled(true);
-                btnDiLai.setEnabled(false);
-                repaint();
-            }
-        });
-
-        btnBoDiLai = new Button("Bỏ đi lại");
-        btnBoDiLai.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
-        btnBoDiLai.setEnabled(false);
-        //btnDiLai.setSize(10,10);
-
-        btnBoDiLai.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(currentState != GameState.PLAYING) return;
-                if(STEPS == 0 || PlayerReRun == null ) return;
-                board[rowPreDiLai][colPreDiLai] = PlayerReRun;
-                currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
-                btnBoDiLai.setEnabled(false);
-                repaint();
-            }
-        });
-
-        newGameMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                initGame(); // Bắt đầu ván mới
-                repaint(); // Vẽ lại bàn cờ
-            }
-        });
-
-        exitMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0); // Thoát ứng dụng
-            }
-        });
-
-        gameMenu.add(newGameMenuItem);
-        gameMenu.add(exitMenuItem);
-        menuBar.add(gameMenu);
-        setJMenuBar(menuBar);
-
         pnButton = new JPanel();
         pnButton.setLayout(new FlowLayout(FlowLayout.CENTER));
-        pnButton.add(btnDiLai);
-        pnButton.add(btnBoDiLai);
+        pnButton.add(btnNewgame);
+        pnButton.add(btnExit);
+
+        // LEFT
+        player1Label = new JLabel(name1, SwingConstants.CENTER);
+        player1Label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
+        player1Label.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+        player1TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
+        player1TimeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 50));
+
+        player2Label = new JLabel(name2, SwingConstants.CENTER);
+        player2Label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
+        player2Label.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+        player2TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
+        player2TimeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 50));
 
         Container cp = getContentPane();
+
         cp.setLayout(new BorderLayout());
+        JPanel player1Panel = new JPanel(new BorderLayout());
+        player1Panel.add(player1Label, BorderLayout.NORTH);
+        player1Panel.add(player1TimeLabel, BorderLayout.SOUTH);
+
+        JPanel player2Panel = new JPanel(new BorderLayout());
+        player2Panel.add(player2Label, BorderLayout.NORTH);
+        player2Panel.add(player2TimeLabel, BorderLayout.SOUTH);
+
+        cp.add(player1Panel, BorderLayout.WEST);
+        cp.add(player2Panel, BorderLayout.EAST);
         cp.add(canvas, BorderLayout.CENTER);
-        cp.add(statusBar, BorderLayout.PAGE_END); // same as SOUTH
+        cp.add(statusBar, BorderLayout.PAGE_END);
         cp.add(pnButton, BorderLayout.PAGE_START);
 
-        pack();  // pack all the components in this JFrame
-        setTitle("Tic Tac Toe 2 người");
+        pack();
+        setTitle("Chơi với bạn");
         setLocationRelativeTo(null);
-        setVisible(true);  // show this JFrame
+        setVisible(true);
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                jFrame.setVisible(true);
+                JFrameMain.jFrame.setVisible(true);
             }
         });
 
-        board = new Seed[ROWS][COLS]; // allocate array
-        initGame(); // initialize the game board contents and game variables
+        board = new Seed[ROWS][COLS];
+        initGame();
     }
 
-    /** Initialize the game-board contents and the status */
     public void initGame() {
-        btnDiLai.setEnabled(false);
-        btnBoDiLai.setEnabled(false);
+        // Khởi tạo hoàn toàn trò chơi mới
+
         STEPS = 0;
         for (int row = 0; row < ROWS; ++row) {
             for (int col = 0; col < COLS; ++col) {
-                board[row][col] = Seed.EMPTY; // all cells empty
+                board[row][col] = Seed.EMPTY;
             }
         }
-        currentState = GameState.PLAYING; // ready to play
-        currentPlayer = Seed.CROSS;       // cross plays first
+        currentState = GameState.PLAYING;
+        currentPlayer = Seed.CROSS;
+
+        // Khởi động đếm ngược
+        resetTimer();
+        updateStatusBar();
+        updatePlayerTimeLabels();
     }
 
-    /** Update the currentState after the player with "theSeed" has placed on
-     (rowSelected, colSelected). */
+    private void updateStatusBar() {
+        if (currentState == GameState.PLAYING) {
+            statusBar.setForeground(new Color(59, 89, 182));
+            String currentPlayerName = (currentPlayer == Seed.CROSS) ? Player1Name : Player2Name;
+            statusBar.setText("Lượt của " + currentPlayerName );
+            // Hiển thị hoặc ẩn thời gian cho người chơi tương ứng
+            if (currentPlayer == Seed.CROSS) {
+                player1TimeLabel.setVisible(true);
+                player2TimeLabel.setVisible(false);
+            } else {
+                player1TimeLabel.setVisible(false);
+                player2TimeLabel.setVisible(true);
+            }
+        }
+    }
+    private void updatePlayerTimeLabels() {
+        player1TimeLabel.setText(timeLeft + "");
+        player2TimeLabel.setText(timeLeft + "");
+    }
+
+
+    private void handleTimeout() {
+        // Dừng timer
+        timer.stop();
+        // Hiển thị thông báo và xử thua cho người chơi hiện tại
+        String loserName = (currentPlayer == Seed.CROSS) ? Player1Name : Player2Name;
+        JOptionPane.showMessageDialog(null, loserName + " hết thời gian! " + loserName + " thua! Click chuột để chơi lại");
+        currentState = (currentPlayer == Seed.CROSS) ? GameState.NOUGHT_WON : GameState.CROSS_WON;
+        repaint();
+    }
+
     public void updateGame(Seed theSeed, int rowSelected, int colSelected) {
-        if (hasWon(theSeed, rowSelected, colSelected)) {  // check for win
+        if (hasWon(theSeed, rowSelected, colSelected)) {
             currentState = (theSeed == Seed.CROSS) ? GameState.CROSS_WON : GameState.NOUGHT_WON;
-
-            if(theSeed == Seed.CROSS){
-
-                JOptionPane.showMessageDialog(null,Player1Name+" thắng rồi! Click chuột để chơi lại");
-            }
-            else {
-                JOptionPane.showMessageDialog(null, Player2Name + " thắng rồi! Click chuột để chơi lại");
-                }
-        } else if (isDraw()) {  // check for draw
+            String winnerName = (theSeed == Seed.CROSS) ? Player1Name : Player2Name;
+            JOptionPane.showMessageDialog(null, winnerName + " thắng rồi! Click chuột để chơi lại");
+        } else if (isDraw()) {
             currentState = GameState.DRAW;
-            JOptionPane.showMessageDialog(null,"Hòa rồi! Click chuột để chơi lại");
+            JOptionPane.showMessageDialog(null, "Hòa rồi! Click chuột để chơi lại");
         }
-        // Otherwise, no change to current state (still GameState.PLAYING).
     }
 
-    /** Return true if it is a draw (i.e., no more empty cell) */
     public boolean isDraw() {
         for (int row = 0; row < ROWS; ++row) {
             for (int col = 0; col < COLS; ++col) {
                 if (board[row][col] == Seed.EMPTY) {
-                    return false; // an empty cell found, not draw, exit
+                    return false;
                 }
             }
         }
-        return true;  // no more empty cell, it's a draw
+        return true;
     }
 
-    /** Return true if the player with "theSeed" has won after placing at
-     (rowSelected, colSelected) */
     public boolean hasWon(Seed theSeed, int rowSelected, int colSelected) {
-        return (board[rowSelected][0] == theSeed  // 3-in-the-row
+        return (board[rowSelected][0] == theSeed
                 && board[rowSelected][1] == theSeed
                 && board[rowSelected][2] == theSeed
-                || board[0][colSelected] == theSeed      // 3-in-the-column
+                || board[0][colSelected] == theSeed
                 && board[1][colSelected] == theSeed
                 && board[2][colSelected] == theSeed
-                || rowSelected == colSelected            // 3-in-the-diagonal
+                || rowSelected == colSelected
                 && board[0][0] == theSeed
                 && board[1][1] == theSeed
                 && board[2][2] == theSeed
-                || rowSelected + colSelected == 2  // 3-in-the-opposite-diagonal
+                || rowSelected + colSelected == 2
                 && board[0][2] == theSeed
                 && board[1][1] == theSeed
                 && board[2][0] == theSeed);
     }
-    /**
-     *  Inner class DrawCanvas (extends JPanel) used for custom graphics drawing.
-     */
-    public class DrawCanvas extends JPanel {
 
+    class DrawCanvas extends JPanel {
         @Override
-        public void paintComponent(Graphics g) {  // invoke via repaint()
-            super.paintComponent(g);    // fill background
-            setBackground(Color.WHITE); // set its background color
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            setBackground(Color.WHITE);
+            g.setColor(new Color(149, 149, 161));
 
-            // Draw the grid-lines
-            g.setColor(Color.LIGHT_GRAY);
             for (int row = 1; row < ROWS; ++row) {
                 g.fillRoundRect(0, CELL_SIZE * row - GRID_WIDHT_HALF,
-                        CANVAS_WIDTH-1, GRID_WIDTH, GRID_WIDTH, GRID_WIDTH);
+                        CANVAS_WIDTH - 1, GRID_WIDTH, GRID_WIDTH, GRID_WIDTH);
             }
             for (int col = 1; col < COLS; ++col) {
                 g.fillRoundRect(CELL_SIZE * col - GRID_WIDHT_HALF, 0,
-                        GRID_WIDTH, CANVAS_HEIGHT-1, GRID_WIDTH, GRID_WIDTH);
+                        GRID_WIDTH, CANVAS_HEIGHT - 1, GRID_WIDTH, GRID_WIDTH);
             }
 
-            // Draw the Seeds of all the cells if they are not empty
-            // Use Graphics2D which allows us to set the pen's stroke
-            Graphics2D g2d = (Graphics2D)g;
+            Graphics2D g2d = (Graphics2D) g;
             g2d.setStroke(new BasicStroke(SYMBOL_STROKE_WIDTH, BasicStroke.CAP_ROUND,
-                    BasicStroke.JOIN_ROUND));  // Graphics2D only
+                    BasicStroke.JOIN_ROUND));
             for (int row = 0; row < ROWS; ++row) {
                 for (int col = 0; col < COLS; ++col) {
                     int x1 = col * CELL_SIZE + CELL_PADDING;
                     int y1 = row * CELL_SIZE + CELL_PADDING;
                     if (board[row][col] == Seed.CROSS) {
-                        g2d.setColor(Color.RED);
+                        g2d.setColor(new Color(239, 28, 65));
                         int x2 = (col + 1) * CELL_SIZE - CELL_PADDING;
                         int y2 = (row + 1) * CELL_SIZE - CELL_PADDING;
                         g2d.drawLine(x1, y1, x2, y2);
                         g2d.drawLine(x2, y1, x1, y2);
                     } else if (board[row][col] == Seed.NOUGHT) {
-                        g2d.setColor(Color.BLUE);
+                        g2d.setColor(new Color(8, 208, 208));
                         g2d.drawOval(x1, y1, SYMBOL_SIZE, SYMBOL_SIZE);
                     }
                 }
             }
 
-            // Print status-bar message
             if (currentState == GameState.PLAYING) {
-                statusBar.setForeground(Color.BLACK);
+                statusBar.setForeground(new Color(59, 89, 182));
                 if (currentPlayer == Seed.CROSS) {
-                    statusBar.setText("Lượt của "+Player1Name);
+                    statusBar.setText("Lượt của " + Player1Name + " - Thời gian còn lại: " + timeLeft + " giây");
                 } else {
-                    statusBar.setText("Lượt của "+Player2Name);
+                    statusBar.setText("Lượt của " + Player2Name + " - Thời gian còn lại: " + timeLeft + " giây");
                 }
             } else if (currentState == GameState.DRAW) {
-                statusBar.setForeground(Color.RED);
-                statusBar.setText("Hòa rồi! Click chuột để chơi lại");
+                statusBar.setForeground(new Color(220, 20, 60));
+                statusBar.setText("Hòa! Click chuột để chơi lại.");
             } else if (currentState == GameState.CROSS_WON) {
-                statusBar.setForeground(Color.RED);
-                statusBar.setText(Player1Name+" thắng rồi! Click chuột để chơi lại");
+                statusBar.setForeground(new Color(220, 20, 60));
+                statusBar.setText(Player1Name + " (X) thắng! Click chuột để chơi lại.");
             } else if (currentState == GameState.NOUGHT_WON) {
-                statusBar.setForeground(Color.RED);
-                statusBar.setText(Player2Name+" thắng rồi! Click chuột để chơi lại");
+                statusBar.setForeground(new Color(0, 128, 128));
+                statusBar.setText(Player2Name + " (O) thắng! Click chuột để chơi lại.");
             }
         }
-    }
-    protected boolean CheckEmptyBoard(){
-        for (int row = 0; row < ROWS; ++row) {
-            for (int col = 0; col < COLS; ++col) {
-                if (board[row][col] != Seed.EMPTY) {
-                    return false; // an empty cell found, not draw, exit
-                }
-            }
-        }
-        return true;
     }
 }
