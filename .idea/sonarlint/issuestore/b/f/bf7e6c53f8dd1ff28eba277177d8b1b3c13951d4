@@ -1,0 +1,57 @@
+
+C
+java:S1604 "(Make this anonymous inner class a lambda(Ãúó’ÿÿÿÿÿ
+C
+java:S1604&"(Make this anonymous inner class a lambda(òÀ…¾şÿÿÿÿ
+C
+java:S1604T"(Make this anonymous inner class a lambda(‘–ñÀıÿÿÿÿ
+f	java:S117)"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ¥à¹
+f	java:S117W"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ¥à¹
+f	java:S117X"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(à²†İ
+m
+java:S1104"RMake jFrame a static final constant or non-public and provide accessors if needed.(ç»Ôµÿÿÿÿÿ
+G
+java:S1444",Make this "public static jFrame" field final(ç»Ôµÿÿÿÿÿ
+j	java:S116"URename this field "JPanelMain" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìšû
+w	java:S116"bRename this field "tÃªnNgÆ°á»iChÆ¡i1Label" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁŒ½Ç
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(Ê€Ñåùÿÿÿÿ
+_
+java:S1854E"DRemove this useless assignment to local variable "heuristicBotCaro".(¦˜˜ üÿÿÿÿ
+Q
+java:S2696A"6Make the enclosing method "static" or remove this set.(æ¬ı§üÿÿÿÿ
+`
+java:S3252A"EUse static access with "com.caro.TicTacToe.PlayWithAI" for "GameBot".(æ¬ı§üÿÿÿÿ
+Q
+java:S2696C"6Make the enclosing method "static" or remove this set.(×Ó‰¸ÿÿÿÿÿ
+`
+java:S3252C"EUse static access with "com.caro.TicTacToe.PlayWithAI" for "GameBot".(×Ó‰¸ÿÿÿÿÿ
+Q
+java:S2696D"6Make the enclosing method "static" or remove this set.(´³¨¤ùÿÿÿÿ
+a
+java:S3252D"FUse static access with "com.caro.TicTacToe.Play2Players" for "newRow".(´³¨¤ùÿÿÿÿ
+P
+java:S1481E"5Remove this unused "heuristicBotCaro" local variable.(¦˜˜ üÿÿÿÿ
+L
+java:S2696I"6Make the enclosing method "static" or remove this set.(¦›éí
+Q
+java:S2696K"6Make the enclosing method "static" or remove this set.(·ü•‰ùÿÿÿÿ
+Q
+java:S2696L"6Make the enclosing method "static" or remove this set.(Ø¼èÙûÿÿÿÿ
+a
+java:S3252L"FUse static access with "com.caro.TicTacToe.Play2Players" for "newRow".(Ø¼èÙûÿÿÿÿ
+Q
+java:S2696j"6Make the enclosing method "static" or remove this set.(Ÿøœ”üÿÿÿÿ
+a
+java:S3252j"FUse static access with "com.caro.TicTacToe.Play2Players" for "newRow".(Ÿøœ”üÿÿÿÿ
+Q
+java:S2696n"6Make the enclosing method "static" or remove this set.(°æ‡Íşÿÿÿÿ
+h	java:S100w"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â¸‚Óÿÿÿÿÿ
+L
+java:S2696|"6Make the enclosing method "static" or remove this set.(‘Ëß†
+Q
+java:S1068";Remove this unused "tÃªnNgÆ°á»iChÆ¡i1Label" private field.(ÁŒ½Ç
+H
+java:S1068"-Remove this unused "caroPanel" private field.(­ÍÛÑşÿÿÿÿ
+C
+java:S1068"-Remove this unused "menuPanel" private field.(ë‡Ù„

@@ -9,6 +9,10 @@ import java.awt.event.*;
 public class Play2Players extends JFrame {
     private Timer timer;
     private int timeLeft;
+    private int savedPlayer1Score = 0;
+    private int savedPlayer2Score = 0;
+
+
 
     public static int newRow = 3;
     protected Seed PlayerReRun;
@@ -18,6 +22,8 @@ public class Play2Players extends JFrame {
     public static int COLS = 3;
     public static String Player1Name;
     public static String Player2Name;
+    public static int Player1Score = 0; // Player 1 score
+    public static int Player2Score = 0; // Player 2 score
     public static boolean Player1TwoMove;
     public static int STEPS = 0;
     public static int CELL_SIZE = 100;
@@ -52,15 +58,21 @@ public class Play2Players extends JFrame {
     protected JLabel player2Label;
     protected JLabel player1TimeLabel;
     protected JLabel player2TimeLabel;
+    protected JLabel player1ScoreLabel; // Label to display Player 1 score
+    protected JLabel player2ScoreLabel;
     protected JButton btnExit;
     public Play2Players(String name1, String name2) {
+
         STEPS = 0;
         Player1Name = name1;
         Player2Name = name2;
         // Initialize the labels
         player1TimeLabel = new JLabel("", SwingConstants.CENTER);
         player2TimeLabel = new JLabel("", SwingConstants.CENTER);
+        player1ScoreLabel = new JLabel("Score: " + Player1Score, SwingConstants.CENTER);
+        player2ScoreLabel = new JLabel("Score: " + Player2Score, SwingConstants.CENTER);
         PlayGame(name1, name2);
+        loadPlayerScores();
     }
 
     public void SetUpBoard(int row) {
@@ -92,7 +104,7 @@ public class Play2Players extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                    timeLeft--;
+                timeLeft--;
                 if (timeLeft < 0) {
                     handleTimeout();
                 } else {
@@ -186,35 +198,75 @@ public class Play2Players extends JFrame {
         pnButton.add(btnNewgame);
         pnButton.add(btnExit);
 
+
         // LEFT
         player1Label = new JLabel(name1, SwingConstants.CENTER);
         player1Label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
         player1Label.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
         player1TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
+        player1ScoreLabel = new JLabel("Score: " + Player1Score, SwingConstants.CENTER);
         player1TimeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 50));
+
 
         player2Label = new JLabel(name2, SwingConstants.CENTER);
         player2Label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
         player2Label.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
         player2TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
+        player2ScoreLabel = new JLabel("Score: " + Player2Score, SwingConstants.CENTER);
         player2TimeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 50));
+
 
         Container cp = getContentPane();
 
         cp.setLayout(new BorderLayout());
-        JPanel player1Panel = new JPanel(new BorderLayout());
-        player1Panel.add(player1Label, BorderLayout.NORTH);
-        player1Panel.add(player1TimeLabel, BorderLayout.SOUTH);
 
-        JPanel player2Panel = new JPanel(new BorderLayout());
-        player2Panel.add(player2Label, BorderLayout.NORTH);
-        player2Panel.add(player2TimeLabel, BorderLayout.SOUTH);
+
+
+
+
+        // Player 1 Panel
+        JPanel player1Panel = new JPanel();
+        player1Panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.weightx = 1.0;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        player1Panel.add(player1Label, gbc); // Adding player name label
+        player1Panel.add(player1ScoreLabel, gbc); // Adding score label
+        player1Panel.add(player1TimeLabel, gbc); // Adding time label
+
+        player1Panel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT)); // Set preferred size for the panel
+        player1Panel.setMinimumSize(new Dimension(200, CANVAS_HEIGHT)); // Set minimum size for the panel
+
+// Player 2 Panel
+        JPanel player2Panel = new JPanel();
+        player2Panel.setLayout(new GridBagLayout());
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.weightx = 1.0;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        player2Panel.add(player2Label, gbc); // Adding player name label
+        player2Panel.add(player2ScoreLabel, gbc); // Adding score label
+        player2Panel.add(player2TimeLabel, gbc); // Adding time label
+
+        player2Panel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT)); // Set preferred size for the panel
+        player2Panel.setMinimumSize(new Dimension(200, CANVAS_HEIGHT)); // Set minimum size for the panel
 
         cp.add(player1Panel, BorderLayout.WEST);
         cp.add(player2Panel, BorderLayout.EAST);
         cp.add(canvas, BorderLayout.CENTER);
         cp.add(statusBar, BorderLayout.PAGE_END);
         cp.add(pnButton, BorderLayout.PAGE_START);
+
+
 
         pack();
         setTitle("Chơi với bạn");
@@ -224,7 +276,11 @@ public class Play2Players extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                Player1Score = 0;
+                Player2Score = 0;
+                savePlayerScores();
                 JFrameMain.jFrame.setVisible(true);
+                dispose();
             }
         });
 
@@ -234,6 +290,7 @@ public class Play2Players extends JFrame {
 
     public void initGame() {
         // Khởi tạo hoàn toàn trò chơi mới
+
 
         STEPS = 0;
         for (int row = 0; row < ROWS; ++row) {
@@ -270,6 +327,28 @@ public class Play2Players extends JFrame {
         player2TimeLabel.setText(timeLeft + "");
     }
 
+    private void updatePlayerScores() {
+        player1ScoreLabel.setText("Score: " + Player1Score);
+        player2ScoreLabel.setText("Score: " + Player2Score);
+        repaint();
+    }
+    private void loadPlayerScores() {
+        // Điều này có thể thực hiện thông qua tệp dữ liệu hoặc các cài đặt khác
+        // Ở đây, tôi chỉ giả định rằng bạn đã lưu điểm số của hai người chơi trong savedPlayer1Score và savedPlayer2Score
+        Player1Score = savedPlayer1Score;
+        Player2Score = savedPlayer2Score;
+        updatePlayerScores();
+    }
+    private void savePlayerScores() {
+        // Lưu điểm số của hai người chơi vào savedPlayer1Score và savedPlayer2Score
+        savedPlayer1Score = Player1Score;
+        savedPlayer2Score = Player2Score;
+        // Điều này có thể thực hiện thông qua tệp dữ liệu hoặc các cài đặt khác
+    }
+
+
+
+
 
     private void handleTimeout() {
         // Dừng timer
@@ -277,20 +356,33 @@ public class Play2Players extends JFrame {
         // Hiển thị thông báo và xử thua cho người chơi hiện tại
         String loserName = (currentPlayer == Seed.CROSS) ? Player1Name : Player2Name;
         JOptionPane.showMessageDialog(null, loserName + " hết thời gian! " + loserName + " thua! Click chuột để chơi lại");
+        if (currentPlayer == Seed.CROSS) {
+            Player2Score++; // Increment Player 2's score if Player 1 loses on timeout
+        } else {
+            Player1Score++; // Increment Player 1's score if Player 2 loses on timeout
+        }
+        updatePlayerScores(); // Update scores in the GUI
         currentState = (currentPlayer == Seed.CROSS) ? GameState.NOUGHT_WON : GameState.CROSS_WON;
         repaint();
     }
-
+    // Trong phương thức updateGame của lớp Play2Players
     public void updateGame(Seed theSeed, int rowSelected, int colSelected) {
         if (hasWon(theSeed, rowSelected, colSelected)) {
             currentState = (theSeed == Seed.CROSS) ? GameState.CROSS_WON : GameState.NOUGHT_WON;
             String winnerName = (theSeed == Seed.CROSS) ? Player1Name : Player2Name;
             JOptionPane.showMessageDialog(null, winnerName + " thắng rồi! Click chuột để chơi lại");
+            if (theSeed == Seed.CROSS) {
+                Player1Score++; // Increment Player 1's score if they win
+            } else {
+                Player2Score++; // Increment Player 2's score if they win
+            }
+            updatePlayerScores(); // Update scores in the GUI
         } else if (isDraw()) {
             currentState = GameState.DRAW;
             JOptionPane.showMessageDialog(null, "Hòa rồi! Click chuột để chơi lại");
         }
     }
+
 
     public boolean isDraw() {
         for (int row = 0; row < ROWS; ++row) {
@@ -359,11 +451,16 @@ public class Play2Players extends JFrame {
             if (currentState == GameState.PLAYING) {
                 statusBar.setForeground(new Color(59, 89, 182));
                 if (currentPlayer == Seed.CROSS) {
-                    statusBar.setText("Lượt của " + Player1Name + " - Thời gian còn lại: " + timeLeft + " giây");
+                    statusBar.setText("Lượt của " + Player1Name + " - Thời gian còn lại: " + timeLeft + " giây\n"
+                            + Player1Name + " (X): " + Player1Score + " điểm\n"
+                            + Player2Name + " (O): " + Player2Score + " điểm");
                 } else {
-                    statusBar.setText("Lượt của " + Player2Name + " - Thời gian còn lại: " + timeLeft + " giây");
+                    statusBar.setText("Lượt của " + Player2Name + " - Thời gian còn lại: " + timeLeft + " giây\n"
+                            + Player1Name + " (X): " + Player1Score + " điểm\n"
+                            + Player2Name + " (O): " + Player2Score + " điểm");
                 }
-            } else if (currentState == GameState.DRAW) {
+            }
+            else if (currentState == GameState.DRAW) {
                 statusBar.setForeground(new Color(220, 20, 60));
                 statusBar.setText("Hòa! Click chuột để chơi lại.");
             } else if (currentState == GameState.CROSS_WON) {
@@ -376,3 +473,4 @@ public class Play2Players extends JFrame {
         }
     }
 }
+

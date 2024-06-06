@@ -26,7 +26,7 @@ public class PlayWithAI extends Play2Players {
    public static int colBotPreSelected = -1;
    public static int rowBotPreDiLai;
    public static int colBotPreDiLai;
-protected JButton btnExit;
+   protected JButton btnExit;
    public static Bot GameBot;
 
    public static String PlayerName;
@@ -36,8 +36,16 @@ protected JButton btnExit;
    private Timer timer;
    private int timeLeft; // Remaining time in seconds
    private JLabel lblTimer;
+   private int playerScore = 0;
+   private int aiScore = 0;
+   protected JLabel player1; // Label to display Player 1 score
+   protected JLabel playerai;
 
-   /** Constructor to setup the game and the GUI components */
+
+
+   /**
+    * Constructor to setup the game and the GUI components
+    */
    public PlayWithAI(String name) {
       super(name, "");
       initTimer(); // Initialize the countdown timer
@@ -176,10 +184,32 @@ protected JButton btnExit;
       });
    }
 
+
    private void setupStatusBar() {
       statusBar = new JLabel("  ");
       statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
       statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
+      // Thêm các label cho điểm
+      player1 = new JLabel("Player 1: " + playerScore);
+      playerai = new JLabel("Player AI: " + aiScore);
+
+
+      JPanel scorePanel = new JPanel(new GridLayout(1, 2));
+      scorePanel.add(player1);
+      scorePanel.add(playerai);
+
+      // Thêm các nhãn điểm vào thanh trạng thái
+      JPanel statusPanel = new JPanel(new BorderLayout());
+      statusPanel.add(scorePanel, BorderLayout.CENTER);
+      statusPanel.add(statusBar, BorderLayout.SOUTH);
+
+      Container cp = getContentPane();
+
+      cp.setLayout(new BorderLayout());
+      cp.add(statusPanel, BorderLayout.PAGE_END);
+
+      // Thêm điểm vào thanh trạng thái
+
    }
 
    private void setupButtons() {
@@ -257,12 +287,30 @@ protected JButton btnExit;
          timer.stop();
       }
    }
+
    private void resetAndStartTimer() {
       stopTimer(); // Stop the timer if it's running
       timeLeft = 30; // Reset time to the initial value
       lblTimer.setText("Time left: " + timeLeft + " seconds"); // Update the timer label
       startTimer(); // Start the timer
    }
+   public void updateGame(Seed theSeed, int rowSelected, int colSelected) {
+      if (hasWon(theSeed, rowSelected, colSelected)) {
+         currentState = (theSeed == Seed.CROSS) ? GameState.CROSS_WON : GameState.NOUGHT_WON;
+         if (theSeed == Seed.CROSS) {
+            aiScore++; // Máy tính thắng, cộng 1 vào điểm của máy tính
+         } else {
+            playerScore++; // Người chơi thắng, cộng 1 vào điểm của người chơi
+         }
+         // Cập nhật văn bản của các label điểm
+         player1.setText("Player 1: " + playerScore);
+         playerai.setText("Player AI: " + aiScore);
+      } else if (isDraw()) {
+         currentState = GameState.DRAW;
+      }
+   }
+
+
 
    // Bot đi theo thuật toán Heuristic
 

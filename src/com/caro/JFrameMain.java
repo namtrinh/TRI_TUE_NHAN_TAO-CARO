@@ -22,9 +22,12 @@ public class JFrameMain {
     private JLabel tênNgườiChơi1Label;
     private JPanel caroPanel;
     private JPanel menuPanel;
+    private JLabel player1ScoreLabel;
+    private JLabel player2ScoreLabel;
 
 
     public JFrameMain() {
+
         // Cài đặt model cho spinner nhập dòng, cột.
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(10, 3,15,1);
