@@ -36,16 +36,8 @@ public class PlayWithAI extends Play2Players {
    private Timer timer;
    private int timeLeft; // Remaining time in seconds
    private JLabel lblTimer;
-   private int playerScore = 0;
-   private int aiScore = 0;
-   protected JLabel player1; // Label to display Player 1 score
-   protected JLabel playerai;
 
-
-
-   /**
-    * Constructor to setup the game and the GUI components
-    */
+   /** Constructor to setup the game and the GUI components */
    public PlayWithAI(String name) {
       super(name, "");
       initTimer(); // Initialize the countdown timer
@@ -88,20 +80,51 @@ public class PlayWithAI extends Play2Players {
 
       // Create panels for player names
       JPanel leftPanel = new JPanel(new BorderLayout());
-      JPanel rightPanel = new JPanel(new BorderLayout());
+      JPanel leftInnerPanel = new JPanel(new GridLayout(2, 1, 0, 160)); // Use GridLayout to stack components vertically with 20 pixel gap
 
+      JPanel rightPanel = new JPanel(new BorderLayout());
+      JPanel rightInnerPanel = new JPanel(new GridLayout(2, 1, 0, 160)); // Use GridLayout to stack components vertically with 20 pixel gap
       lblPlayer1 = new JLabel(Player1Name, SwingConstants.CENTER);
+      player1ScoreLabel = new JLabel("Score: " + Player1Score, SwingConstants.CENTER);
+
       lblPlayer2 = new JLabel(Player2Name, SwingConstants.CENTER);
+      player2ScoreLabel = new JLabel("Score: " + Player2Score, SwingConstants.CENTER);
 
       lblPlayer1.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
       lblPlayer2.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 
-      leftPanel.add(lblPlayer1, BorderLayout.CENTER);
-      rightPanel.add(lblPlayer2, BorderLayout.CENTER);
+      // Player 1 Labels
+      lblPlayer1.setFont(new Font("Arial", Font.BOLD, 24));
+      lblPlayer1.setForeground(Color.BLUE);
 
-      // Set preferred size for panels
+      player1ScoreLabel.setFont(new Font("Arial", Font.BOLD, 18));
+      player1ScoreLabel.setForeground(Color.DARK_GRAY);
+
+// Player 2 Labels
+      lblPlayer2.setFont(new Font("Arial", Font.BOLD, 24));
+      lblPlayer2.setForeground(Color.RED);
+
+      player2ScoreLabel.setFont(new Font("Arial", Font.BOLD, 18));
+      player2ScoreLabel.setForeground(Color.DARK_GRAY);
+
+
+
+      leftInnerPanel.add(lblPlayer1); // Add name label
+      leftInnerPanel.add(player1ScoreLabel); // Add score label
+      rightInnerPanel.add(lblPlayer2); // Add name label
+      rightInnerPanel.add(player2ScoreLabel); // Add score label
+      setUndecorated(true);
+      leftPanel.add(leftInnerPanel, BorderLayout.PAGE_START); // Add the inner panel to the center of the left panel
+      rightPanel.add(rightInnerPanel, BorderLayout.PAGE_START); // Add the inner panel to the center of the right panel
+
+// Set preferred size for panels
       leftPanel.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
       rightPanel.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+
+// Set preferred size for panels
+      leftPanel.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+      rightPanel.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
+
 
       cp.add(leftPanel, BorderLayout.WEST);
       cp.add(canvas, BorderLayout.CENTER);
@@ -184,32 +207,10 @@ public class PlayWithAI extends Play2Players {
       });
    }
 
-
    private void setupStatusBar() {
       statusBar = new JLabel("  ");
       statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
       statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
-      // Thêm các label cho điểm
-      player1 = new JLabel("Player 1: " + playerScore);
-      playerai = new JLabel("Player AI: " + aiScore);
-
-
-      JPanel scorePanel = new JPanel(new GridLayout(1, 2));
-      scorePanel.add(player1);
-      scorePanel.add(playerai);
-
-      // Thêm các nhãn điểm vào thanh trạng thái
-      JPanel statusPanel = new JPanel(new BorderLayout());
-      statusPanel.add(scorePanel, BorderLayout.CENTER);
-      statusPanel.add(statusBar, BorderLayout.SOUTH);
-
-      Container cp = getContentPane();
-
-      cp.setLayout(new BorderLayout());
-      cp.add(statusPanel, BorderLayout.PAGE_END);
-
-      // Thêm điểm vào thanh trạng thái
-
    }
 
    private void setupButtons() {
@@ -241,15 +242,25 @@ public class PlayWithAI extends Play2Players {
       btnExit.setForeground(Color.WHITE);
       btnExit.setBackground(new Color(59, 89, 182));
       btnExit.addActionListener(new ActionListener() {
-         @Override
          public void actionPerformed(ActionEvent e) {
-            if (timer != null && timer.isRunning()) {
-               timer.stop();
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want to exit the game?", "Exit Game",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+
+               stopTimer();
+
+               resetTimerr();
+               dispose();
+               JFrameMain.jFrame.setVisible(true);
+               // Optionally, you might want to reset the game state
+               initGame();
+               repaint();
             }
-            JFrameMain.jFrame.setVisible(true);
-            dispose();
          }
       });
+
 
       pnButton = new JPanel();
       pnButton.setLayout(new GridLayout(1, 2));
@@ -287,42 +298,28 @@ public class PlayWithAI extends Play2Players {
          timer.stop();
       }
    }
-
+    public void resetTimerr() {
+        timeLeft = 30; // Reset time to initial value
+        lblTimer.setText("Time left: " + timeLeft + " seconds");
+    }
    private void resetAndStartTimer() {
       stopTimer(); // Stop the timer if it's running
       timeLeft = 30; // Reset time to the initial value
       lblTimer.setText("Time left: " + timeLeft + " seconds"); // Update the timer label
       startTimer(); // Start the timer
    }
-   public void updateGame(Seed theSeed, int rowSelected, int colSelected) {
-      if (hasWon(theSeed, rowSelected, colSelected)) {
-         currentState = (theSeed == Seed.CROSS) ? GameState.CROSS_WON : GameState.NOUGHT_WON;
-         if (theSeed == Seed.CROSS) {
-            aiScore++; // Máy tính thắng, cộng 1 vào điểm của máy tính
-         } else {
-            playerScore++; // Người chơi thắng, cộng 1 vào điểm của người chơi
-         }
-         // Cập nhật văn bản của các label điểm
-         player1.setText("Player 1: " + playerScore);
-         playerai.setText("Player AI: " + aiScore);
-      } else if (isDraw()) {
-         currentState = GameState.DRAW;
-      }
-   }
-
-
 
    // Bot đi theo thuật toán Heuristic
 
    public static class HeuristicBot {
       static int dong, cot;
-      static Seed bot; //giá trị quân cờ của boss
-      static Seed player; // giá trị quân cờ cuar người chơi
-      static int[] mangTC = new int[]{0, 10, 600, 3500, 40000000, 70000, 1000000};
-      static int[] mangPN = new int[]{0, 7, 700, 4000, 10000, 67000, 500000};
+      static Seed bot;
+      static Seed player;
+      static int[] mangTC = new int[]{0, 200, 10000, 30000, 80000000, 140000, 2000000};
+      static int[] mangPN = new int[]{0, 7, 700, 10000, 100000, 67000, 500000};
       //2 mảng tc pt lưu giá trị tương ứng với những trường hợp trong trò chơi
-      static long MAX_INT = 1000000000;
-      static int MAX_DEPTH = 0; // độ sâu tối đa mà thuật toán minimax phải duyệt
+      static long MAX_INT = 100000000;
+      static int MAX_DEPTH=2 ;
 
       public HeuristicBot(int dongg, int cott, Seed Bott, Seed Playerr) {
          dong = dongg;
@@ -330,6 +327,14 @@ public class PlayWithAI extends Play2Players {
          bot = Bott;
          player = Playerr;
       }
+      public static boolean isAttackingMove(int i, int j, Seed[][] board, Seed type) {
+         // Kiểm tra xem nước đi này có giúp kéo dài chuỗi tấn công hay không
+         return CheckNgang(j, i, board, type) > 0||
+                 CheckDoc(j, i, board, type) > 0 ||
+                 CheckCheoPhai(i, j, board, type) > 0 ||
+                 CheckCheoTrai(i, j, board, type) > 0;
+      }
+
       //  nhận vào một bảng trạng thái của trò chơi và trả về tọa độ của nước đi tốt nhất dựa trên thuật toán minimax và hàm đánh giá.
       public static String getPoint(Seed[][] board) {
          long bestScore = -MAX_INT;
@@ -338,10 +343,16 @@ public class PlayWithAI extends Play2Players {
          for (String move : moves) {
             int i = Integer.parseInt(move.split(" ")[0]);
             int j = Integer.parseInt(move.split(" ")[1]);
-            if (isValidMove(board, i, j)) {
+            if (isValid(i, j, board)) {
                board[i][j] = bot;
                long score = minimax(board, 0, false, -MAX_INT, MAX_INT);
                board[i][j] = Seed.EMPTY;
+
+
+               if (isAttackingMove(i, j, board, bot)) {
+                  score += 10000; // Tăng trọng số cho các nước đi tấn công
+               }
+
                if (score > bestScore) {
                   bestScore = score;
                   bestMove = move;
@@ -350,21 +361,35 @@ public class PlayWithAI extends Play2Players {
          }
          return bestMove;
       }
+
       //Trả về một danh sách các nước đi có thể thực hiện trên bảng trạng thái hiện tại.
       public static List<String> getPossibleMoves(Seed[][] board) {
-         List<String> moves = new ArrayList<>();
-         for (int i = 0; i < dong; i++) {
-            for (int j = 0; j < cot; j++) {
-               if (board[i][j] == Seed.EMPTY) {
-                  moves.add(i + " " + j);
+         List<String> possibleMoves = new ArrayList<>();
+         for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+               if (board[i][j] == Seed.EMPTY && hasNeighborMove(i, j, board)) {
+                  possibleMoves.add(i + " " + j);
                }
             }
          }
-         return moves;
+         return possibleMoves;
       }
-      //Kiểm tra xem một nước đi có hợp lệ không.
-      public static boolean isValidMove(Seed[][] board, int row, int col) {
-         return row >= 0 && row < dong && col >= 0 && col < cot && board[row][col] == Seed.EMPTY;
+
+      public static boolean hasNeighborMove(int row, int col, Seed[][] board) {
+         // Kiểm tra các ô xung quanh ô hiện tại để xác định xem có nước đi nào xung quanh không
+         int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+         for (int[] dir : directions) {
+            int newRow = row + dir[0];
+            int newCol = col + dir[1];
+            if (isValid(newRow, newCol, board) && board[newRow][newCol] != Seed.EMPTY) {
+               return true;
+            }
+         }
+         return false;
+      }
+
+      public static boolean isValid(int row, int col, Seed[][] board) {
+         return row >= 0 && row < board.length && col >= 0 && col < board[0].length;
       }
 
       public static long minimax(Seed[][] board, int depth, boolean isMaximizing, long alpha, long beta) {
@@ -378,7 +403,7 @@ public class PlayWithAI extends Play2Players {
             for (String move : moves) {
                int i = Integer.parseInt(move.split(" ")[0]);
                int j = Integer.parseInt(move.split(" ")[1]);
-               if (isValidMove(board, i, j)) {
+               if (isValid( i, j,board)) {
                   board[i][j] = bot;
                   long eval = minimax(board, depth + 1, false, alpha, beta);
                   board[i][j] = Seed.EMPTY;
@@ -394,7 +419,7 @@ public class PlayWithAI extends Play2Players {
             for (String move : moves) {
                int i = Integer.parseInt(move.split(" ")[0]);
                int j = Integer.parseInt(move.split(" ")[1]);
-               if (isValidMove(board, i, j)) {
+               if (isValid( i, j,board)) {
                   board[i][j] = player;
                   long eval = minimax(board, depth + 1, true, alpha, beta);
                   board[i][j] = Seed.EMPTY;
@@ -407,20 +432,30 @@ public class PlayWithAI extends Play2Players {
          }
 
       }
+
       // Hàm đánh giá giá trị của bảng trạng thái.dựa trên các quân cờ hiện có trên bàn cờ
       public static long evaluateBoard(Seed[][] board) {
-         long score = 0;
+         long Score = 0;
+
          for (int i = 0; i < dong; i++) {
             for (int j = 0; j < cot; j++) {
                if (board[i][j] == bot) {
-                  score += evaluatePosition(i, j, board, bot);
+                  Score += evaluatePosition(i, j, board, bot);
                } else if (board[i][j] == player) {
-                  score -= evaluatePosition(i, j, board, player);
+                  Score -= evaluatePosition(i, j, board, player);
                }
             }
          }
-         return score;
+
+         // Ưu tiên tấn công mạnh hơn
+         if (Math.abs(Score) < MAX_INT / 10) {
+            Score *= 2; // Tăng trọng số nếu không có nước đi rõ ràng
+         }
+
+         return Score;
       }
+
+
       //Đánh giá giá trị của một vị trí trên bảng dựa trên loại quân cờ và vị trí đó.
       public static long evaluatePosition(int i, int j, Seed[][] board, Seed type) {
          long checkTC = CheckDoc(j, i, board, bot) + CheckNgang(j, i, board, bot) + CheckCheoPhai(i, j, board, bot) + CheckCheoTrai(i, j, board, bot);
@@ -461,17 +496,14 @@ public class PlayWithAI extends Play2Players {
             }
          }
          if (ta == 0) return 0;
-         if (ta == 3 && dich == 2 && (count == 0 || count == 1)) return 0;
-         if (ta == 2 && dich == 2 && (count == 0 || count == 1 || count == 2)) return 0;
-         if (ta <= 3 && dich == 1 && count == 0) return 0;
-         if (ta == 3 && (dich == 0 || dich == 1)) return MAX_INT / 250;
          if (ta >= 4) return MAX_INT;
-         return (mangTC[ta] * 3) / 2 - count * 100;
+         long score = (mangTC[ta] * 3) ;
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangTC[ta] * 2);
+         }
+         return score;
       }
 
-      //^ ^ ^ ^ or | | | | [n++][i]
-      // colNow => cột hiện tại, pos => vị trí dòng hiện tại
-      // int type => enum type
       public static long CheckDoc(int colNow, int pos, Seed[][] board, Seed type) {
          int ta = 0;
          int count = 0;
@@ -505,12 +537,13 @@ public class PlayWithAI extends Play2Players {
             }
          }
          if (ta == 0) return 0;
-         if (ta == 3 && dich == 2 && (count == 0 || count == 1)) return 0;
-         if (ta == 2 && dich == 2 && (count == 0 || count == 1 || count == 2)) return 0;
-         if (ta <= 3 && dich == 1 && count == 0) return 0;
-         if (ta == 3 && (dich == 0 || dich == 1)) return MAX_INT / 250;
          if (ta >= 4) return MAX_INT;
-         return (mangTC[ta] * 3) / 2 - count * 100;
+         long score = (mangTC[ta] * 3);
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangTC[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
 
       // \ \ \ \ \ \ [n++][n++]
@@ -558,14 +591,15 @@ public class PlayWithAI extends Play2Players {
             ii = ii - 1;
          }
          if (ta == 0) return 0;
-         if (ta == 3 && dich == 2 && (count == 0 || count == 1)) return 0;
-         if (ta == 2 && dich == 2 && (count == 0 || count == 1 || count == 2)) return 0;
-         if (ta <= 3 && dich == 1 && count == 0) return 0;
-         if (ta == 3 && (dich == 0 || dich == 1)) return MAX_INT / 250;
          if (ta >= 4) return MAX_INT;
-         return (mangTC[ta] * 3) - count * 100;
+         long score = (mangTC[ta] * 3) ;
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangTC[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
-
+      //he
       // pos_col => dòng hiện tại, pos_row => cột hiện tại
       public static long CheckCheoTrai(int pos_col, int pos_row, Seed[][] board, Seed type) {
          int ta = 0;
@@ -610,12 +644,13 @@ public class PlayWithAI extends Play2Players {
             ii = ii + 1;
          }
          if (ta == 0) return 0;
-         if (ta == 3 && dich == 2 && (count == 0 || count == 1)) return 0;
-         if (ta == 2 && dich == 2 && (count == 0 || count == 1 || count == 2)) return 0;
-         if (ta <= 3 && dich == 1 && count == 0) return 0;
-         if (ta == 3 && (dich == 0 || dich == 1)) return MAX_INT / 250;
          if (ta >= 4) return MAX_INT;
-         return (mangTC[ta] * 3) - count * 100;
+         long score = (mangTC[ta] * 3);
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangTC[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
 
       public static long PTNgang(int pos, int rowNow, Seed[][] board, Seed type) {
@@ -676,7 +711,7 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT / 2;
          if (ta == 3 && (dich == 1 || dich == 0)) return MAX_INT / 1000;
-         return (mangPN[ta + 1] * 6) / 4 - count;
+         return (mangPN[ta + 1] * 6L) / 4 - count;
       }
 
       // \ \ \ \ \ \ [n++][n++]
@@ -751,4 +786,5 @@ public class PlayWithAI extends Play2Players {
       }
    }
 
-}
+   }
+

@@ -120,13 +120,16 @@ public class JFrameMain {
     }
 
     public void CreateAndShow() {
+
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(10, 3, 15, 1);//step
 
         spinnerRow.setModel(spinnerModel);
+
         jFrame = new JFrame("Caro");
         jFrame.setContentPane(new JFrameMain().JPanelMain);
         jFrame.setSize(450, 450);
+        jFrame.setUndecorated(true);
         jFrame.setVisible(true);
         jFrame.setLocationRelativeTo(null);
     }

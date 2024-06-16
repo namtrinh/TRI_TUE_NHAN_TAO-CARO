@@ -197,77 +197,91 @@ public class Play2Players extends JFrame {
         pnButton.setLayout(new FlowLayout(FlowLayout.CENTER));
         pnButton.add(btnNewgame);
         pnButton.add(btnExit);
-
+        setUndecorated(true);
 
         // LEFT
         player1Label = new JLabel(name1, SwingConstants.CENTER);
-        player1Label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
-        player1Label.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
-        player1TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
-        player1ScoreLabel = new JLabel("Score: " + Player1Score, SwingConstants.CENTER);
-        player1TimeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 50));
+        player1Label.setFont(new Font("Arial", Font.BOLD, 36));
+        player1Label.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player1Label.setForeground(new Color(0, 128, 0)); // Xanh lá cây
 
+        player1TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
+        player1TimeLabel.setFont(new Font("Arial", Font.PLAIN, 60));
+        player1TimeLabel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player1TimeLabel.setForeground(new Color(255, 0, 0)); // Đỏ
+
+        player1ScoreLabel = new JLabel("Score: " + Player1Score, SwingConstants.CENTER);
+        player1ScoreLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        player1ScoreLabel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player1ScoreLabel.setForeground(new Color(0, 0, 128)); // Xanh dương
 
         player2Label = new JLabel(name2, SwingConstants.CENTER);
-        player2Label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
-        player2Label.setPreferredSize(new Dimension(100, CANVAS_HEIGHT));
-        player2TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
-        player2ScoreLabel = new JLabel("Score: " + Player2Score, SwingConstants.CENTER);
-        player2TimeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 50));
+        player2Label.setFont(new Font("Arial", Font.BOLD, 36));
+        player2Label.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player2Label.setForeground(new Color(255, 165, 0)); // Cam
 
+        player2TimeLabel = new JLabel(timeLeft +"", SwingConstants.CENTER);
+        player2TimeLabel.setFont(new Font("Arial", Font.PLAIN, 60));
+        player2TimeLabel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player2TimeLabel.setForeground(new Color(255, 0, 0)); // Đỏ
+
+        player2ScoreLabel = new JLabel("Score: " + Player2Score, SwingConstants.CENTER);
+        player2ScoreLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        player2ScoreLabel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player2ScoreLabel.setForeground(new Color(0, 0, 128)); // Xanh dương
 
         Container cp = getContentPane();
-
         cp.setLayout(new BorderLayout());
 
-
-
-
-
-        // Player 1 Panel
+// Player 1 Panel
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = GridBagConstraints.RELATIVE;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.weightx = 1.0;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.gridx = 0;
+        gbc1.fill = GridBagConstraints.HORIZONTAL;
+        gbc1.anchor = GridBagConstraints.NORTH;
+        gbc1.weightx = 1.0;
+        gbc1.insets = new Insets(5, 5, 5, 5);
 
-        player1Panel.add(player1Label, gbc); // Adding player name label
-        player1Panel.add(player1ScoreLabel, gbc); // Adding score label
-        player1Panel.add(player1TimeLabel, gbc); // Adding time label
+        gbc1.gridy = 0; // Name label
+        player1Panel.add(player1Label, gbc1);
 
-        player1Panel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT)); // Set preferred size for the panel
-        player1Panel.setMinimumSize(new Dimension(200, CANVAS_HEIGHT)); // Set minimum size for the panel
+        gbc1.gridy = 1; // Score label
+        player1Panel.add(player1ScoreLabel, gbc1);
+
+        gbc1.gridy = 2; // Time label
+        player1Panel.add(player1TimeLabel, gbc1);
+
+        player1Panel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player1Panel.setMinimumSize(new Dimension(200, CANVAS_HEIGHT));
 
 // Player 2 Panel
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = GridBagConstraints.RELATIVE;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.weightx = 1.0;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridx = 0;
+        gbc2.fill = GridBagConstraints.HORIZONTAL;
+        gbc2.anchor = GridBagConstraints.NORTH;
+        gbc2.weightx = 1.0;
+        gbc2.insets = new Insets(5, 5, 5, 5);
 
-        player2Panel.add(player2Label, gbc); // Adding player name label
-        player2Panel.add(player2ScoreLabel, gbc); // Adding score label
-        player2Panel.add(player2TimeLabel, gbc); // Adding time label
+        gbc2.gridy = 0; // Name label
+        player2Panel.add(player2Label, gbc2);
 
-        player2Panel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT)); // Set preferred size for the panel
-        player2Panel.setMinimumSize(new Dimension(200, CANVAS_HEIGHT)); // Set minimum size for the panel
+        gbc2.gridy = 1; // Score label
+        player2Panel.add(player2ScoreLabel, gbc2);
+
+        gbc2.gridy = 2; // Time label
+        player2Panel.add(player2TimeLabel, gbc2);
+
+        player2Panel.setPreferredSize(new Dimension(200, CANVAS_HEIGHT));
+        player2Panel.setMinimumSize(new Dimension(200, CANVAS_HEIGHT));
 
         cp.add(player1Panel, BorderLayout.WEST);
         cp.add(player2Panel, BorderLayout.EAST);
         cp.add(canvas, BorderLayout.CENTER);
         cp.add(statusBar, BorderLayout.PAGE_END);
         cp.add(pnButton, BorderLayout.PAGE_START);
-
-
-
         pack();
         setTitle("Chơi với bạn");
         setLocationRelativeTo(null);
@@ -451,12 +465,12 @@ public class Play2Players extends JFrame {
             if (currentState == GameState.PLAYING) {
                 statusBar.setForeground(new Color(59, 89, 182));
                 if (currentPlayer == Seed.CROSS) {
-                    statusBar.setText("Lượt của " + Player1Name + " - Thời gian còn lại: " + timeLeft + " giây\n"
-                            + Player1Name + " (X): " + Player1Score + " điểm\n"
+                    statusBar.setText("Lượt của " + Player1Name + " - Thời gian còn lại: " + timeLeft + " giây"
+                            + Player1Name + " (X): " + Player1Score + " điểm"
                             + Player2Name + " (O): " + Player2Score + " điểm");
                 } else {
-                    statusBar.setText("Lượt của " + Player2Name + " - Thời gian còn lại: " + timeLeft + " giây\n"
-                            + Player1Name + " (X): " + Player1Score + " điểm\n"
+                    statusBar.setText("Lượt của " + Player2Name + " - Thời gian còn lại: " + timeLeft + " giây"
+                            + Player1Name + " (X): " + Player1Score + " điểm"
                             + Player2Name + " (O): " + Player2Score + " điểm");
                 }
             }
