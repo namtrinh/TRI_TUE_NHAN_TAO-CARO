@@ -348,7 +348,6 @@ public class PlayWithAI extends Play2Players {
                long score = minimax(board, 0, false, -MAX_INT, MAX_INT);
                board[i][j] = Seed.EMPTY;
 
-
                if (isAttackingMove(i, j, board, bot)) {
                   score += 10000; // Tăng trọng số cho các nước đi tấn công
                }
@@ -446,12 +445,6 @@ public class PlayWithAI extends Play2Players {
                }
             }
          }
-
-         // Ưu tiên tấn công mạnh hơn
-         if (Math.abs(Score) < MAX_INT / 10) {
-            Score *= 2; // Tăng trọng số nếu không có nước đi rõ ràng
-         }
-
          return Score;
       }
 
@@ -678,9 +671,13 @@ public class PlayWithAI extends Play2Players {
             }
          }
          if (ta == 0) return 0;
-         if (ta >= 4) return MAX_INT / 2;
-         if (ta == 3 && (dich == 1 || dich == 0)) return MAX_INT / 1000;
-         return (mangPN[ta + 1] * 6) / 4 - count;
+         if (ta >= 4) return MAX_INT;
+         long score = (mangPN[ta] * 100);
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
 
       //^ ^ ^ ^ or | | | | [n++][i]
@@ -709,9 +706,13 @@ public class PlayWithAI extends Play2Players {
             }
          }
          if (ta == 0) return 0;
-         if (ta >= 4) return MAX_INT / 2;
-         if (ta == 3 && (dich == 1 || dich == 0)) return MAX_INT / 1000;
-         return (mangPN[ta + 1] * 6L) / 4 - count;
+         if (ta >= 4) return MAX_INT;
+         long score = (mangPN[ta] * 100);
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
 
       // \ \ \ \ \ \ [n++][n++]
@@ -745,9 +746,14 @@ public class PlayWithAI extends Play2Players {
             i = i - 1;
             ii = ii - 1;
          }
-         if (ta >= 4) return MAX_INT / 2;
-         if (ta == 3 && (dich == 1 || dich == 0)) return MAX_INT / 1000;
-         return (mangPN[ta + 1] * 6) / 4 - count;
+         if (ta == 0) return 0;
+         if (ta >= 4) return MAX_INT;
+         long score = (mangPN[ta] * 100);
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
 
       public static long PTTrai(int pos_col, int pos_row, Seed[][] board, Seed type) {
@@ -780,9 +786,14 @@ public class PlayWithAI extends Play2Players {
             i = i - 1;
             ii = ii + 1;
          }
-         if (ta >= 4) return MAX_INT / 2;
-         if (ta == 3 && (dich == 1 || dich == 0)) return MAX_INT / 1000;
-         return (mangPN[ta + 1] * 6) / 4 - count;
+         if (ta == 0) return 0;
+         if (ta >= 4) return MAX_INT;
+         long score = (mangPN[ta] * 100);
+         // Thêm điểm cho các đường tấn công đang diễn ra
+         if (ta >= 2 && count == 1 && dich == 0) {
+            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+         }
+         return score;
       }
    }
 
