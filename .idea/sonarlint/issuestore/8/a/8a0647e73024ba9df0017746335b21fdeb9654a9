@@ -1,179 +1,179 @@
 
 q
-java:S1604Ø"(Make this anonymous inner class a lambda(ŠåÓÆøÿÿÿÿ8ÂÃİ†ƒ2J$ca52bfb4-1e89-4e84-832a-fd2192098c9f
+java:S1604×"(Make this anonymous inner class a lambda(ŠåÓÆøÿÿÿÿ8ÂÃİ†ƒ2J$e2a2b6bd-da25-4406-ab37-fb8c49b85b0a
 q
-java:S1604ï"(Make this anonymous inner class a lambda(Ãúó’ÿÿÿÿÿ8ÂÃİ†ƒ2J$de687a70-61e6-4944-adc2-4292f3b15c17
+java:S1604î"(Make this anonymous inner class a lambda(Ãúó’ÿÿÿÿÿ8ÂÃİ†ƒ2J$203fcc3f-1fe3-497b-b406-1c664733ce5b
 q
-java:S1604"(Make this anonymous inner class a lambda(Ùä³”úÿÿÿÿ8ÂÃİ†ƒ2J$332b89df-5bc3-4ee1-9c07-d57a8d75b0dd
-™	java:S117¿"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸãÄÙıÿÿÿÿ8ÃÃİ†ƒ2J$00fb255d-5f0c-4a65-b18e-7ee5882ada56
-™	java:S117¿"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸãÄÙıÿÿÿÿ8ÃÃİ†ƒ2J$300f8e01-337e-4f69-a3a0-6a24b5c02f01
-™	java:S117°"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„¹÷Àøÿÿÿÿ8ÃÃİ†ƒ2J$827442f0-16ad-40e5-9297-a9ce2d93900f
-™	java:S117›"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»íˆÛıÿÿÿÿ8ÃÃİ†ƒ2J$eaedb1ac-ea13-4b4b-aa73-4a5ab829ddb2
-™	java:S117›"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»íˆÛıÿÿÿÿ8ÃÃİ†ƒ2J$fa21d880-c934-4979-8bdc-c66c8d9b7bf6
-”	java:S117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉôÅ­8Îèè†ƒ2J$762be908-5c54-432c-ba7c-ece54b92402e
-”	java:S117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉôÅ­8Îèè†ƒ2J$29a8c271-2625-4198-91a1-744e2d2cebac
-”	java:S117Ê"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÃ«­8Îèè†ƒ2J$57057126-8ee5-4b72-a92f-347289de91dd
-”	java:S117Ê"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÃ«­8Ïèè†ƒ2J$321b0e4d-ab36-4f6a-8908-c101a9721092
-™	java:S117ò"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÉ†«ùÿÿÿÿ8Ïèè†ƒ2J$172fca7f-c937-425a-8b6c-e69ac6b94bc4
-™	java:S117ò"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÉ†«ùÿÿÿÿ8Ğèè†ƒ2J$d569f633-df89-4628-ad35-2ddbe334f5b9
-œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô×÷Æ8ÅÃİ†ƒ2J$aeb5b505-ee11-46a5-9523-2d61dc02f95b
-{
-java:S2589„"7Remove this expression which always evaluates to "true"(„Ç«8ÉÃİ†ƒ2J$b901167c-4473-439c-b2c7-667262867c76
-{
-java:S2589Í"7Remove this expression which always evaluates to "true"(Ê»Á8ÈÃİ†ƒ2J$c8d50c95-5744-4c0a-b1b3-2350741ffa62
-{
-java:S2589ö"7Remove this expression which always evaluates to "true"(„Ç«8Ñèè†ƒ2J$493f4a09-91d9-4e64-8899-5a2f2860f713
+java:S1604Œ"(Make this anonymous inner class a lambda(Ùä³”úÿÿÿÿ8ÂÃİ†ƒ2J$925ad8db-be52-4858-9402-2617960cf0b9
+™	java:S117À"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸãÄÙıÿÿÿÿ8ÃÃİ†ƒ2J$2516e7b6-1d6f-40ee-a48f-f083a81ebf23
+™	java:S117À"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸãÄÙıÿÿÿÿ8ÃÃİ†ƒ2J$d1aafc15-f696-400e-96c7-a6ba4966a992
+™	java:S117²"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„¹÷Àøÿÿÿÿ8ÃÃİ†ƒ2J$db7ca897-fb7a-4b64-b24c-2b9ef6ecb897
+™	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»íˆÛıÿÿÿÿ8ÃÃİ†ƒ2J$a117d0a4-ec33-471f-a007-7b280e49ca06
+™	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»íˆÛıÿÿÿÿ8ÃÃİ†ƒ2J$aefe98a3-22f2-47a0-9431-386ff1eeaa77
+”	java:S117Ó"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉôÅ­8Îèè†ƒ2J$98135004-b542-4203-9cfc-079d1848e2a0
+”	java:S117Ó"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉôÅ­8Îèè†ƒ2J$4999a34c-422b-4394-990f-10c5cc43b54f
+”	java:S117Í"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÃ«­8Îèè†ƒ2J$ef58ff46-7dad-47d3-9867-844a12133efb
+”	java:S117Í"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÃ«­8Ïèè†ƒ2J$b69b75fb-c02e-4702-b533-8e15b19c2f15
+™	java:S117õ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÉ†«ùÿÿÿÿ8Ïèè†ƒ2J$426b28f8-c3e5-4bd4-bd2d-9e488456f504
+™	java:S117õ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÉ†«ùÿÿÿÿ8Ğèè†ƒ2J$e77dffb0-e602-48a9-b0b9-38141733aa6e
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô×÷Æ8ÅÃİ†ƒ2J$517af53f-fad3-463e-ac4e-f724c3bfa1da
 €
-java:S2589¥"7Remove this expression which always evaluates to "true"(©ºÜùÿÿÿÿ8ÈÃİ†ƒ2J$55600d4e-07f0-4edb-b7e3-536128a799ab
+java:S2589ğ"7Remove this expression which always evaluates to "true"(Íè”£üÿÿÿÿ8ÈÃİ†ƒ2J$ee1ac83f-eb73-415d-a93a-503ba0f509fc
 {
-java:S2589Û"7Remove this expression which always evaluates to "true"(Ê»Á8ÈÃİ†ƒ2J$a4246b28-14ac-48ab-b827-e6ed70bc517c
-€
-java:S2589Ú"7Remove this expression which always evaluates to "true"(Ë‹¾“úÿÿÿÿ8Òèè†ƒ2J$7e15cffb-d8ef-4425-911d-abb4f56cf9ca
+java:S2589†"7Remove this expression which always evaluates to "true"(„Ç«8ÉÃİ†ƒ2J$3e4f9882-6a6b-40e6-b347-0b5161035309
 {
-java:S2589¸"7Remove this expression which always evaluates to "true"(’ê¡8ÇÃİ†ƒ2J$1fff296f-61ba-42c9-a6af-fc0cfc44a883
+java:S2589Ï"7Remove this expression which always evaluates to "true"(Ê»Á8ÈÃİ†ƒ2J$45597a79-9894-4020-a625-1b97cac35f8a
+{
+java:S2589İ"7Remove this expression which always evaluates to "true"(Ê»Á8ÈÃİ†ƒ2J$81431995-2b8d-4c16-bdef-16b637090012
 €
-java:S2589í"7Remove this expression which always evaluates to "true"(Íè”£üÿÿÿÿ8ÈÃİ†ƒ2J$59c141cb-4823-43c0-b4c1-8d04a2e93701
+java:S2589İ"7Remove this expression which always evaluates to "true"(Ë‹¾“úÿÿÿÿ8Òèè†ƒ2J$1680f730-414f-4264-8346-78354451061b
+{
+java:S2589ø"7Remove this expression which always evaluates to "true"(„Ç«8Ñèè†ƒ2J$57729322-c365-4ef9-8a6e-dd2056641882
+{
+java:S2589º"7Remove this expression which always evaluates to "true"(’ê¡8ÇÃİ†ƒ2J$4421c428-cb69-4476-b47a-3abd3169f1bc
+€
+java:S2589§"7Remove this expression which always evaluates to "true"(©ºÜùÿÿÿÿ8ÈÃİ†ƒ2J$ac79a8d1-d8a2-4a70-a904-88a8205d8b8e
  
-java:S1104"]Make rowBotPreSelected a static final constant or non-public and provide accessors if needed.(Õş¾Ù8ÉÃİ†ƒ2J$eee0d834-1c8f-4246-ba6b-947d8451d7b5
+java:S1104"]Make rowBotPreSelected a static final constant or non-public and provide accessors if needed.(Õş¾Ù8ÉÃİ†ƒ2J$a7c142e5-f1aa-4dc1-94c3-3ab03027cd83
  
-java:S1104"]Make colBotPreSelected a static final constant or non-public and provide accessors if needed.(‚Âßì8ÉÃİ†ƒ2J$46ceb0a7-f71e-4ebd-b64f-0ceb7fb61612
+java:S1104"]Make colBotPreSelected a static final constant or non-public and provide accessors if needed.(‚Âßì8ÉÃİ†ƒ2J$501c67da-9132-493f-90bc-10f01d7a56ba
 ›
-java:S1104"SMake GameBot a static final constant or non-public and provide accessors if needed.(ŞÀ©ûÿÿÿÿ8ÉÃİ†ƒ2J$21c337b5-deaf-4e55-8c88-6cd7e3dc77de
+java:S1104"SMake GameBot a static final constant or non-public and provide accessors if needed.(ŞÀ©ûÿÿÿÿ8ÉÃİ†ƒ2J$fbe4805e-61d5-4dbc-9209-0f586b20eb4b
 z
-java:S1444"7Make this "public static rowBotPreSelected" field final(Õş¾Ù8ÓÃİ†ƒ2J$debbe524-0ea9-41fa-8f3f-865fd20d00a6
+java:S1444"7Make this "public static rowBotPreSelected" field final(Õş¾Ù8ÓÃİ†ƒ2J$95bd2e57-fe13-4645-b133-94b60e7b33d0
 z
-java:S1444"7Make this "public static colBotPreSelected" field final(‚Âßì8ÓÃİ†ƒ2J$d9dd8a5a-79d3-4048-9878-ef54cff9f560
+java:S1444"7Make this "public static colBotPreSelected" field final(‚Âßì8ÓÃİ†ƒ2J$b5e5afd5-fbe4-49f7-80da-de91522dad42
 u
-java:S1444"-Make this "public static GameBot" field final(ŞÀ©ûÿÿÿÿ8ÔÃİ†ƒ2J$76d253a9-d7d9-4eb6-a54d-6312b68baf58
-¡	java:S135Ë"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8ÕÃİ†ƒ2J$0df97c4c-9316-46cd-a1e6-1b366d8c8bd9
-œ	java:S135Ù"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8ÕÃİ†ƒ2J$0e966b27-0def-44cd-a12a-8e0b01036c0f
-¡	java:S135ô"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8ÖÃİ†ƒ2J$65ebe62b-92e8-453a-bb2a-aee29ad1883b
-œ	java:S135‚"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8ÖÃİ†ƒ2J$70763f82-82cd-4715-b22b-ffd5fd1f1a27
-œ	java:S135£"YReduce the total number of break and continue statements in this loop to use at most one.(˜ëØê8ÖÃİ†ƒ2J$b1239bef-af19-481a-952d-c75890129c1d
-¡	java:S135¶"YReduce the total number of break and continue statements in this loop to use at most one.(°‡Ùüÿÿÿÿ8ÖÃİ†ƒ2J$bf106012-bb0c-4218-ab87-b9928b84a205
-œ	java:S135Ø"YReduce the total number of break and continue statements in this loop to use at most one.(à˜—Ô8×èè†ƒ2J$60b1a19d-a0e6-42de-b0aa-5e36c60b100b
-¡	java:S135ë"YReduce the total number of break and continue statements in this loop to use at most one.(¾º‹çÿÿÿÿÿ8Øèè†ƒ2J$86ba4303-c050-4cea-849c-10428148131a
-¡	java:S135ˆ"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8Øèè†ƒ2J$264c63e6-f808-42d0-9d68-ced20283393d
-œ	java:S135’"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8Øèè†ƒ2J$74bf88de-7dc1-4bf2-abb0-c4ba91c1508c
-¡	java:S135«"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8Ùèè†ƒ2J$915238f1-2899-482d-9f1d-0218f7876258
-œ	java:S135µ"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8Ùèè†ƒ2J$01a12769-45ee-475a-8ebc-b37900e4e12a
-œ	java:S135Ñ"YReduce the total number of break and continue statements in this loop to use at most one.(˜ëØê8Ùèè†ƒ2J$54d3f43f-6ecb-4cec-90a3-8a76a5c16196
-¡	java:S135Ş"YReduce the total number of break and continue statements in this loop to use at most one.(°‡Ùüÿÿÿÿ8Ùèè†ƒ2J$bb5a850d-90eb-45b0-9734-c1b4c0c989f6
-œ	java:S135ù"YReduce the total number of break and continue statements in this loop to use at most one.(à˜—Ô8Úèè†ƒ2J$a2614655-869f-45b2-a534-70bdd145edd1
-¡	java:S135†"YReduce the total number of break and continue statements in this loop to use at most one.(¾º‹çÿÿÿÿÿ8Úèè†ƒ2J$69c9485c-88f7-497b-b3e2-f5d448da586c
+java:S1444"-Make this "public static GameBot" field final(ŞÀ©ûÿÿÿÿ8ÔÃİ†ƒ2J$73402202-5d39-4756-a24e-91a9e76b814b
+¡	java:S135Í"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8ÕÃİ†ƒ2J$da136eec-bd2f-4c5c-8c75-a855a65963cf
+œ	java:S135Û"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8ÕÃİ†ƒ2J$03dbf734-9632-4511-ab1d-c520dbc5fcbc
+¡	java:S135ö"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8ÖÃİ†ƒ2J$26761399-1e32-4fcd-af64-379887552cd5
+œ	java:S135„"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8ÖÃİ†ƒ2J$2498d5bc-0b71-435f-b2e9-2a1c8d8bb479
+œ	java:S135¥"YReduce the total number of break and continue statements in this loop to use at most one.(˜ëØê8ÖÃİ†ƒ2J$d5c33584-3992-42f4-9007-f35f592a3212
+¡	java:S135¸"YReduce the total number of break and continue statements in this loop to use at most one.(°‡Ùüÿÿÿÿ8ÖÃİ†ƒ2J$20e80bfa-6a2b-449d-a40d-fbd1d03f475b
+œ	java:S135Û"YReduce the total number of break and continue statements in this loop to use at most one.(à˜—Ô8×èè†ƒ2J$b2a9a513-f8da-40be-a31e-a55c4738fb63
+¡	java:S135î"YReduce the total number of break and continue statements in this loop to use at most one.(¾º‹çÿÿÿÿÿ8Øèè†ƒ2J$346017e8-1fea-478b-b9f6-38edd5a2fd17
+¡	java:S135‹"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8Øèè†ƒ2J$fdd1cd2d-5562-4b0e-8f24-1b4cbe091857
+œ	java:S135•"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8Øèè†ƒ2J$a5e283bb-2afa-4ce8-94f7-e6421fc40993
+¡	java:S135®"YReduce the total number of break and continue statements in this loop to use at most one.(…ÖÑÃüÿÿÿÿ8Ùèè†ƒ2J$20f90c18-c050-4902-b31a-325dab96d5ec
+œ	java:S135¸"YReduce the total number of break and continue statements in this loop to use at most one.(Ğğøş8Ùèè†ƒ2J$17123d11-4b41-4ef9-9579-22bd7c50a591
+œ	java:S135Ô"YReduce the total number of break and continue statements in this loop to use at most one.(˜ëØê8Ùèè†ƒ2J$1952924a-8e9e-45d7-adb7-3df4da536d5b
+¡	java:S135á"YReduce the total number of break and continue statements in this loop to use at most one.(°‡Ùüÿÿÿÿ8Ùèè†ƒ2J$9d23dd48-fdbc-4c52-bdd4-cb8e5e28df90
+œ	java:S135ü"YReduce the total number of break and continue statements in this loop to use at most one.(à˜—Ô8Úèè†ƒ2J$6ebea2c4-76f6-46b2-bd18-66d64ae2a1ed
+¡	java:S135‰"YReduce the total number of break and continue statements in this loop to use at most one.(¾º‹çÿÿÿÿÿ8Úèè†ƒ2J$91772c92-d47b-4b62-b248-2bacd17e27cb
 
-java:S1192è"LDefine a constant instead of duplicating this literal "Time left: " 4 times.(´´ƒà8×Ãİ†ƒ2J$7d790369-e06d-447b-9959-157feefb2e71
+java:S1192ç"LDefine a constant instead of duplicating this literal "Time left: " 4 times.(´´ƒà8×Ãİ†ƒ2J$651e0353-2b07-421d-bf97-4f596443f15c
 
-java:S1192\"FDefine a constant instead of duplicating this literal "Arial" 4 times.(¿ÕıÁúÿÿÿÿ8×Ãİ†ƒ2J$ed85ebae-b033-43c2-934f-556adbb10b00
+java:S1192\"FDefine a constant instead of duplicating this literal "Arial" 4 times.(¿ÕıÁúÿÿÿÿ8×Ãİ†ƒ2J$613f2ff2-2b8d-47a8-a940-55514c807355
 
-java:S1192è"IDefine a constant instead of duplicating this literal " seconds" 4 times.(´´ƒà8×Ãİ†ƒ2J$593b7757-b408-43b5-a808-7a8c30c163ca
+java:S1192ç"IDefine a constant instead of duplicating this literal " seconds" 4 times.(´´ƒà8×Ãİ†ƒ2J$d64f1d21-9ad6-4d9c-bd2d-0d846455eee4
 š
-java:S3008"RRename this field "GameBot" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÀ©ûÿÿÿÿ8ÙÃİ†ƒ2J$cc72a7de-57cc-4da1-bced-95e623cd626d
+java:S3008"RRename this field "GameBot" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÀ©ûÿÿÿÿ8ÙÃİ†ƒ2J$fe4fe9f8-914f-41ea-926a-91e810416f3c
 {
-java:S2387"3"btnExit" is the name of a field in "Play2Players".(¼ÉÄøÿÿÿÿ8ÛÃİ†ƒ2J$383e17f7-561e-49e5-934b-7eecb0734c27
+java:S2387"3"btnExit" is the name of a field in "Play2Players".(¼ÉÄøÿÿÿÿ8ÛÃİ†ƒ2J$9383ad85-a20d-43ca-a54d-89aa01494778
 ~
-java:S2387"6"btnNewgame" is the name of a field in "Play2Players".(¤»äúÿÿÿÿ8ÛÃİ†ƒ2J$ebce5052-fecd-4fe6-b6de-d99b3a4a3c65
+java:S2387"6"btnNewgame" is the name of a field in "Play2Players".(¤»äúÿÿÿÿ8ÛÃİ†ƒ2J$e9857d3e-8063-4bd0-98a5-ec77fbefbe6d
 p
-java:S1659"(Declare "lblPlayer2" on a separate line.(îòÚıÿÿÿÿ8ßÃİ†ƒ2J$e232dc94-fc0a-4e09-9cf4-2558e1728cb7
+java:S1659"(Declare "lblPlayer2" on a separate line.(îòÚıÿÿÿÿ8ßÃİ†ƒ2J$dc651545-e3fe-496b-afe7-9526e3d06430
 ¡
-java:S1450"YRemove the "lblPlayer1" field and declare it as a local variable in the relevant methods.(îòÚıÿÿÿÿ8ßÃİ†ƒ2J$a1a48ba4-20d8-4be1-8714-888d0c968e6d
+java:S1450"YRemove the "lblPlayer1" field and declare it as a local variable in the relevant methods.(îòÚıÿÿÿÿ8ßÃİ†ƒ2J$61afe31b-ac85-49b8-bfa9-328443110213
 ¡
-java:S1450"YRemove the "lblPlayer2" field and declare it as a local variable in the relevant methods.(îòÚıÿÿÿÿ8ßÃİ†ƒ2J$de4c6c1e-737a-4d04-98d4-8e031b2cc99c
+java:S1450"YRemove the "lblPlayer2" field and declare it as a local variable in the relevant methods.(îòÚıÿÿÿÿ8ßÃİ†ƒ2J$7d7febb6-8bfe-4f8d-af19-9f83d81dd96b
 }
-java:S1161)":Add the "@Override" annotation above this method signature(×„ïş8ãÃİ†ƒ2J$37ab8113-5cdc-4c0b-b157-2a406cd1e049
+java:S1161)":Add the "@Override" annotation above this method signature(×„ïş8ãÃİ†ƒ2J$d0298ac4-62f6-426c-accd-a1241cd6b6d0
 y
-java:S2696+"6Make the enclosing method "static" or remove this set.(š‹¦÷8ãÃİ†ƒ2J$d3d03895-4955-45a9-b624-0571b00dd1ef
+java:S2696+"6Make the enclosing method "static" or remove this set.(š‹¦÷8ãÃİ†ƒ2J$0de4261d-8f96-4b03-8b8e-e51d768d369d
 y
-java:S2696,"6Make the enclosing method "static" or remove this set.(Ç‚¶¯8ãÃİ†ƒ2J$c8eb3477-3650-45fd-9027-1657fcbe3c7e
+java:S2696,"6Make the enclosing method "static" or remove this set.(Ç‚¶¯8ãÃİ†ƒ2J$ea7b64ea-20f2-4baa-ae12-377fc87683ff
 z
-java:S2696"6Make the enclosing method "static" or remove this set.(°¡Í8ëÃİ†ƒ2J$fef61dbe-c840-4390-9a49-488425fca155
+java:S2696"6Make the enclosing method "static" or remove this set.(°¡Í8ëÃİ†ƒ2J$56a53b02-716f-4e51-bf0c-208ceedf16a2
 z
-java:S2696‘"6Make the enclosing method "static" or remove this set.(¡ä†Ö8ëÃİ†ƒ2J$ba8d02a1-0010-44e7-8c81-befc2ef244b5
+java:S2696"6Make the enclosing method "static" or remove this set.(¡ä†Ö8ëÃİ†ƒ2J$4a7aa7f9-b1bc-46f9-b776-1195b1cb2c43
 z
-java:S2696•"6Make the enclosing method "static" or remove this set.(ë²™Ò8ëÃİ†ƒ2J$cb39d7ca-215d-4912-95fe-0202bf9363b9
+java:S2696”"6Make the enclosing method "static" or remove this set.(ë²™Ò8ëÃİ†ƒ2J$86a19ed3-a75c-424d-8584-7087fac5dcdd
 ›
-java:S3776¡"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.( µ°¸ûÿÿÿÿ8ìÃİ†ƒ2J$12b75690-7ba0-41e2-ae75-94e5ed03e1fc
+java:S3776 "RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.( µ°¸ûÿÿÿÿ8ìÃİ†ƒ2J$16cd3c44-e51b-4e0e-9dfc-4674bd1fcccd
 o
-java:S2440«",Remove this instantiation of "HeuristicBot".(‹¼Áj8íÃİ†ƒ2J$ccdfb965-4c7e-4a8c-84a6-117872ca441a
+java:S2440ª",Remove this instantiation of "HeuristicBot".(‹¼Áj8íÃİ†ƒ2J$b0963fbd-c05b-491d-85e9-7faf2b2a94a8
 ~
-java:S2209¬"5Change this instance-reference to a static reference.(¨úÏ›ùÿÿÿÿ8îÃİ†ƒ2J$4803d07a-fa2f-4d4b-b321-262208b25520
+java:S2209«"5Change this instance-reference to a static reference.(¨úÏ›ùÿÿÿÿ8îÃİ†ƒ2J$91009bc4-b1a2-4ce7-b6aa-02eb4a0d0052
 
-java:S2696¶"6Make the enclosing method "static" or remove this set.(Å©½şÿÿÿÿ8îÃİ†ƒ2J$7e5d2621-4269-40b7-90a9-8474bc61a98d
+java:S2696µ"6Make the enclosing method "static" or remove this set.(Å©½şÿÿÿÿ8îÃİ†ƒ2J$58e2db4b-c652-4f23-a1fb-721a49b9e27d
 z
-java:S2696·"6Make the enclosing method "static" or remove this set.(Š‚–ä8îÃİ†ƒ2J$54fde259-b1fa-4165-86bc-c7c94adace32
+java:S2696¶"6Make the enclosing method "static" or remove this set.(Š‚–ä8îÃİ†ƒ2J$c29f92db-9f98-4fae-a7c0-e688177ce814
 –
-java:S3008¼"RRename this field "MAX_INT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä»Œ 8÷Ãİ†ƒ2J$0448abae-72c2-4b45-9960-1e77d7d71bf8
+java:S3008½"RRename this field "MAX_INT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä»Œ 8÷Ãİ†ƒ2J$00ff07ec-7217-4e28-b006-febe57881fab
 
-java:S3008½"TRename this field "MAX_DEPTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­á‹Êøÿÿÿÿ8÷Ãİ†ƒ2J$f86511a8-612f-4942-ae91-b182ba664e79
+java:S3008¾"TRename this field "MAX_DEPTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­á‹Êøÿÿÿÿ8÷Ãİ†ƒ2J$3d98fc97-33a8-4f1e-a0c3-5959339d7e99
 e
-java:S1659¶"!Declare "cot" on a separate line.(¤³ƒ 8øÃİ†ƒ2J$a1ebd4cb-27f1-4e22-b531-49876f0d05fc
+java:S1659·"!Declare "cot" on a separate line.(¤³ƒ 8øÃİ†ƒ2J$65bb64e2-47fc-4e77-9ef7-2fcdf85abf3e
 f
-java:S1118¿"Hide this public constructor.(ŸãÄÙıÿÿÿÿ8øÃİ†ƒ2J$24da5efa-662c-4c55-95f3-8bb3002c17f9
+java:S1118À"Hide this public constructor.(ŸãÄÙıÿÿÿÿ8øÃİ†ƒ2J$39c590d1-b616-413b-9e07-ef740e3fe26e
 j
-java:S3010À"!Remove this assignment of "dong".(µò‡¾ıÿÿÿÿ8ùÃİ†ƒ2J$66123c2b-f947-4814-8581-1e7a458c8656
+java:S3010Á"!Remove this assignment of "dong".(µò‡¾ıÿÿÿÿ8ùÃİ†ƒ2J$bcce5e6e-9ff7-4f18-af90-7479d1ea4b8c
 c
-java:S3010Á" Remove this assignment of "cot".(îÍŸ(8ùÃİ†ƒ2J$df6d2785-778d-49da-9ece-7783c7c65bb9
+java:S3010Â" Remove this assignment of "cot".(îÍŸ(8ùÃİ†ƒ2J$f2171d6b-5a6c-42eb-b616-ff4d1ef62aea
 d
-java:S3010Â" Remove this assignment of "bot".(ÀšÕã8ùÃİ†ƒ2J$3d77450d-a463-4651-a83c-67d69c85da23
+java:S3010Ã" Remove this assignment of "bot".(ÀšÕã8ùÃİ†ƒ2J$e01794f0-4210-4b30-a5db-c013e727358e
 g
-java:S3010Ã"#Remove this assignment of "player".(“¸ÛÎ8ùÃİ†ƒ2J$20ee7260-d588-4f49-b7f9-4e7de08ee2da
+java:S3010Ä"#Remove this assignment of "player".(“¸ÛÎ8ùÃİ†ƒ2J$605340d3-c789-4cc0-b7b0-1ba310f357f8
 •
-java:S3776…"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(øá§08ıÃİ†ƒ2J$496971d1-7b2d-417c-b4c8-e292c8b506d5
+java:S3776‡"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(øá§08ıÃİ†ƒ2J$5a7ce8c0-db9e-4105-89b8-0c74688446c3
 t
-java:S1172À"+Remove this unused method parameter "type".(Ş“…Äşÿÿÿÿ8€Äİ†ƒ2J$c37521eb-9cf5-463f-80fe-687dd2ecde3e
-–	java:S100Æ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®­èÇûÿÿÿÿ8Äİ†ƒ2J$c2eaf466-55c4-49b1-8ddb-94896418575a
+java:S1172Â"+Remove this unused method parameter "type".(Ş“…Äşÿÿÿÿ8€Äİ†ƒ2J$7ce2b5a9-017b-4340-9701-763d93394860
+–	java:S100È"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®­èÇûÿÿÿÿ8Äİ†ƒ2J$861eca11-fa45-4943-afa9-b1e31edcaf9e
 ›
-java:S3776Æ"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(®­èÇûÿÿÿÿ8‚Äİ†ƒ2J$fbd495e2-f565-4a47-b1ee-dbbfb55772ab
+java:S3776È"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(®­èÇûÿÿÿÿ8‚Äİ†ƒ2J$30380ada-ac63-4a14-8caa-e7d661151f66
 
-java:S1854Ï"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$76171b34-332a-4c7c-95a2-0c6fcb3da353
+java:S1854Ñ"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$38c7da88-2fc7-486a-af75-13ab4e67aa7b
 
-java:S1854İ"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$cb771276-66ed-4cc9-b3fc-b4680cadd19d
+java:S1854ß"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$ed71ab17-dff3-4b73-98f8-4c5f7bdcf22c
 k
-java:S1125Í"'Remove the unnecessary boolean literal.(Ê»Á8‚Äİ†ƒ2J$e5492c0b-8d2f-4146-a94c-b0c62d9f5b1e
+java:S1125Ï"'Remove the unnecessary boolean literal.(Ê»Á8‚Äİ†ƒ2J$0e19d3ac-2964-494b-a0a7-d210d6ffcfb7
 k
-java:S1125Û"'Remove the unnecessary boolean literal.(Ê»Á8‚Äİ†ƒ2J$d1e37709-ab28-40fc-bfd4-4d50b9ed028b
-–	java:S100ï"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä€–ğøÿÿÿÿ8‚Äİ†ƒ2J$7e8df2cb-1bc7-4c8b-88c8-ed9eb8308402
+java:S1125İ"'Remove the unnecessary boolean literal.(Ê»Á8‚Äİ†ƒ2J$9afc908b-7bca-44fa-8ccd-23afd1f04e5a
+–	java:S100ñ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä€–ğøÿÿÿÿ8‚Äİ†ƒ2J$37f5c8f9-3bde-4081-9079-cea98dc69504
 ›
-java:S3776ï"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(Ä€–ğøÿÿÿÿ8‚Äİ†ƒ2J$c3d625e8-ddfe-4497-b66d-4380578e627b
+java:S3776ñ"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(Ä€–ğøÿÿÿÿ8‚Äİ†ƒ2J$19025012-13b8-45cd-a2f1-2f6dcac785bc
 
-java:S1854ø"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$bebb3b93-3519-430a-8db1-6ed9f4f3130d
+java:S1854ú"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$474aed7b-6eb7-4b0d-ad97-0d214e604d58
 
-java:S1854†"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$a2daaaad-879f-4996-8e45-a8daefd4b804
+java:S1854ˆ"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8‚Äİ†ƒ2J$c81f7c1f-5fdb-4302-8be0-8e881229cd08
 k
-java:S1125ö"'Remove the unnecessary boolean literal.(„Ç«8„Äİ†ƒ2J$859f73b4-7a80-4a8c-86fe-6352f1fe15cf
+java:S1125ø"'Remove the unnecessary boolean literal.(„Ç«8„Äİ†ƒ2J$e462feb9-6a23-48a5-ac2d-40e8dc2d6f14
 k
-java:S1125„"'Remove the unnecessary boolean literal.(„Ç«8„Äİ†ƒ2J$728a4f30-b56c-4bc4-ac59-e86d4dd081ab
-–	java:S100›"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»íˆÛıÿÿÿÿ8„Äİ†ƒ2J$df14046b-3577-4e7e-8100-e0157a39a817
+java:S1125†"'Remove the unnecessary boolean literal.(„Ç«8„Äİ†ƒ2J$f924dfe0-529c-4e6a-a3b3-8c924e2a907b
+–	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»íˆÛıÿÿÿÿ8„Äİ†ƒ2J$6fbb1950-aad6-4790-852d-19826ed00402
 ›
-java:S3776›"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(»íˆÛıÿÿÿÿ8…Äİ†ƒ2J$d89e7283-39d1-4b26-96c7-370640a26072
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(»íˆÛıÿÿÿÿ8…Äİ†ƒ2J$c5a5f1b7-c92c-407f-b74f-751a396ba7f0
 
-java:S1854§"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8…Äİ†ƒ2J$1a5be167-0085-474f-88c1-36b10bf7531f
+java:S1854©"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8…Äİ†ƒ2J$fa1fd884-cc3f-435b-a192-c222ef1bbf11
 
-java:S1854º"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8…Äİ†ƒ2J$5759f4b1-cf87-4857-a1a9-fb83555a8969
+java:S1854¼"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8…Äİ†ƒ2J$2104bea7-c0ae-4d22-9eb1-963c56d69eed
 p
-java:S1125¥"'Remove the unnecessary boolean literal.(©ºÜùÿÿÿÿ8†Äİ†ƒ2J$560ee97d-d74f-44b0-9584-88f67bd9233f
+java:S1125§"'Remove the unnecessary boolean literal.(©ºÜùÿÿÿÿ8†Äİ†ƒ2J$a8aaba15-749d-4c9b-b7d3-7d5eab34c3e4
 k
-java:S1125¸"'Remove the unnecessary boolean literal.(’ê¡8†Äİ†ƒ2J$bf4a83b3-7e7f-4689-bdb6-b5a8cf868ef3
-‘	java:S100Ğ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉôÅ­8üèè†ƒ2J$7aee3a28-894d-4e4a-bfb1-ad1321b4a3f9
+java:S1125º"'Remove the unnecessary boolean literal.(’ê¡8†Äİ†ƒ2J$ca31acde-c5b2-4dc2-840f-5709fc5ce1c7
+‘	java:S100Ó"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉôÅ­8üèè†ƒ2J$9185e9df-d059-4ad1-96fb-6a9def0cb5b4
 –
-java:S3776Ğ"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ÉôÅ­8üèè†ƒ2J$c6b07098-9cb7-4ae7-9586-3c77c7ada147
+java:S3776Ó"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ÉôÅ­8üèè†ƒ2J$c087e28a-cf5c-4126-9747-ca6e0658b6f4
 
-java:S1854Ü"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8ıèè†ƒ2J$0c060267-df0f-4e7b-8ffc-19d4c34d20bf
+java:S1854ß"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8ıèè†ƒ2J$0a5ed8a0-0c78-4a56-a399-f1001dba318e
 
-java:S1854ï"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8ıèè†ƒ2J$9c592a5b-f906-4a32-993d-4d83f387c075
+java:S1854ò"8Remove this useless assignment to local variable "flag".(³ÖÉÿÿÿÿÿ8ıèè†ƒ2J$a0a598ae-ddb7-41ce-b744-ee8620c04ec8
 p
-java:S1125Ú"'Remove the unnecessary boolean literal.(Ë‹¾“úÿÿÿÿ8ıèè†ƒ2J$8911d700-1711-4e89-82db-7cf26068f12a
+java:S1125İ"'Remove the unnecessary boolean literal.(Ë‹¾“úÿÿÿÿ8ıèè†ƒ2J$f87f8880-254e-4cad-89ab-b52fbdcfe863
 p
-java:S1125í"'Remove the unnecessary boolean literal.(Íè”£üÿÿÿÿ8ıèè†ƒ2J$2c0cd472-3f49-4c73-b4e8-c9f5bb093cbf
-‘	java:S100„"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×·åœ8ıèè†ƒ2J$3784e6de-2bfe-47b2-8a97-6e6b65747be5
+java:S1125ğ"'Remove the unnecessary boolean literal.(Íè”£üÿÿÿÿ8ıèè†ƒ2J$b88b2732-4727-4d20-b96f-582959962b0b
+‘	java:S100‡"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×·åœ8ıèè†ƒ2J$dc359d85-12c9-4f18-896c-a5f63bbc17d3
 –
-java:S3776„"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(×·åœ8ıèè†ƒ2J$490839b3-6fbc-457c-9c6c-6b7772af4ab4
-‘	java:S100§"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”—ÔÇ8şèè†ƒ2J$95069061-f08b-426e-a05a-ddf7db812ebc
+java:S3776‡"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(×·åœ8ıèè†ƒ2J$86265aa3-f3ca-418b-a329-fecb7578bff8
+‘	java:S100ª"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”—ÔÇ8şèè†ƒ2J$20d5e9fa-2437-4201-ba87-cefdaf63e00b
 –
-java:S3776§"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(”—ÔÇ8şèè†ƒ2J$4e2059cf-5de7-4022-a66c-33269407df09
-‘	java:S100Ê"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÃ«­8şèè†ƒ2J$ce56d084-d039-4d07-9768-23517d36f8e1
+java:S3776ª"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(”—ÔÇ8şèè†ƒ2J$1c90711e-0a7a-469d-8c56-b673912dc15c
+‘	java:S100Í"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÃ«­8şèè†ƒ2J$ac394d77-4641-4099-a26e-c314ae3ce316
 –
-java:S3776Ê"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(öÃ«­8ÿèè†ƒ2J$a01f3f5e-979f-433b-812a-0c71d784ee7e
-–	java:S100ò"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÉ†«ùÿÿÿÿ8ÿèè†ƒ2J$a7fa468e-0047-4d91-88bf-6afdc5ee9df9
+java:S3776Í"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(öÃ«­8ÿèè†ƒ2J$97438dda-a0b2-469a-8d51-a7bb66456745
+–	java:S100õ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÉ†«ùÿÿÿÿ8ÿèè†ƒ2J$8c39356c-3d5b-4ab8-add4-9729e8fb1d52
 ›
-java:S3776ò"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÚÉ†«ùÿÿÿÿ8ÿèè†ƒ2J$2e5b2748-d9aa-41d6-b22c-3870cfbcc93e
+java:S3776õ"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÚÉ†«ùÿÿÿÿ8ÿèè†ƒ2J$b7637755-8377-406c-a427-ed087e143b5b
