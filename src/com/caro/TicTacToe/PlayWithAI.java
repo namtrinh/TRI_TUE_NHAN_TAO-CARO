@@ -9,14 +9,10 @@ import java.util.*;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.Timer;
-import javax.swing.border.Border;
+
 
 import static com.caro.JFrameMain.jFrame;
 
-/**
- * Tic-Tac-Toe: Two-player Graphics version with Simple-OO
- */
-@SuppressWarnings("serial")
 public class PlayWithAI extends Play2Players {
    public enum Bot {
       EASY_BOT, HEURISTIC_BOT
@@ -24,12 +20,11 @@ public class PlayWithAI extends Play2Players {
 
    public static int rowBotPreSelected = -1;
    public static int colBotPreSelected = -1;
-   public static int rowBotPreDiLai;
-   public static int colBotPreDiLai;
+
    protected JButton btnExit;
    public static Bot GameBot;
 
-   public static String PlayerName;
+
    protected JButton btnNewgame;
    private JLabel lblPlayer1, lblPlayer2; // Labels for player names
 
@@ -37,7 +32,7 @@ public class PlayWithAI extends Play2Players {
    private int timeLeft; // Remaining time in seconds
    private JLabel lblTimer;
 
-   /** Constructor to setup the game and the GUI components */
+
    public PlayWithAI(String name) {
       super(name, "");
       initTimer(); // Initialize the countdown timer
@@ -532,9 +527,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangTC[ta] * 3);
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangTC[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangTC[ta] * 2);
          }
          return score;
       }
@@ -586,9 +581,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangTC[ta] * 3) ;
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangTC[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangTC[ta] * 2);
          }
          return score;
       }
@@ -639,9 +634,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangTC[ta] * 3);
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangTC[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangTC[ta] * 2);
          }
          return score;
       }
@@ -673,9 +668,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangPN[ta] * 100);
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangPN[ta] * 2);
          }
          return score;
       }
@@ -708,9 +703,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangPN[ta] * 100);
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangPN[ta] * 2);
          }
          return score;
       }
@@ -749,9 +744,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangPN[ta] * 100);
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangPN[ta] * 2);
          }
          return score;
       }
@@ -789,9 +784,9 @@ public class PlayWithAI extends Play2Players {
          if (ta == 0) return 0;
          if (ta >= 4) return MAX_INT;
          long score = (mangPN[ta] * 100);
-         // Thêm điểm cho các đường tấn công đang diễn ra
+
          if (ta >= 2 && count == 1 && dich == 0) {
-            score += (mangPN[ta] * 2); // Thêm trọng số cho các chuỗi tấn công hiện tại
+            score += (mangPN[ta] * 2);
          }
          return score;
       }

@@ -13,5 +13,3 @@ V
 &src/com/caro/Point/PlayWithAiCaro.java,1\a\1ae1156fe087d45eba75760413ce129506d6ad14
 X
 (src/com/caro/TicTacToe/Play2Players.java,4\a\4aae6e2073c6a0f175cdb62724ce842fcdb2f30d
-Q
-!src/com/caro/Play/PlayWithAI.java,b\c\bcf1901b23d12be16cb923c6b207ae14b18997ab
