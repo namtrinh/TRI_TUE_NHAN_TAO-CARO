@@ -231,29 +231,26 @@ public class PlayWithAI extends Play2Players {
         lblTimer = new JLabel("Time left: " + timeLeft + " seconds", SwingConstants.CENTER);
         lblTimer.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
         lblTimer.setForeground(Color.RED);
-
         btnExit = new JButton("Exit Game");
         btnExit.setForeground(Color.WHITE);
         btnExit.setBackground(new Color(59, 89, 182));
+
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int confirmed = JOptionPane.showConfirmDialog(null,
-                        "Are you sure you want to exit the game?", "Exit Game",
+                        "Bạn có chắc chắn muốn thoát khỏi trò chơi không?", "Thoát trò chơi",
                         JOptionPane.YES_NO_OPTION);
 
                 if (confirmed == JOptionPane.YES_OPTION) {
-
-                    stopTimer();
-
-                    resetTimerr();
-                    dispose();
-                    JFrameMain.jFrame.setVisible(true);
-                    // Optionally, you might want to reset the game state
-                    initGame();
-                    repaint();
+                    if (timer != null && timer.isRunning()) {
+                        timer.stop();
+                    }
+                    JFrameMain.jFrame.setVisible(true); // Hiển thị lại JFrame chính
+                    dispose(); // Đóng cửa sổ hiện tại
                 }
             }
         });
+
 
 
         pnButton = new JPanel();
@@ -264,7 +261,7 @@ public class PlayWithAI extends Play2Players {
     }
 
     private void initTimer() {
-        timeLeft = 30; // Initial time left is 10 seconds
+        timeLeft = 5; // Initial time left is 10 seconds
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -293,7 +290,7 @@ public class PlayWithAI extends Play2Players {
         }
     }
 
-    public void resetTimerr() {
+    public void resetTimer() {
         timeLeft = 30; // Reset time to initial value
         lblTimer.setText("Time left: " + timeLeft + " seconds");
     }
@@ -315,6 +312,7 @@ public class PlayWithAI extends Play2Players {
         static int[] mangPN = new int[]{0, 7, 700, 10000, 100000, 67000, 500000};
         //2 mảng tc pt lưu giá trị tương ứng với những trường hợp trong trò chơi
         static long MAX_INT = 100000000;
+
         static int MAX_DEPTH = 2;
 
         public HeuristicBot(int dongg, int cott, Seed Bott, Seed Playerr) {
@@ -389,6 +387,7 @@ public class PlayWithAI extends Play2Players {
         }
 
         public static long minimax(Seed[][] board, int depth, boolean isMaximizing, long alpha, long beta) {
+
             long boardVal = evaluateBoard(board);
             if (Math.abs(boardVal) >= MAX_INT || depth == MAX_DEPTH) {
                 return boardVal;
@@ -409,7 +408,9 @@ public class PlayWithAI extends Play2Players {
                     }
                 }
                 return maxEval;
-            } else {
+            }
+
+            else {
                 long minEval = MAX_INT;
                 List<String> moves = getPossibleMoves(board);
                 for (String move : moves) {
