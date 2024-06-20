@@ -1,0 +1,61 @@
+
+J
+java:S1604#"(Make this anonymous inner class a lambda(Ãúó’ÿÿÿÿÿ8ÅÖ¡®ƒ2
+J
+java:S1604)"(Make this anonymous inner class a lambda(òÀ…¾şÿÿÿÿ8ÆÖ¡®ƒ2
+J
+java:S1604W"(Make this anonymous inner class a lambda(‘–ñÀıÿÿÿÿ8ÆÖ¡®ƒ2
+m	java:S117,"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ¥à¹8ÆÖ¡®ƒ2
+m	java:S117Z"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ¥à¹8ÆÖ¡®ƒ2
+m	java:S117["QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(à²†İ8ÆÖ¡®ƒ2
+t
+java:S1104"RMake jFrame a static final constant or non-public and provide accessors if needed.(ç»Ôµÿÿÿÿÿ8ÆÖ¡®ƒ2
+N
+java:S1444",Make this "public static jFrame" field final(ç»Ôµÿÿÿÿÿ8ÉÖ¡®ƒ2
+q	java:S116"URename this field "JPanelMain" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìšû8ÊÖ¡®ƒ2
+~	java:S116"bRename this field "tÃªnNgÆ°á»iChÆ¡i1Label" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁŒ½Ç8ÊÖ¡®ƒ2
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(Ê€Ñåùÿÿÿÿ8ÎÖ¡®ƒ2
+f
+java:S1854H"DRemove this useless assignment to local variable "heuristicBotCaro".(¦˜˜ üÿÿÿÿ8×Ö¡®ƒ2
+X
+java:S2696D"6Make the enclosing method "static" or remove this set.(æ¬ı§üÿÿÿÿ8ßÖ¡®ƒ2
+g
+java:S3252D"EUse static access with "com.caro.TicTacToe.PlayWithAI" for "GameBot".(æ¬ı§üÿÿÿÿ8ßÖ¡®ƒ2
+X
+java:S2696F"6Make the enclosing method "static" or remove this set.(×Ó‰¸ÿÿÿÿÿ8àÖ¡®ƒ2
+g
+java:S3252F"EUse static access with "com.caro.TicTacToe.PlayWithAI" for "GameBot".(×Ó‰¸ÿÿÿÿÿ8áÖ¡®ƒ2
+X
+java:S2696G"6Make the enclosing method "static" or remove this set.(´³¨¤ùÿÿÿÿ8âÖ¡®ƒ2
+h
+java:S3252G"FUse static access with "com.caro.TicTacToe.Play2Players" for "newRow".(´³¨¤ùÿÿÿÿ8âÖ¡®ƒ2
+W
+java:S1481H"5Remove this unused "heuristicBotCaro" local variable.(¦˜˜ üÿÿÿÿ8äÖ¡®ƒ2
+S
+java:S2696L"6Make the enclosing method "static" or remove this set.(¦›éí8äÖ¡®ƒ2
+X
+java:S2696N"6Make the enclosing method "static" or remove this set.(·ü•‰ùÿÿÿÿ8äÖ¡®ƒ2
+X
+java:S2696O"6Make the enclosing method "static" or remove this set.(Ø¼èÙûÿÿÿÿ8äÖ¡®ƒ2
+h
+java:S3252O"FUse static access with "com.caro.TicTacToe.Play2Players" for "newRow".(Ø¼èÙûÿÿÿÿ8äÖ¡®ƒ2
+X
+java:S2696m"6Make the enclosing method "static" or remove this set.(Ÿøœ”üÿÿÿÿ8ëÖ¡®ƒ2
+h
+java:S3252m"FUse static access with "com.caro.TicTacToe.Play2Players" for "newRow".(Ÿøœ”üÿÿÿÿ8ëÖ¡®ƒ2
+X
+java:S2696q"6Make the enclosing method "static" or remove this set.(°æ‡Íşÿÿÿÿ8ëÖ¡®ƒ2
+o	java:S100z"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â¸‚Óÿÿÿÿÿ8ğÖ¡®ƒ2
+T
+java:S2696"6Make the enclosing method "static" or remove this set.(‘Ëß†8ñÖ¡®ƒ2
+X
+java:S1068";Remove this unused "tÃªnNgÆ°á»iChÆ¡i1Label" private field.(ÁŒ½Ç8òÖ¡®ƒ2
+O
+java:S1068"-Remove this unused "caroPanel" private field.(­ÍÛÑşÿÿÿÿ8òÖ¡®ƒ2
+J
+java:S1068"-Remove this unused "menuPanel" private field.(ë‡Ù„8òÖ¡®ƒ2
+W
+java:S1068"5Remove this unused "player1ScoreLabel" private field.(¶ÊÁ‚úÿÿÿÿ8òÖ¡®ƒ2
+R
+java:S1068"5Remove this unused "player2ScoreLabel" private field.(Æ²Ğà8òÖ¡®ƒ2

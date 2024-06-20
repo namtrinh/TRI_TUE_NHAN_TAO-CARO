@@ -35,9 +35,7 @@ public class Play2Players extends JFrame {
     public static int SYMBOL_SIZE = CELL_SIZE - CELL_PADDING * 2;
     public static int SYMBOL_STROKE_WIDTH = 8;
 
-    private JPanel jhjh;
-    private JList list1;
-    private JEditorPane ụuuEditorPane;
+
     public enum GameState {
         PLAYING, DRAW, CROSS_WON, NOUGHT_WON
     }
@@ -51,8 +49,6 @@ public class Play2Players extends JFrame {
     protected DrawCanvas canvas;
     protected JLabel statusBar;
     protected JPanel pnButton;
-    protected JButton btnDiLai;
-    protected JButton btnBoDiLai;
     protected JButton btnNewgame;
     protected JLabel player1Label;
     protected JLabel player2Label;
@@ -100,7 +96,6 @@ public class Play2Players extends JFrame {
         timeLeft = 30; // hoặc giá trị mặc định bạn muốn
         updatePlayerTimeLabels(); // Cập nhật label ngay từ đầu
         timer = new Timer(1000, new ActionListener() {
-            boolean firstTick = true; // Biến để kiểm tra tick đầu tiên
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,19 +139,17 @@ public class Play2Players extends JFrame {
         btnExit = new JButton("Exit Game");
         btnExit.setForeground(Color.WHITE);
         btnExit.setBackground(new Color(59, 89, 182));
-        btnExit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int confirmed = JOptionPane.showConfirmDialog(null,
-                        "Are you sure you want to exit the game?", "Exit Game",
-                        JOptionPane.YES_NO_OPTION);
+        btnExit.addActionListener(e -> {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want to exit the game?", "Exit Game",
+                    JOptionPane.YES_NO_OPTION);
 
-                if (confirmed == JOptionPane.YES_OPTION) {
-                    if (timer != null && timer.isRunning()) {
-                        timer.stop();
-                    }
-                    JFrameMain.jFrame.setVisible(true);
-                    dispose();
+            if (confirmed == JOptionPane.YES_OPTION) {
+                if (timer != null && timer.isRunning()) {
+                    timer.stop();
                 }
+                JFrameMain.jFrame.setVisible(true);
+                dispose();
             }
         });
 
@@ -177,7 +170,7 @@ public class Play2Players extends JFrame {
                         updateGame(currentPlayer, rowSelected, colSelected);
                         currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
                         STEPS++;
-                        // Gọi resetTimer() khi chuyển lượt chơi
+
                         resetTimer();
                         // Cập nhật statusBar sau khi chuyển lượt chơi
                         updateStatusBar();
@@ -305,7 +298,6 @@ public class Play2Players extends JFrame {
     public void initGame() {
         // Khởi tạo hoàn toàn trò chơi mới
 
-
         STEPS = 0;
         for (int row = 0; row < ROWS; ++row) {
             for (int col = 0; col < COLS; ++col) {
@@ -359,7 +351,6 @@ public class Play2Players extends JFrame {
         savedPlayer2Score = Player2Score;
         // Điều này có thể thực hiện thông qua tệp dữ liệu hoặc các cài đặt khác
     }
-
 
 
 

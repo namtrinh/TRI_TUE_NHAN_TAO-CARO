@@ -242,15 +242,21 @@ public class PlayWithAI extends Play2Players {
                         JOptionPane.YES_NO_OPTION);
 
                 if (confirmed == JOptionPane.YES_OPTION) {
-                    if (timer != null && timer.isRunning()) {
+                    if (timer != null) {
                         timer.stop();
+                        timeLeft = 0;
+                        initGame(); // Giả sử initGame() thiết lập lại tất cả các biến và trạng thái cần thiết của trò chơi
+                        repaint();
                     }
-                    JFrameMain.jFrame.setVisible(true); // Hiển thị lại JFrame chính
-                    dispose(); // Đóng cửa sổ hiện tại
+                    // Đặt lại trạng thái trò chơi
+                    initGame(); // Giả sử initGame() thiết lập lại tất cả các biến và trạng thái cần thiết của trò chơi
+                    repaint(); // Vẽ lại canvas để phản ánh trạng thái đã được đặt lại
+
+                    JFrameMain.jFrame.setVisible(true);
+                    dispose(); // Đóng cửa sổ PlayWithAI hiện tại
                 }
             }
         });
-
 
 
         pnButton = new JPanel();
@@ -261,7 +267,7 @@ public class PlayWithAI extends Play2Players {
     }
 
     private void initTimer() {
-        timeLeft = 5; // Initial time left is 10 seconds
+        timeLeft = 30; // Initial time left is 10 seconds
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -269,13 +275,28 @@ public class PlayWithAI extends Play2Players {
                     timeLeft--;
                     lblTimer.setText("Time left: " + timeLeft + " seconds");
                 } else {
-
+                    handleTimeout();
                     stopTimer(); // Stop the timer when time runs out
                     processAIMove(); // Proceed with AI move when time runs out
                     resetTimer();
                 }
             }
         });
+    }
+
+    private void handleTimeout() {
+        // Dừng timer
+        timer.stop();
+        // Hiển thị thông báo và xử thua cho người chơi hiện tại
+        String loserName = (currentPlayer == Seed.CROSS) ? Player1Name : Player2Name;
+        JOptionPane.showMessageDialog(null, loserName + " hết thời gian! " + loserName + " thua! Click chuột để chơi lại");
+        if (currentPlayer == Seed.CROSS) {
+            Player2Score++; // Increment Player 2's score if Player 1 loses on timeout
+        } else {
+            Player1Score++; // Increment Player 1's score if Player 2 loses on timeout
+        }
+        currentState = (currentPlayer == Seed.CROSS) ? GameState.NOUGHT_WON : GameState.CROSS_WON;
+        repaint();
     }
 
     private void startTimer() {
@@ -408,9 +429,7 @@ public class PlayWithAI extends Play2Players {
                     }
                 }
                 return maxEval;
-            }
-
-            else {
+            } else {
                 long minEval = MAX_INT;
                 List<String> moves = getPossibleMoves(board);
                 for (String move : moves) {
