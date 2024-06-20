@@ -1,189 +1,187 @@
 
-J
-java:S1604b"(Make this anonymous inner class a lambda(Ùä³”úÿÿÿÿ8˜ó­ƒ2
-J
-java:S1604}"(Make this anonymous inner class a lambda(ŠåÓÆøÿÿÿÿ8‚˜ó­ƒ2
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô×÷Æ8‚˜ó­ƒ2
-o
-java:S1104"RMake newRow a static final constant or non-public and provide accessors if needed.(ãšÄÉ8‚˜ó­ƒ2
-v
-java:S1104"ZMake rowPreSelected a static final constant or non-public and provide accessors if needed.(–¿ƒ=8‚˜ó­ƒ2
-|
-java:S1104"ZMake colPreSelected a static final constant or non-public and provide accessors if needed.(†‰÷Ìùÿÿÿÿ8ƒ˜ó­ƒ2
-m
-java:S1104"PMake ROWS a static final constant or non-public and provide accessors if needed.(ğ³à‘8ƒ˜ó­ƒ2
-r
-java:S1104"PMake COLS a static final constant or non-public and provide accessors if needed.(äÖ†Åúÿÿÿÿ8ƒ˜ó­ƒ2
-y
-java:S1104"WMake Player1Name a static final constant or non-public and provide accessors if needed.(ê«¸æøÿÿÿÿ8ƒ˜ó­ƒ2
-y
-java:S1104"WMake Player2Name a static final constant or non-public and provide accessors if needed.(³÷°ùÿÿÿÿ8ƒ˜ó­ƒ2
-u
-java:S1104"XMake Player1Score a static final constant or non-public and provide accessors if needed.(ñß¿Á8ƒ˜ó­ƒ2
-z
-java:S1104"XMake Player2Score a static final constant or non-public and provide accessors if needed.(ÒÒ÷ïüÿÿÿÿ8ƒ˜ó­ƒ2
-|
-java:S1104"ZMake Player1TwoMove a static final constant or non-public and provide accessors if needed.(˜¶Ñ¥şÿÿÿÿ8ƒ˜ó­ƒ2
-n
-java:S1104"QMake STEPS a static final constant or non-public and provide accessors if needed.(Ä³âš8ƒ˜ó­ƒ2
-r
-java:S1104"UMake CELL_SIZE a static final constant or non-public and provide accessors if needed.(ÇƒÛµ8ƒ˜ó­ƒ2
-z
-java:S1104"XMake CANVAS_WIDTH a static final constant or non-public and provide accessors if needed.(Ó²ğÒúÿÿÿÿ8ƒ˜ó­ƒ2
-v
-java:S1104"YMake CANVAS_HEIGHT a static final constant or non-public and provide accessors if needed.(À¥“Ğ8ƒ˜ó­ƒ2
-s
-java:S1104 "VMake GRID_WIDTH a static final constant or non-public and provide accessors if needed.(½éÏÙ8ƒ˜ó­ƒ2
-}
-java:S1104!"[Make GRID_WIDHT_HALF a static final constant or non-public and provide accessors if needed.(Ç²öúÿÿÿÿ8ƒ˜ó­ƒ2
-t
-java:S1104""XMake CELL_PADDING a static final constant or non-public and provide accessors if needed.(ÛàB8ƒ˜ó­ƒ2
-t
-java:S1104#"WMake SYMBOL_SIZE a static final constant or non-public and provide accessors if needed.(İÉáÙ8ƒ˜ó­ƒ2
-
-java:S1104$"_Make SYMBOL_STROKE_WIDTH a static final constant or non-public and provide accessors if needed.(µ½á¦şÿÿÿÿ8ƒ˜ó­ƒ2
-s
-java:S11040"QMake board a static final constant or non-public and provide accessors if needed.(ÀÁ´ğÿÿÿÿÿ8ƒ˜ó­ƒ2
-I
-java:S1444",Make this "public static newRow" field final(ãšÄÉ8†˜ó­ƒ2
-P
-java:S1444"4Make this "public static rowPreSelected" field final(–¿ƒ=8†˜ó­ƒ2
-V
-java:S1444"4Make this "public static colPreSelected" field final(†‰÷Ìùÿÿÿÿ8†˜ó­ƒ2
-G
-java:S1444"*Make this "public static ROWS" field final(ğ³à‘8†˜ó­ƒ2
-L
-java:S1444"*Make this "public static COLS" field final(äÖ†Åúÿÿÿÿ8†˜ó­ƒ2
-S
-java:S1444"1Make this "public static Player1Name" field final(ê«¸æøÿÿÿÿ8†˜ó­ƒ2
-S
-java:S1444"1Make this "public static Player2Name" field final(³÷°ùÿÿÿÿ8†˜ó­ƒ2
-O
-java:S1444"2Make this "public static Player1Score" field final(ñß¿Á8†˜ó­ƒ2
-T
-java:S1444"2Make this "public static Player2Score" field final(ÒÒ÷ïüÿÿÿÿ8†˜ó­ƒ2
-V
-java:S1444"4Make this "public static Player1TwoMove" field final(˜¶Ñ¥şÿÿÿÿ8†˜ó­ƒ2
-H
-java:S1444"+Make this "public static STEPS" field final(Ä³âš8†˜ó­ƒ2
-L
-java:S1444"/Make this "public static CELL_SIZE" field final(ÇƒÛµ8†˜ó­ƒ2
-T
-java:S1444"2Make this "public static CANVAS_WIDTH" field final(Ó²ğÒúÿÿÿÿ8†˜ó­ƒ2
-P
-java:S1444"3Make this "public static CANVAS_HEIGHT" field final(À¥“Ğ8†˜ó­ƒ2
-M
-java:S1444 "0Make this "public static GRID_WIDTH" field final(½éÏÙ8†˜ó­ƒ2
-W
-java:S1444!"5Make this "public static GRID_WIDHT_HALF" field final(Ç²öúÿÿÿÿ8†˜ó­ƒ2
-N
-java:S1444""2Make this "public static CELL_PADDING" field final(ÛàB8†˜ó­ƒ2
-N
-java:S1444#"1Make this "public static SYMBOL_SIZE" field final(İÉáÙ8†˜ó­ƒ2
-[
-java:S1444$"9Make this "public static SYMBOL_STROKE_WIDTH" field final(µ½á¦şÿÿÿÿ8†˜ó­ƒ2
-g
-java:S1192Ì"IDefine a constant instead of duplicating this literal " Ä‘iá»ƒm" 4 times.(‹¹ûÁ8ˆ˜ó­ƒ2
-d
-java:S1192Å"FDefine a constant instead of duplicating this literal "Arial" 6 times.(µÔ¨Ó8ˆ˜ó­ƒ2
-r
-java:S1192À"ODefine a constant instead of duplicating this literal "LÆ°á»£t cá»§a " 3 times.(êû°òùÿÿÿÿ8ˆ˜ó­ƒ2
-j
-java:S1192D"HDefine a constant instead of duplicating this literal "Score: " 6 times.(ú¥Óßÿÿÿÿÿ8ˆ˜ó­ƒ2
-w	java:S116"VRename this field "PlayerReRun" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎÏ§¨üÿÿÿÿ8‰˜ó­ƒ2
-l
-java:S3008"ORename this field "ROWS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ³à‘8‰˜ó­ƒ2
-q
-java:S3008"ORename this field "COLS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äÖ†Åúÿÿÿÿ8‰˜ó­ƒ2
-x
-java:S3008"VRename this field "Player1Name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê«¸æøÿÿÿÿ8‰˜ó­ƒ2
-x
-java:S3008"VRename this field "Player2Name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³÷°ùÿÿÿÿ8‰˜ó­ƒ2
-t
-java:S3008"WRename this field "Player1Score" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñß¿Á8‰˜ó­ƒ2
-y
-java:S3008"WRename this field "Player2Score" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÒ÷ïüÿÿÿÿ8‰˜ó­ƒ2
-{
-java:S3008"YRename this field "Player1TwoMove" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜¶Ñ¥şÿÿÿÿ8‰˜ó­ƒ2
-m
-java:S3008"PRename this field "STEPS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä³âš8‰˜ó­ƒ2
-q
-java:S3008"TRename this field "CELL_SIZE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÇƒÛµ8‰˜ó­ƒ2
-y
-java:S3008"WRename this field "CANVAS_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó²ğÒúÿÿÿÿ8‰˜ó­ƒ2
-u
-java:S3008"XRename this field "CANVAS_HEIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À¥“Ğ8‰˜ó­ƒ2
-r
-java:S3008 "URename this field "GRID_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½éÏÙ8‰˜ó­ƒ2
-|
-java:S3008!"ZRename this field "GRID_WIDHT_HALF" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç²öúÿÿÿÿ8‰˜ó­ƒ2
-s
-java:S3008""WRename this field "CELL_PADDING" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛàB8‰˜ó­ƒ2
-s
-java:S3008#"VRename this field "SYMBOL_SIZE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İÉáÙ8‰˜ó­ƒ2
-€
-java:S3008$"^Rename this field "SYMBOL_STROKE_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ½á¦şÿÿÿÿ8‰˜ó­ƒ2
-D
-java:S3010>""Remove this assignment of "STEPS".(´ºîÿÿÿÿÿ8˜ó­ƒ2
-E
-java:S3010?"(Remove this assignment of "Player1Name".(š‹¦÷8˜ó­ƒ2
-E
-java:S3010@"(Remove this assignment of "Player2Name".(‘Í™8˜ó­ƒ2
-j	java:S100J"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦õÇÏ8˜ó­ƒ2
-S
-java:S2696K"6Make the enclosing method "static" or remove this set.(‡úâİ8˜ó­ƒ2
-S
-java:S2696L"6Make the enclosing method "static" or remove this set.(ñŞƒ‚8˜ó­ƒ2
-S
-java:S2696N"6Make the enclosing method "static" or remove this set.(ìôØĞ8˜ó­ƒ2
-S
-java:S2696O"6Make the enclosing method "static" or remove this set.(´ø8˜ó­ƒ2
-S
-java:S2696P"6Make the enclosing method "static" or remove this set.(ƒÎ™Ÿ8˜ó­ƒ2
-S
-java:S2696Q"6Make the enclosing method "static" or remove this set.(ŠÚÖ8˜ó­ƒ2
-X
-java:S2696R"6Make the enclosing method "static" or remove this set.(úŞ×óıÿÿÿÿ8˜ó­ƒ2
-X
-java:S2696T"6Make the enclosing method "static" or remove this set.(áûÅñıÿÿÿÿ8˜ó­ƒ2
-S
-java:S2696U"6Make the enclosing method "static" or remove this set.(´ø8˜ó­ƒ2
-S
-java:S2696V"6Make the enclosing method "static" or remove this set.(ƒÎ™Ÿ8˜ó­ƒ2
-S
-java:S2696W"6Make the enclosing method "static" or remove this set.(ŠÚÖ8˜ó­ƒ2
-X
-java:S2696X"6Make the enclosing method "static" or remove this set.(úŞ×óıÿÿÿÿ8˜ó­ƒ2
-j	java:S100r"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×„ïş8’˜ó­ƒ2
-o
-java:S3776r"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(×„ïş8“˜ó­ƒ2
-S
-java:S2696t"6Make the enclosing method "static" or remove this set.(š‹¦÷8”˜ó­ƒ2
-S
-java:S2696u"6Make the enclosing method "static" or remove this set.(‘Í™8”˜ó­ƒ2
-T
-java:S2696§"6Make the enclosing method "static" or remove this set.(ª½Íé8˜˜ó­ƒ2
-Y
-java:S2696¨"6Make the enclosing method "static" or remove this set.(óÈÜıÿÿÿÿ8˜˜ó­ƒ2
-T
-java:S2696¬"6Make the enclosing method "static" or remove this set.(ë²™Ò8˜˜ó­ƒ2
-Y
-java:S2696"6Make the enclosing method "static" or remove this set.(ÊÛàÑúÿÿÿÿ8 ˜ó­ƒ2
-Y
-java:S2696Ÿ"6Make the enclosing method "static" or remove this set.(×Ÿ°ïûÿÿÿÿ8 ˜ó­ƒ2
-Y
-java:S2696­"6Make the enclosing method "static" or remove this set.(´ºîÿÿÿÿÿ8 ˜ó­ƒ2
-T
-java:S2696Ø"6Make the enclosing method "static" or remove this set.(Ç±ö8¢˜ó­ƒ2
-Y
-java:S2696Ù"6Make the enclosing method "static" or remove this set.(¡«ãïøÿÿÿÿ8¢˜ó­ƒ2
-Y
-java:S2696í"6Make the enclosing method "static" or remove this set.(‹è’Úûÿÿÿÿ8£˜ó­ƒ2
-T
-java:S2696ï"6Make the enclosing method "static" or remove this set.(ºøßœ8£˜ó­ƒ2
-Y
-java:S2696ü"6Make the enclosing method "static" or remove this set.(àÆ’Õşÿÿÿÿ8£˜ó­ƒ2
-T
-java:S2696ş"6Make the enclosing method "static" or remove this set.(çı–š8£˜ó­ƒ2
 p
-java:S3776¦"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(³ıŸê8¥˜ó­ƒ2
+java:S1604b"(Make this anonymous inner class a lambda(Ùä³”úÿÿÿÿ8˜ó­ƒ2J$5784f5e6-53d7-48b3-89fb-15ceb840208f
+p
+java:S1604"(Make this anonymous inner class a lambda(ŠåÓÆøÿÿÿÿ8‚˜ó­ƒ2J$38037767-4383-4561-8aeb-b109497dd3fd
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô×÷Æ8‚˜ó­ƒ2J$5d553c59-3de5-4c23-9fbb-232c8f316fba
+•
+java:S1104"RMake newRow a static final constant or non-public and provide accessors if needed.(ãšÄÉ8‚˜ó­ƒ2J$d6d432a8-5d97-4297-9e0f-78e19f580411
+œ
+java:S1104"ZMake rowPreSelected a static final constant or non-public and provide accessors if needed.(–¿ƒ=8‚˜ó­ƒ2J$9249d7ee-7a28-4c46-96d5-03c6473716eb
+¢
+java:S1104"ZMake colPreSelected a static final constant or non-public and provide accessors if needed.(†‰÷Ìùÿÿÿÿ8ƒ˜ó­ƒ2J$0435f77b-9863-4381-a9fe-e108abca1685
+“
+java:S1104"PMake ROWS a static final constant or non-public and provide accessors if needed.(ğ³à‘8ƒ˜ó­ƒ2J$2bedbdc2-bf4f-4648-94b7-62338204ffac
+˜
+java:S1104"PMake COLS a static final constant or non-public and provide accessors if needed.(äÖ†Åúÿÿÿÿ8ƒ˜ó­ƒ2J$48f7265d-33bc-486d-96a3-d316169b976d
+Ÿ
+java:S1104"WMake Player1Name a static final constant or non-public and provide accessors if needed.(ê«¸æøÿÿÿÿ8ƒ˜ó­ƒ2J$aac509ff-13b6-4ce4-8557-300325ea7e23
+Ÿ
+java:S1104"WMake Player2Name a static final constant or non-public and provide accessors if needed.(³÷°ùÿÿÿÿ8ƒ˜ó­ƒ2J$bafbdbed-84af-4c08-844d-a6ce273ce966
+›
+java:S1104"XMake Player1Score a static final constant or non-public and provide accessors if needed.(ñß¿Á8ƒ˜ó­ƒ2J$0593017f-e5f4-40b7-b164-b70070be28bb
+ 
+java:S1104"XMake Player2Score a static final constant or non-public and provide accessors if needed.(ÒÒ÷ïüÿÿÿÿ8ƒ˜ó­ƒ2J$02a75b12-109f-423e-b84e-2c865eb45d69
+¢
+java:S1104"ZMake Player1TwoMove a static final constant or non-public and provide accessors if needed.(˜¶Ñ¥şÿÿÿÿ8ƒ˜ó­ƒ2J$ff89d666-3f39-4001-858d-eb101cbf7e55
+”
+java:S1104"QMake STEPS a static final constant or non-public and provide accessors if needed.(Ä³âš8ƒ˜ó­ƒ2J$b546ad50-3c7c-4e42-ab07-e55b01971791
+˜
+java:S1104"UMake CELL_SIZE a static final constant or non-public and provide accessors if needed.(ÇƒÛµ8ƒ˜ó­ƒ2J$97b9a75f-9aee-47d5-9f2a-e49f760d9f7c
+ 
+java:S1104"XMake CANVAS_WIDTH a static final constant or non-public and provide accessors if needed.(Ó²ğÒúÿÿÿÿ8ƒ˜ó­ƒ2J$0efc94ba-8a9c-483e-a878-f9a2926dcad1
+œ
+java:S1104"YMake CANVAS_HEIGHT a static final constant or non-public and provide accessors if needed.(À¥“Ğ8ƒ˜ó­ƒ2J$8c567d03-70a8-4e5e-a19a-299079f6751f
+™
+java:S1104 "VMake GRID_WIDTH a static final constant or non-public and provide accessors if needed.(½éÏÙ8ƒ˜ó­ƒ2J$e891cada-dd8d-4443-9b4c-dde400531aab
+£
+java:S1104!"[Make GRID_WIDHT_HALF a static final constant or non-public and provide accessors if needed.(Ç²öúÿÿÿÿ8ƒ˜ó­ƒ2J$e7d2fc26-6dc5-44ab-84c1-09fb0d260b5d
+š
+java:S1104""XMake CELL_PADDING a static final constant or non-public and provide accessors if needed.(ÛàB8ƒ˜ó­ƒ2J$aae911c3-3f2f-49cb-9bca-359d9fd64da1
+š
+java:S1104#"WMake SYMBOL_SIZE a static final constant or non-public and provide accessors if needed.(İÉáÙ8ƒ˜ó­ƒ2J$4194bb55-29cf-4a54-8cf9-018ec6ec4279
+§
+java:S1104$"_Make SYMBOL_STROKE_WIDTH a static final constant or non-public and provide accessors if needed.(µ½á¦şÿÿÿÿ8ƒ˜ó­ƒ2J$8bebec62-1452-4efb-943f-7538f97f4afc
+™
+java:S11040"QMake board a static final constant or non-public and provide accessors if needed.(ÀÁ´ğÿÿÿÿÿ8ƒ˜ó­ƒ2J$6c524c53-284d-44ff-b1a7-405d4ed574e6
+o
+java:S1444",Make this "public static newRow" field final(ãšÄÉ8†˜ó­ƒ2J$997666c6-d5d2-46f5-82bb-992428c12fc9
+v
+java:S1444"4Make this "public static rowPreSelected" field final(–¿ƒ=8†˜ó­ƒ2J$0a0d772f-b2cb-4c0b-b9be-cba22d43e471
+|
+java:S1444"4Make this "public static colPreSelected" field final(†‰÷Ìùÿÿÿÿ8†˜ó­ƒ2J$823faae2-5a4c-4bb7-9495-7b5acd072f91
+m
+java:S1444"*Make this "public static ROWS" field final(ğ³à‘8†˜ó­ƒ2J$e672179a-459d-44ae-819f-ccfe81886a5a
+r
+java:S1444"*Make this "public static COLS" field final(äÖ†Åúÿÿÿÿ8†˜ó­ƒ2J$c909c76d-1f62-413a-ad91-a4812336bece
+y
+java:S1444"1Make this "public static Player1Name" field final(ê«¸æøÿÿÿÿ8†˜ó­ƒ2J$0ce11bbd-2807-4c6d-8788-1d6ade63e777
+y
+java:S1444"1Make this "public static Player2Name" field final(³÷°ùÿÿÿÿ8†˜ó­ƒ2J$983e07cc-6b1e-4f7e-8e49-717d6f8a9180
+u
+java:S1444"2Make this "public static Player1Score" field final(ñß¿Á8†˜ó­ƒ2J$6ebd39dc-3457-45bb-b002-e90cc360b935
+z
+java:S1444"2Make this "public static Player2Score" field final(ÒÒ÷ïüÿÿÿÿ8†˜ó­ƒ2J$ac4e9d85-9ada-4985-b6fa-29d680bf51b3
+|
+java:S1444"4Make this "public static Player1TwoMove" field final(˜¶Ñ¥şÿÿÿÿ8†˜ó­ƒ2J$e305d038-cd83-4c9c-8f15-a8977fc73526
+n
+java:S1444"+Make this "public static STEPS" field final(Ä³âš8†˜ó­ƒ2J$0e38bd30-55c5-4dfc-b4d3-a08980ffcee6
+r
+java:S1444"/Make this "public static CELL_SIZE" field final(ÇƒÛµ8†˜ó­ƒ2J$70ff9eda-c4a7-42cb-afd6-58ef5b074fa8
+z
+java:S1444"2Make this "public static CANVAS_WIDTH" field final(Ó²ğÒúÿÿÿÿ8†˜ó­ƒ2J$b38b6900-890a-4cdf-89ba-d01cf6e7abb8
+v
+java:S1444"3Make this "public static CANVAS_HEIGHT" field final(À¥“Ğ8†˜ó­ƒ2J$d75db507-ab9c-4018-aec0-a1bcd7a310eb
+s
+java:S1444 "0Make this "public static GRID_WIDTH" field final(½éÏÙ8†˜ó­ƒ2J$3cc61d88-1b15-4382-a824-16078e83d841
+}
+java:S1444!"5Make this "public static GRID_WIDHT_HALF" field final(Ç²öúÿÿÿÿ8†˜ó­ƒ2J$b07ff087-11e9-491f-8087-253914e6476f
+t
+java:S1444""2Make this "public static CELL_PADDING" field final(ÛàB8†˜ó­ƒ2J$3087fab4-f8fe-4668-b643-3a868036f830
+t
+java:S1444#"1Make this "public static SYMBOL_SIZE" field final(İÉáÙ8†˜ó­ƒ2J$585a9c20-90fa-466e-bc63-2dc8ae7209d2
+
+java:S1444$"9Make this "public static SYMBOL_STROKE_WIDTH" field final(µ½á¦şÿÿÿÿ8†˜ó­ƒ2J$2f0b11e5-d62c-4076-85a5-a223f3b58e9e
+Š
+java:S1192É"FDefine a constant instead of duplicating this literal "Arial" 6 times.(µÔ¨Ó8ˆ˜ó­ƒ2J$db89f12f-57af-470b-8628-1572d17d4f4d
+˜
+java:S1192Ä"ODefine a constant instead of duplicating this literal "LÆ°á»£t cá»§a " 3 times.(êû°òùÿÿÿÿ8ˆ˜ó­ƒ2J$b88253ac-933f-4270-850d-8cba582aaef8
+
+java:S1192D"HDefine a constant instead of duplicating this literal "Score: " 6 times.(ú¥Óßÿÿÿÿÿ8ˆ˜ó­ƒ2J$1d47b60c-c63c-47a6-b67c-163cfe5029a0
+	java:S116"VRename this field "PlayerReRun" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎÏ§¨üÿÿÿÿ8‰˜ó­ƒ2J$8b2df8fe-9450-4237-a118-9e0698808607
+’
+java:S3008"ORename this field "ROWS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ³à‘8‰˜ó­ƒ2J$61c0e875-660c-44e7-921d-67a860231259
+—
+java:S3008"ORename this field "COLS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äÖ†Åúÿÿÿÿ8‰˜ó­ƒ2J$fa587508-3db9-4743-847f-e9b6eadf68ce
+
+java:S3008"VRename this field "Player1Name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê«¸æøÿÿÿÿ8‰˜ó­ƒ2J$fc95e615-a380-4269-85bd-2a05f37de2cf
+
+java:S3008"VRename this field "Player2Name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³÷°ùÿÿÿÿ8‰˜ó­ƒ2J$e5d9f243-1c3c-4095-9e53-231e5dc43ba8
+š
+java:S3008"WRename this field "Player1Score" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñß¿Á8‰˜ó­ƒ2J$d8ebf89f-3694-4c08-8088-1871ba84fb7b
+Ÿ
+java:S3008"WRename this field "Player2Score" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÒ÷ïüÿÿÿÿ8‰˜ó­ƒ2J$ee606d5f-d934-4757-b498-e5aecbb5cc03
+¡
+java:S3008"YRename this field "Player1TwoMove" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜¶Ñ¥şÿÿÿÿ8‰˜ó­ƒ2J$0e6a60e4-c95e-4201-8539-27ec624841f4
+“
+java:S3008"PRename this field "STEPS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä³âš8‰˜ó­ƒ2J$234631ea-60a9-4dac-8005-5ca8a0f71416
+—
+java:S3008"TRename this field "CELL_SIZE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÇƒÛµ8‰˜ó­ƒ2J$16f47017-230a-4a6a-834e-d520589cb97a
+Ÿ
+java:S3008"WRename this field "CANVAS_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó²ğÒúÿÿÿÿ8‰˜ó­ƒ2J$0867f214-1e80-4232-a71a-6a893f96f34e
+›
+java:S3008"XRename this field "CANVAS_HEIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À¥“Ğ8‰˜ó­ƒ2J$ab0db68a-0aa5-4d94-bf95-42cb70bd1c86
+˜
+java:S3008 "URename this field "GRID_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½éÏÙ8‰˜ó­ƒ2J$44d5547f-fb71-4f7e-b4db-bd0ee124f5fa
+¢
+java:S3008!"ZRename this field "GRID_WIDHT_HALF" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç²öúÿÿÿÿ8‰˜ó­ƒ2J$38f14be7-d992-41bc-af10-089dfdce6c28
+™
+java:S3008""WRename this field "CELL_PADDING" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛàB8‰˜ó­ƒ2J$a82d6fda-ab78-4be5-972a-9b45831e46f0
+™
+java:S3008#"VRename this field "SYMBOL_SIZE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İÉáÙ8‰˜ó­ƒ2J$d7c1eba8-f963-4c62-9cf1-3322c78df47c
+¦
+java:S3008$"^Rename this field "SYMBOL_STROKE_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ½á¦şÿÿÿÿ8‰˜ó­ƒ2J$bec8cea3-077d-46ac-836a-8aa53ad9d98e
+j
+java:S3010>""Remove this assignment of "STEPS".(´ºîÿÿÿÿÿ8˜ó­ƒ2J$39a2b19d-1b4e-443c-8e56-790268a01f58
+k
+java:S3010?"(Remove this assignment of "Player1Name".(š‹¦÷8˜ó­ƒ2J$9337c2de-50ea-44f6-b5cc-082ac608c8ed
+k
+java:S3010@"(Remove this assignment of "Player2Name".(‘Í™8˜ó­ƒ2J$b6dcbd04-e241-4860-8e8a-593e6c6ce989
+	java:S100J"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦õÇÏ8˜ó­ƒ2J$f8d8dafd-e4c6-421c-af2d-3a21ae669896
+y
+java:S2696K"6Make the enclosing method "static" or remove this set.(‡úâİ8˜ó­ƒ2J$62f45136-e3a1-45a3-ac6b-7bc0b2898c26
+y
+java:S2696L"6Make the enclosing method "static" or remove this set.(ñŞƒ‚8˜ó­ƒ2J$fc9098cd-88a6-4c41-82e1-a693916c759e
+y
+java:S2696N"6Make the enclosing method "static" or remove this set.(ìôØĞ8˜ó­ƒ2J$b341e892-d165-42c7-8258-059bd91fe461
+y
+java:S2696O"6Make the enclosing method "static" or remove this set.(´ø8˜ó­ƒ2J$90db1059-bf34-4547-ae6f-72f3045950a4
+y
+java:S2696P"6Make the enclosing method "static" or remove this set.(ƒÎ™Ÿ8˜ó­ƒ2J$645c6bfa-6165-445e-b7a9-0a93f60c7a1b
+y
+java:S2696Q"6Make the enclosing method "static" or remove this set.(ŠÚÖ8˜ó­ƒ2J$3f549718-e9f6-429e-a12d-908abb8eca9a
+~
+java:S2696R"6Make the enclosing method "static" or remove this set.(úŞ×óıÿÿÿÿ8˜ó­ƒ2J$1f006c84-a338-4d27-88f5-692b58f6c7fd
+~
+java:S2696T"6Make the enclosing method "static" or remove this set.(áûÅñıÿÿÿÿ8˜ó­ƒ2J$786ca347-8952-4a30-a067-2f0d817eb059
+y
+java:S2696U"6Make the enclosing method "static" or remove this set.(´ø8˜ó­ƒ2J$fd804109-eb73-4e84-880a-bc1e4ebcea77
+y
+java:S2696V"6Make the enclosing method "static" or remove this set.(ƒÎ™Ÿ8˜ó­ƒ2J$c59161a7-30ba-4542-8ff7-0a47db600af5
+y
+java:S2696W"6Make the enclosing method "static" or remove this set.(ŠÚÖ8˜ó­ƒ2J$e8e526d7-3eaa-4f97-a5e9-83e050a5fe40
+~
+java:S2696X"6Make the enclosing method "static" or remove this set.(úŞ×óıÿÿÿÿ8˜ó­ƒ2J$ce779951-92c7-451b-9199-b417a36c59ec
+	java:S100r"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×„ïş8’˜ó­ƒ2J$80e18f94-6f64-4295-92fb-1e61ce3943ba
+•
+java:S3776r"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(×„ïş8“˜ó­ƒ2J$51bed069-d0b1-4230-9da0-47dd3455380d
+y
+java:S2696t"6Make the enclosing method "static" or remove this set.(š‹¦÷8”˜ó­ƒ2J$656636e7-3c95-4e2d-925f-ccf73541ecbc
+y
+java:S2696u"6Make the enclosing method "static" or remove this set.(‘Í™8”˜ó­ƒ2J$01b910b7-7202-4879-8f3c-d92c6a004885
+z
+java:S2696«"6Make the enclosing method "static" or remove this set.(ª½Íé8˜˜ó­ƒ2J$953bd74a-50de-4b19-b828-1a946496fac1
+
+java:S2696¬"6Make the enclosing method "static" or remove this set.(óÈÜıÿÿÿÿ8˜˜ó­ƒ2J$275bce78-3e5f-475b-a3e5-e25c9da6b369
+z
+java:S2696°"6Make the enclosing method "static" or remove this set.(ë²™Ò8˜˜ó­ƒ2J$94a077ef-5301-4251-a754-416a10805da8
+
+java:S2696¢"6Make the enclosing method "static" or remove this set.(ÊÛàÑúÿÿÿÿ8 ˜ó­ƒ2J$ccdebf65-65b9-4934-aebd-91034d8a9a9d
+
+java:S2696£"6Make the enclosing method "static" or remove this set.(×Ÿ°ïûÿÿÿÿ8 ˜ó­ƒ2J$4325ca59-4a97-42cc-a658-3c13f56715bc
+
+java:S2696±"6Make the enclosing method "static" or remove this set.(´ºîÿÿÿÿÿ8 ˜ó­ƒ2J$8e4cbe7e-c7b6-45f9-8f9c-d2d13fe90591
+z
+java:S2696Ü"6Make the enclosing method "static" or remove this set.(Ç±ö8¢˜ó­ƒ2J$574e9bf2-628e-4334-ae44-9891ca01b004
+
+java:S2696İ"6Make the enclosing method "static" or remove this set.(¡«ãïøÿÿÿÿ8¢˜ó­ƒ2J$b1d64146-5254-4704-94dc-13bb47c4e5df
+
+java:S2696ñ"6Make the enclosing method "static" or remove this set.(‹è’Úûÿÿÿÿ8£˜ó­ƒ2J$e4881a81-6b63-48b5-9999-cc2d08c083cf
+z
+java:S2696ó"6Make the enclosing method "static" or remove this set.(ºøßœ8£˜ó­ƒ2J$49011ddb-9846-42e0-9a07-0b729f14e8e3
+
+java:S2696"6Make the enclosing method "static" or remove this set.(àÆ’Õşÿÿÿÿ8£˜ó­ƒ2J$46e04a3d-ac5f-4b15-955b-8bbf3fb60bf7
+z
+java:S2696ƒ"6Make the enclosing method "static" or remove this set.(çı–š8£˜ó­ƒ2J$a6bf25c4-65f3-41df-bdf3-12bc680ece82
+–
+java:S3776«"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(³ıŸê8¥˜ó­ƒ2J$35178168-1724-455a-8fb8-f3e392d4bbdb

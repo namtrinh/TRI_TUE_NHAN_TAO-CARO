@@ -121,7 +121,9 @@ public class Play2Players extends JFrame {
         btnNewgame = new JButton("NewGame");
         btnNewgame.setForeground(Color.WHITE);
         btnNewgame.setBackground(new Color(59, 89, 182));
-
+        Font btnFont = new Font(btnNewgame.getFont().getName(), Font.BOLD, 20);
+        btnNewgame.setFont(btnFont);
+        btnNewgame.setPreferredSize(new Dimension(140, 40));
         btnNewgame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int result = JOptionPane.showOptionDialog(null, "Bạn có muốn bắt đầu trò chơi mới không?", "New Game", JOptionPane.YES_NO_OPTION
@@ -139,6 +141,8 @@ public class Play2Players extends JFrame {
         btnExit = new JButton("Exit Game");
         btnExit.setForeground(Color.WHITE);
         btnExit.setBackground(new Color(59, 89, 182));
+        btnExit.setFont(btnFont);
+        btnExit.setPreferredSize(new Dimension(140, 40));
         btnExit.addActionListener(e -> {
             int confirmed = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to exit the game?", "Exit Game",
@@ -366,6 +370,7 @@ public class Play2Players extends JFrame {
         } else {
             Player1Score++; // Increment Player 1's score if Player 2 loses on timeout
         }
+
         updatePlayerScores(); // Update scores in the GUI
         currentState = (currentPlayer == Seed.CROSS) ? GameState.NOUGHT_WON : GameState.CROSS_WON;
         repaint();
@@ -452,17 +457,12 @@ public class Play2Players extends JFrame {
                     }
                 }
             }
-
             if (currentState == GameState.PLAYING) {
                 statusBar.setForeground(new Color(59, 89, 182));
                 if (currentPlayer == Seed.CROSS) {
-                    statusBar.setText("Lượt của " + Player1Name + " - Thời gian còn lại: " + timeLeft + " giây"
-                            + Player1Name + " (X): " + Player1Score + " điểm"
-                            + Player2Name + " (O): " + Player2Score + " điểm");
+                    statusBar.setText("Lượt của " + Player1Name );
                 } else {
-                    statusBar.setText("Lượt của " + Player2Name + " - Thời gian còn lại: " + timeLeft + " giây"
-                            + Player1Name + " (X): " + Player1Score + " điểm"
-                            + Player2Name + " (O): " + Player2Score + " điểm");
+                    statusBar.setText("Lượt của " + Player2Name );
                 }
             }
             else if (currentState == GameState.DRAW) {

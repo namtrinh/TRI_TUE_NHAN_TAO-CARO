@@ -211,7 +211,9 @@ public class PlayWithAI extends Play2Players {
         btnNewgame = new JButton("NewGame");
         btnNewgame.setForeground(Color.WHITE);
         btnNewgame.setBackground(new Color(59, 89, 182));
-
+        Font btnFont = new Font(btnNewgame.getFont().getName(), Font.BOLD, 20);
+        btnNewgame.setFont(btnFont);
+        btnNewgame.setPreferredSize(new Dimension(140, 40));
         btnNewgame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int result = JOptionPane.showOptionDialog(null, "Bạn có muốn bắt đầu trò chơi mới không?", "New Game", JOptionPane.YES_NO_OPTION
@@ -234,7 +236,8 @@ public class PlayWithAI extends Play2Players {
         btnExit = new JButton("Exit Game");
         btnExit.setForeground(Color.WHITE);
         btnExit.setBackground(new Color(59, 89, 182));
-
+        btnExit.setFont(btnFont);
+        btnExit.setPreferredSize(new Dimension(140, 40));
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int confirmed = JOptionPane.showConfirmDialog(null,
